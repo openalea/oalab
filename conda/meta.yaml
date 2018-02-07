@@ -40,7 +40,7 @@ test:
     - nosetests -v
 
 about:
-  home: http://github.com/openalea/core
+  home: http://github.com/openalea/oalab
   license: Cecill-c License
-  summary: OpenAlea Core component and Scientific Workflow platform.
+  summary: OALab package for OpenAlea.
 
