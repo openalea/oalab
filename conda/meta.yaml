@@ -19,15 +19,10 @@ requirements:
     - openalea.deploy
     - openalea.core
     - openalea.vpltk
-    - openalea.grapheditor
-    - openalea.visualea
-    - matplotlib
-    - scipy
-    - numpy
     - qt <5
     - pyqt
     - ipython-qtconsole
-    - ipython
+    - ipython <5
 
 test:
   imports:

@@ -1,20 +1,16 @@
+from qtconsole.rich_jupyter_widget import RichJupyterWidget
+from qtconsole.inprocess import QtInProcessKernelManager
 from streamredirection import GraphicalStreamRedirection
 
 
-try:
-    from IPython.qt.console.rich_ipython_widget import RichIPythonWidget
-except ImportError:
-    from IPython.frontend.qt.console.rich_ipython_widget import RichIPythonWidget
-
-
-class ShellWidget(RichIPythonWidget, GraphicalStreamRedirection):
+class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):
 
     """
     ShellWidget is an IPython shell.
     """
 
     def __new__(self, interpreter=None, message="", log='', parent=None):
-        obj = RichIPythonWidget()
+        obj = RichJupyterWidget()
         obj.__class__ = ShellWidget
         return obj
 
