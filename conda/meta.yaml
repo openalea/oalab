@@ -19,7 +19,6 @@ requirements:
     - openalea.deploy
     - openalea.core
     - openalea.vpltk
-    - openalea.grapheditor
     - qt <5
     - pyqt
     - ipython-qtconsole
