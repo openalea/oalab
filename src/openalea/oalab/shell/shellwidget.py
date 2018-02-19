@@ -44,29 +44,15 @@ class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):
         self.write(message)
 
         # Set kernel manager
-        try:
-            from IPython.qt.inprocess import QtInProcessKernelManager
-        except ImportError:
-            import warnings
-            message = "You are using a deprecated version of IPython (please update)."
-            warnings.warn(message)
+        km = QtInProcessKernelManager()
+        km.kernel = self.interpreter
+        km.kernel.gui = 'qt4'
 
-            # DEPRECATED !
-            from IPython.frontend.qt.inprocess_kernelmanager import QtInProcessKernelManager
-            km = QtInProcessKernelManager(kernel=self.interpreter)
-            km.start_channels()
-            self.interpreter.frontends.append(km)
-            self.kernel_manager = km
-        else:
-            km = QtInProcessKernelManager()
-            km.kernel = self.interpreter
-            km.kernel.gui = 'qt4'
+        kernel_client = km.client()
+        kernel_client.start_channels()
 
-            kernel_client = km.client()
-            kernel_client.start_channels()
-
-            self.kernel_manager = km
-            self.kernel_client = kernel_client
+        self.kernel_manager = km
+        self.kernel_client = kernel_client
         # For Debug Only
         # self.interpreter.locals['shell'] = self
 
