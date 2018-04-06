@@ -33,7 +33,7 @@ def get_shell_class():
 
     if has_ipython() and has_full_deps():
         # Test IPython
-        from openalea.oalab.shell import ShellWidget
+        from openalea.oalab.shell.shellwidget import ShellWidget
         return ShellWidget
 
     else:

@@ -9,10 +9,6 @@ class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):
     ShellWidget is an IPython shell.
     """
 
-    def __new__(self, interpreter=None, message="", log='', parent=None):
-        obj = RichJupyterWidget()
-        obj.__class__ = ShellWidget
-        return obj
 
     def __init__(self, interpreter=None, message="", log='', parent=None):
         """
@@ -25,15 +21,37 @@ class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):
         If no parent widget has been specified, it is possible to
         exit the interpreter by Ctrl-D.
         """
+        RichJupyterWidget.__init__(self, parent)
+
         if interpreter is None:
             from openalea.core.service.ipython import interpreter
             interpreter = interpreter()
         # Set interpreter
         self.interpreter = interpreter
-        self.interpreter.widget = self
 
-        # Multiple Stream Redirection
-        GraphicalStreamRedirection.__init__(self)
+
+        # Set kernel manager
+        km = QtInProcessKernelManager()
+        km.start_kernel(show_banner=False)
+        self.kernel_manager = km
+
+
+        #km.kernel = self.interpreter
+        #km.kernel.gui = 'qt4'
+
+        self.kernel = self.kernel_manager.kernel
+        self.kernel.gui = 'qt'
+        #self.interpreter = self.kernel
+
+        self.shell = self.kernel.shell
+
+        self.kernel_client = self.kernel_manager.client()
+        self.kernel_client.start_channels()
+
+        self.kernel.locals = self.kernel.shell.user_ns
+
+        # For Debug Only
+        # self.interpreter.locals['shell'] = self
 
         # Compatibility with visualea
         self.runsource = self.interpreter.run_cell
@@ -41,34 +59,10 @@ class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):
         self.loadcode = self.interpreter.loadcode
 
         # Write welcome message
-        self.write(message)
-
-        # Set kernel manager
-        try:
-            from IPython.qt.inprocess import QtInProcessKernelManager
-        except ImportError:
-            import warnings
-            message = "You are using a deprecated version of IPython (please update)."
-            warnings.warn(message)
-
-            # DEPRECATED !
-            from IPython.frontend.qt.inprocess_kernelmanager import QtInProcessKernelManager
-            km = QtInProcessKernelManager(kernel=self.interpreter)
-            km.start_channels()
-            self.interpreter.frontends.append(km)
-            self.kernel_manager = km
-        else:
-            km = QtInProcessKernelManager()
-            km.kernel = self.interpreter
-            km.kernel.gui = 'qt4'
-
-            kernel_client = km.client()
-            kernel_client.start_channels()
-
-            self.kernel_manager = km
-            self.kernel_client = kernel_client
-        # For Debug Only
-        # self.interpreter.locals['shell'] = self
+        self.interpreter.widget = self
+        #self.write(message)
+        # Multiple Stream Redirection
+        GraphicalStreamRedirection.__init__(self, self.kernel.stdout, self.kernel.stderr)
 
     def read(self, *args, **kwargs):
         self.kernel_client.stdin_channel.input(*args, **kwargs)
@@ -76,7 +70,7 @@ class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):
     def readline(self, size=None):
         from openalea.oalab.utils import raw_input_dialog
         txt = raw_input_dialog()
-        self.write(txt)
+        self.write(str(txt))
         return txt
 
     def get_interpreter(self):
@@ -90,8 +84,8 @@ class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):
         Write a text in the stdout of the shell and flush it.
         :param txt: String to write.
         """
-        self.interpreter.shell.write(txt)
-        self.interpreter.stdout.flush()
+        self.shell.write(str(txt))
+        #self.interpreter.stdout.flush()
 
     def push(self, var):
         """
@@ -136,7 +130,7 @@ def main():
 
     interpreter.user_ns['interp'] = interpreter
     # Set Shell Widget
-    shellwdgt = ShellWidget(interpreter)
+    shellwdgt = ShellWidget(interpreter=interpreter)
     interpreter.user_ns['shell'] = shellwdgt
 
     mainWindow = QtGui.QMainWindow()
