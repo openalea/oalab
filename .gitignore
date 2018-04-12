@@ -1,4 +1,3 @@
-# {# pkglts, git
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -80,16 +79,9 @@ target/
 
 # svn
 .svn
-.cache/
-
-# coverage
-.coverage
-
 # sphinx autogen file
 doc/_dvlpt/
 
-
-# #}
 
 # user custom filters
 
