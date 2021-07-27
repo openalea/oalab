@@ -200,7 +200,7 @@ def raw_input_dialog(prompt=None, size=None):
     if dialog.exec_() and _line.text():
         return _line.text()
     else:
-        return u'\n'
+        return '\n'
 
 
 def make_error_dialog(e, parent=None, icon=QtGui.QMessageBox.Critical):

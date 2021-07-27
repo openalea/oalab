@@ -128,7 +128,7 @@ if __name__ == '__main__':
             idx = self.cb_category.currentIndex()
             manager = self.cb_category.itemData(idx)
 
-            print select_manager_item(manager, group, size=(x, y))
+            print(select_manager_item(manager, group, size=(x, y)))
 
     widget = TestPluginSelector()
     widget.show()

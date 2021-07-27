@@ -4,4 +4,4 @@ output = lst
 """
 
 lst = f2(nb_step)
-print(nb_step, lst)
+print((nb_step, lst))

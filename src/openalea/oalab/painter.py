@@ -55,7 +55,7 @@ class PainterColormap(AbstractPainter):
         lx = r.width() / 101.
         ly = r.height() / 101.
 
-        points = data['color_points'].keys()
+        points = list(data['color_points'].keys())
 
         orientation = kwargs.get('orientation',QtCore.Qt.Horizontal)
 

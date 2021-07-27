@@ -82,7 +82,7 @@ class FigureManagerQT(FigureManagerBase):
         self.canvas.setFocusPolicy(QtCore.Qt.StrongFocus)
 
     def show(self):
-        print 'pylab.plot'
+        print('pylab.plot')
 
 
 class MplFigureWidget(QtGui.QFrame):

@@ -1,4 +1,4 @@
-from __future__ import absolute_import
+
 
 import os
 import numpy as np
@@ -136,7 +136,7 @@ class MplTabWidget(QtGui.QTabWidget, AbstractMplWidget):
         if index >= 0:
             self.remove_canvas_tab(index)
         else:
-            print 'MplTabWidget does not contain widget: ' + repr(widget)
+            print('MplTabWidget does not contain widget: ' + repr(widget))
 
     # drop event for OpenAleaLab
     def dragEnterEvent(self, event):
@@ -163,7 +163,7 @@ class MplTabWidget(QtGui.QTabWidget, AbstractMplWidget):
             filename = str(path / 'data' / filename)
 
         # load image and imshow it
-        print filename
+        print(filename)
         img = nd.imread(filename)
         plt.clf()
         plt.imshow(img)

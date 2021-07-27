@@ -528,10 +528,10 @@ if __name__ == '__main__':
     # Example: create a panel with one group containing 1 big and 3 small buttons
     menu = PanedMenu()
 
-    act0 = QtGui.QAction(u'Action', menu)
-    act1 = QtGui.QAction(u'act 1', menu)
-    act2 = QtGui.QAction(u'act 2', menu)
-    act3 = QtGui.QAction(u'act 3', menu)
+    act0 = QtGui.QAction('Action', menu)
+    act1 = QtGui.QAction('act 1', menu)
+    act2 = QtGui.QAction('act 2', menu)
+    act3 = QtGui.QAction('act 3', menu)
 
     menu.addBtnByAction('Panel', 'group', act0, PanedMenu.BigButton)
     menu.addBtnByAction('Panel', 'group', act1, PanedMenu.SmallButton)

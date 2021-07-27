@@ -28,7 +28,7 @@ class InputsModel(QtGui.QWidget):
         self.label = QtGui.QLabel("Inputs: ")
 
         self.combo_input = QtGui.QComboBox(self)
-        self.combo_input.addItems(world.keys())
+        self.combo_input.addItems(list(world.keys()))
 
         self.add_button = QtGui.QPushButton("Add Input")
         self.add_button.clicked.connect(self.add_input)
@@ -47,17 +47,17 @@ class InputsModel(QtGui.QWidget):
         self.setLayout(layout)
 
     def add_input(self):
-        print "add"
+        print("add")
 
     def rm_input(self):
-        print "rm"
+        print("rm")
 
     def get_current(self):
         text = self.combo_input.currentText()
         return text, self.world[text]
 
     def print_current(self):
-        print self.get_current()
+        print(self.get_current())
 
 
 class OutputsModel(QtGui.QWidget):
@@ -87,17 +87,17 @@ class OutputsModel(QtGui.QWidget):
         self.setLayout(layout)
 
     def add_input(self):
-        print "add"
+        print("add")
 
     def rm_input(self):
-        print "rm"
+        print("rm")
 
     def get_current(self):
         text = self.line_output.text()
         return text
 
     def print_current(self):
-        print self.get_current()
+        print(self.get_current())
 
 
 class InAndOutModel(QtGui.QWidget):
@@ -124,8 +124,8 @@ class InAndOutModel(QtGui.QWidget):
 
     def print_current(self):
         inp, outp = self.get_current()
-        print "inputs: ", inp
-        print "outputs: ", outp
+        print("inputs: ", inp)
+        print("outputs: ", outp)
 
 
 def main():

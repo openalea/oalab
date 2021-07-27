@@ -22,8 +22,8 @@ from openalea.core.customexception import CustomException
 
 
 class MimeConversionError(CustomException):
-    title = u'Error: this data cannot be dropped here'
-    message = u'%(data)s (%(mimetype_in)s) cannot be converted to %(mimetype_out)s'
+    title = 'Error: this data cannot be dropped here'
+    message = '%(data)s (%(mimetype_in)s) cannot be converted to %(mimetype_out)s'
     desc = "\n".join([
         "This error is raised because the data format dropped ",
         "is not supported by application or not completely supported",
@@ -32,8 +32,8 @@ class MimeConversionError(CustomException):
 
     def _kargs(self):
         return dict(
-            data=unicode(self._args[0].__class__.__name__),
+            data=str(self._args[0].__class__.__name__),
             mimetype_in=self._args[1],
-            mimetype_out=unicode(self._args[2]),
+            mimetype_out=str(self._args[2]),
             exception=self._args[3]
         )

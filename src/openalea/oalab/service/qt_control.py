@@ -151,7 +151,7 @@ def edit(control):
             elif isinstance(control, ControlContainer):
                 return qt_container(control)
     else:
-        raise NotImplementedError, 'Only Qt editors are supported'
+        raise NotImplementedError('Only Qt editors are supported')
 
 
 def qt_widget_plugins(iname=None):

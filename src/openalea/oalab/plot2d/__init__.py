@@ -37,7 +37,7 @@ Notes:
 #
 #   OpenAlea WebSite : http://openalea.gforge.inria.fr
 #########################################################
-from __future__ import absolute_import
+
 
 __revision__ = "0.1"
 

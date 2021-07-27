@@ -21,7 +21,7 @@ class Applet(object):
 
     @classmethod
     def instances(cls, **kwargs):
-        return cls._applets.values()
+        return list(cls._applets.values())
 
     @classmethod
     def instance(cls, **kwargs):
@@ -51,7 +51,7 @@ class Applet(object):
                         cls.register_applet(plugin.name, applet)
                         instance = cls._applets[identifier]
                         return instance
-        raise NotImplementedError, err
+        raise NotImplementedError(err)
 
 
 register_applet = Applet.register

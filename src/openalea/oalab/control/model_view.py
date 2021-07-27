@@ -194,7 +194,7 @@ class ControlModel(QtGui.QStandardItemModel, AbstractListener):
         QtGui.QStandardItemModel.__init__(self)
         AbstractListener.__init__(self)
 
-        self._headers = [u'Name', u'Value']
+        self._headers = ['Name', 'Value']
         self.setHorizontalHeaderLabels(self._headers)
 
         self._control_index = {}
@@ -233,9 +233,9 @@ class ControlModel(QtGui.QStandardItemModel, AbstractListener):
 
     def data(self, index, role):
         if role == QtCore.Qt.DisplayRole and index.column() == 0:
-            return unicode(self.control(index).label)
+            return str(self.control(index).label)
         elif role == QtCore.Qt.DisplayRole and index.column() == 1:
-            return unicode(self.control(index).value)
+            return str(self.control(index).value)
         else:
             return QtGui.QStandardItemModel.data(self, index, role)
 

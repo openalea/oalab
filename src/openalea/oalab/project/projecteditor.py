@@ -148,7 +148,7 @@ class ProjectEditorView(ProjectBrowserView):
         if category:
             categories = [category]
         else:
-            categories = project.categories.keys()
+            categories = list(project.categories.keys())
 
         # Show dialog
         w = ParadigmInfoSelector(default_name, categories, [dtype],

@@ -171,10 +171,10 @@ class TextEditor(QtGui.QTextEdit):
         font = "Courier"
         try:
             font = config.get("Text Editor", "Font")
-        except settings.NoSectionError, e:
+        except settings.NoSectionError as e:
             config.add_section("Text Editor")
             config.add_option("Text Editor", "Font", str(font))
-        except settings.NoOptionError, e:
+        except settings.NoOptionError as e:
             config.add_option("Text Editor", "Font", str(font))
         self.set_font(font)
 
@@ -182,10 +182,10 @@ class TextEditor(QtGui.QTextEdit):
         try:
             font_size = config.get("Text Editor", "Font Size")
             font_size = int(font_size)
-        except settings.NoSectionError, e:
+        except settings.NoSectionError as e:
             config.add_section("Text Editor")
             config.add_option("Text Editor", "Font Size", str(font_size))
-        except settings.NoOptionError, e:
+        except settings.NoOptionError as e:
             config.add_option("Text Editor", "Font Size", str(font_size))
         self.set_font_size(font_size)
 
@@ -193,10 +193,10 @@ class TextEditor(QtGui.QTextEdit):
         try:
             display_tab = config.get("Text Editor", "Display Tab and Spaces")
             display_tab = bool(eval(display_tab))
-        except settings.NoSectionError, e:
+        except settings.NoSectionError as e:
             config.add_section("Text Editor")
             config.add_option("Text Editor", "Display Tab and Spaces", str(display_tab))
-        except settings.NoOptionError, e:
+        except settings.NoOptionError as e:
             config.add_option("Text Editor", "Display Tab and Spaces", str(display_tab))
         self.show_tab_and_spaces(display_tab)
 
@@ -281,7 +281,7 @@ class TextEditor(QtGui.QTextEdit):
     def get_selected_text(self):
         cursor = self.textCursor()
         txt = cursor.selectedText()
-        return unicode(txt).replace(u'\u2029', u'\n')  # replace paragraph separators by new lines
+        return str(txt).replace('\u2029', '\n')  # replace paragraph separators by new lines
 
     def get_text(self, start='sof', end='eof'):
         """
@@ -294,7 +294,7 @@ class TextEditor(QtGui.QTextEdit):
         txt = self.toPlainText()
         if txt is None:
             txt = ""
-        return unicode(txt).replace(u'\u2029', u'\n')  # replace paragraph separators by new lines
+        return str(txt).replace('\u2029', '\n')  # replace paragraph separators by new lines
 
     def replace_tab(self):
         """

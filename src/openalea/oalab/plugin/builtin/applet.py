@@ -53,7 +53,7 @@ class EditorManager(AppletPlugin):
     label = 'Model Editor'
     icon = 'oxygen_text-x-python.png'
     authors = [cpradal, dbarbeau, fboudon, gbaty, jchopard, jcoste, sdufourko, tcokelaer,
-               {'name': u"Et al.", 'note': u"See also IParadigmApplet and IModel authors"}
+               {'name': "Et al.", 'note': "See also IParadigmApplet and IModel authors"}
                ]
 
     def __call__(self):

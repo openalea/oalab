@@ -9,7 +9,7 @@ from openalea.vpltk.qt import QtGui
 
 
 def rename_model(project, category, name):
-    filelist = getattr(project, category).keys()
+    filelist = list(getattr(project, category).keys())
     renamer = RenameModel(filelist, name)
     dialog = ModalDialog(renamer)
     if dialog.exec_():
@@ -48,7 +48,7 @@ class SelectCategory(QtGui.QWidget):
         super(SelectCategory, self).__init__(parent=parent)
 
         if categories is None:
-            categories = Project.DEFAULT_CATEGORIES.keys()
+            categories = list(Project.DEFAULT_CATEGORIES.keys())
         if dtypes is None:
             dtypes = [
                 plugin.default_name for plugin in plugins(

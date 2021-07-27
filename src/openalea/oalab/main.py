@@ -110,9 +110,9 @@ def main():
         if win:
             app.exec_()
         else:
-            print 'Extension %r not found' % session.extension
-            print 'Please choose a valid \033[94mextension\033[0m:'
-            print '\n'.join(available_extensions)
+            print('Extension %r not found' % session.extension)
+            print('Please choose a valid \033[94mextension\033[0m:')
+            print('\n'.join(available_extensions))
 
 if(__name__ == "__main__"):
     main()

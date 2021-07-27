@@ -18,7 +18,7 @@
 __revision__ = ""
 from openalea.vpltk.qt import QtGui, QtCore
 from openalea.oalab.editor.highlight import Highlighter
-import resources_rc  # do not remove this import else icon are not drawn
+from . import resources_rc  # do not remove this import else icon are not drawn
 
 
 class HistoryWidget(QtGui.QTextBrowser):

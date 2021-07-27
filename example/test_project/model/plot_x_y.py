@@ -11,4 +11,4 @@ from pylab import figure, plot
 
 plot(x,y)
 
-print ('plot on fig %d' %int(num))
+print(('plot on fig %d' %int(num)))

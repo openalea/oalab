@@ -144,7 +144,7 @@ class WelcomePage(QtGui.QWidget):
         self.nx = self._compute_layout_info()
 
         # clear old widgets
-        for i in reversed(range(self._layout.count())):
+        for i in reversed(list(range(self._layout.count()))):
             widget = self._layout.itemAt(i).widget()
             widget.setParent(None)
             self._layout.removeWidget(widget)

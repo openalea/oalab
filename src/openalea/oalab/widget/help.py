@@ -18,7 +18,7 @@
 __revision__ = ""
 
 from openalea.vpltk.qt import QtGui, QtCore
-import resources_rc  # do not remove this import else icon are not drawn
+from . import resources_rc  # do not remove this import else icon are not drawn
 import webbrowser
 from openalea.oalab.widget.preferences import PreferenceWidget
 from openalea.oalab.utils import ModalDialog

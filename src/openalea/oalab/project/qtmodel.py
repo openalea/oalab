@@ -83,7 +83,7 @@ class ProjectModel(QtGui.QStandardItemModel):
 
             data_dict = getattr(project, category)
 
-            names = data_dict.keys()
+            names = list(data_dict.keys())
             for name in sorted(names):
                 data = data_dict[name]
                 item3 = QtGui.QStandardItem(name)

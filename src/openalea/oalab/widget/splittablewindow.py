@@ -388,7 +388,7 @@ class AppletTabWidget(QtGui.QTabWidget):
         """
         if idx in self._applets:
             tab = self.currentWidget()
-            for applet in self._applets[idx].values():
+            for applet in list(self._applets[idx].values()):
                 tab.remove_applet(applet)
                 applet.close()
                 del applet
@@ -410,7 +410,7 @@ class AppletTabWidget(QtGui.QTabWidget):
         # clear view (hide all widgets in current tab)
         idx = self.currentIndex()
         old = self._name.get(idx, None)
-        for applet in self._applets.get(idx, {}).values():
+        for applet in list(self._applets.get(idx, {}).values()):
             applet.hide()
 
         if not name:
@@ -591,7 +591,7 @@ class AppletContainer(QtGui.QWidget):
             applet_dict=self._tabwidget._applets,
             applet=self._tabwidget._applets[self._tabwidget.currentIndex()]
         )
-        for k, v in interp.user_ns['debug_dict'].items():
+        for k, v in list(interp.user_ns['debug_dict'].items()):
             interp.user_ns['debug_%s' % k] = v
 
     def _create_menus(self):
@@ -693,7 +693,7 @@ class AppletContainer(QtGui.QWidget):
     def properties(self):
         properties = {}
         properties.update(self._tabwidget.properties())
-        title = unicode(self._e_title.text()).strip()
+        title = str(self._e_title.text()).strip()
         if title:
             properties['title'] = title
         return properties
@@ -729,9 +729,9 @@ class OABinaryTree(BinaryTree):
 
     def _repr_json_(self, props=[]):
         filteredProps = {}
-        for vid, di in self._properties.iteritems():
+        for vid, di in self._properties.items():
             filteredProps[vid] = {}
-            for k, v in di.iteritems():
+            for k, v in di.items():
                 if k in props:
                     if hasattr(v, '_repr_json_'):
                         filteredProps[vid][k] = v._repr_json_()
@@ -896,7 +896,7 @@ class OALabSplittableUi(SplittableUI):
 
     def set_edit_mode(self, mode=True):
         self._edit_mode = mode
-        for properties in self._g._properties.values():
+        for properties in list(self._g._properties.values()):
 
             # if 'handleWidget' in properties:
             #    properties['handleWidget'].setVisible(mode)
@@ -1084,7 +1084,7 @@ class OALabMainWin(QtGui.QMainWindow):
             if hasattr(widget, 'set_edit_mode'):
                 widget.set_edit_mode(mode)
         if mode is True and self.LAB:
-            print self.LAB.connections
+            print(self.LAB.connections)
         self.splittable.set_edit_mode(mode)
 
     def initialize(self):
@@ -1239,7 +1239,7 @@ class SplitterApplet(Splitter):
             self.add_applet(widget.currentAppletName())
 
     def clear(self):
-        for applet in self._applets.itervalues():
+        for applet in self._applets.values():
             applet.close()
         self._applets.clear()
 
@@ -1258,5 +1258,5 @@ class SplitterApplet(Splitter):
 
     def properties(self):
         dic = Splitter.properties(self)
-        dic['applets'] = self._applets.keys()
+        dic['applets'] = list(self._applets.keys())
         return dic

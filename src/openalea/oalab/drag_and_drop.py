@@ -174,7 +174,7 @@ class DropHandler(object):
             self._compatible = None
 
     def _compatible_mime(self, mimetype_in_list):
-        return compatible_mime(mimetype_in_list, self._drop_callbacks.keys())
+        return compatible_mime(mimetype_in_list, list(self._drop_callbacks.keys()))
 
     def can_insert_from_mime_data(self, source):
         default = super(self.widget.__class__, self.widget).canInsertFromMimeData(source)
@@ -203,11 +203,11 @@ class DropHandler(object):
 
     def _labels(self, possible_conv):
         labels = {}
-        for all_conv in possible_conv.values():
+        for all_conv in list(possible_conv.values()):
             for conv in all_conv:
                 plugin = decode_plugin(conv)
                 if hasattr(plugin, 'mimetype_desc'):
-                    for mimetype, desc in plugin.mimetype_desc.items():
+                    for mimetype, desc in list(plugin.mimetype_desc.items()):
                         if 'title' in desc:
                             labels[mimetype] = desc['title']
         return labels
@@ -232,11 +232,11 @@ class DropHandler(object):
             if conv:
                 possible_conv[k] = conv
 
-        nb_choice = len(possible_conv.keys())
+        nb_choice = len(list(possible_conv.keys()))
         if nb_choice == 0:
             return None, None
         elif nb_choice == 1:
-            selected = possible_conv.keys()[0]
+            selected = list(possible_conv.keys())[0]
         else:
             keys = sorted(possible_conv.keys())
             labels = self._labels(possible_conv)

@@ -148,6 +148,6 @@ class PackageSearchWidget(QtGui.QWidget):
 
     def search_node(self):
         """ Activated when search line edit is validated """
-        text = str(unicode(self.search_lineEdit.text()).encode('latin1'))
+        text = str(str(self.search_lineEdit.text()).encode('latin1'))
         results = package_manager.search_node(text)
         self.search_model.set_results(results) ###result_model, result_widget

@@ -79,7 +79,7 @@ def run():
 '''
     _, _, _, run = parse_functions(code)
     d = {}
-    exec run in d
+    exec(run, d)
     assert d['a'] == 10
 
 

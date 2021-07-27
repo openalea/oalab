@@ -59,42 +59,42 @@ if VIEW == "webkit":
 
 dependencies = dict(
     vtk=dict(
-        team=u'VTK',
-        icon=u'vtk.png',
-        website=u'http://vtk.org'
+        team='VTK',
+        icon='vtk.png',
+        website='http://vtk.org'
     ),
 
     pyqode=dict(
-        authors=[u'Colin Duquesnoy'],
-        team=u'PyQode',
-        icon=u'pyqode.png',
-        website=u'http://github.com/pyQode/pyQode',
-        license=u'MIT',
+        authors=['Colin Duquesnoy'],
+        team='PyQode',
+        icon='pyqode.png',
+        website='http://github.com/pyQode/pyQode',
+        license='MIT',
     ),
 
     qt=dict(
-        team=u'Qt',
-        icon=u'qt.png',
-        website=u'http://qt.io'
+        team='Qt',
+        icon='qt.png',
+        website='http://qt.io'
     ),
 
     pyqt=dict(
-        team=u'PyQt',
-        icon=u'pyqt.png',
-        website=u'http://www.riverbankcomputing.com'
+        team='PyQt',
+        icon='pyqt.png',
+        website='http://www.riverbankcomputing.com'
     ),
 
     git=dict(
-        team=u'Git',
-        icon=u'git.png',
-        website=u'https://git-scm.com'
+        team='Git',
+        icon='git.png',
+        website='https://git-scm.com'
     ),
 
 )
 
 scientific = ['ipython', 'matplotlib', 'numpy', 'pandas', 'scipy', 'python']
 for lib in scientific:
-    dependencies[lib] = dict(team=lib.capitalize(), icon=u'%s.png' % lib, website=u'http://%s.org' % lib)
+    dependencies[lib] = dict(team=lib.capitalize(), icon='%s.png' % lib, website='http://%s.org' % lib)
 
 
 dep_order = 'python qt pyqt ipython pyqode numpy matplotlib scipy pandas git vtk'.split()

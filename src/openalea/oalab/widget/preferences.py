@@ -87,7 +87,7 @@ class PreferenceWidget(QtGui.QWidget):
         if not config:
             config = self._config
         if config:
-            for section, options in self._option_values.items():
+            for section, options in list(self._option_values.items()):
                 for option in options:
                     config.set(section, option.name, str(option.value))
             if save:

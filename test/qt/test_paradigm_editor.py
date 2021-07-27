@@ -43,18 +43,18 @@ class TestCaseParadigmEditor(QtTestCase):
         pyqode.setPlainText(memory_code)
 
         # Unchanged because data has not been saved
-        self.assertEquals(self.data.content, SAMPLE_CODE)
+        self.assertEqual(self.data.content, SAMPLE_CODE)
 
         # APPLY: change data object but do not save on disk
         self.widget.apply()
         # Changed in memory but not on disk
         self.assertFalse(self.data.path.exists())
-        self.assertEquals(self.data.content, memory_code)
+        self.assertEqual(self.data.content, memory_code)
 
         pyqode.setPlainText(hdd_code)
         self.widget.save()
         # SAVE: change data object and save to disk
         with open(self.data.path, 'r') as f:
             disk_code = f.read()
-        self.assertEquals(self.data.content, hdd_code)
-        self.assertEquals(disk_code, hdd_code)
+        self.assertEqual(self.data.content, hdd_code)
+        self.assertEqual(disk_code, hdd_code)

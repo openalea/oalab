@@ -59,7 +59,7 @@ class ParadigmCreator(QtCore.QObject):
             applet_class = self._name_to_applet[dtype]
         else:
             # Check in paradigm.extension
-            for value in self._name_to_applet.values():
+            for value in list(self._name_to_applet.values()):
                 if dtype == value.extension:
                     applet_class = value
         if applet_class is None:
@@ -68,7 +68,7 @@ class ParadigmCreator(QtCore.QObject):
         return applet_class(data=obj).instantiate_widget()
 
     def actions(self):
-        return self._action_to_name.keys()
+        return list(self._action_to_name.keys())
 
     def action(self, paradigm):
         """

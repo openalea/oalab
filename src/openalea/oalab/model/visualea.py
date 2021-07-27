@@ -276,7 +276,7 @@ class ModelNodeFactory(AbstractFactory):
         model = get_model(self.name)
 
         if model is None:
-            print "error loading model ", self.name
+            print("error loading model ", self.name)
             # print "Available models are ", pm.cproject.model.keys()
 
         # TODO
@@ -320,9 +320,9 @@ class ModelNodeFactory(AbstractFactory):
         else:
             from openalea.core.project.manager import ProjectManager
             pm = ProjectManager()
-            print "We can't instantiate node from project %s because we don't have model %s" % (pm.cproject.name, self.name)
-            print "We only have models : "
-            print ", ".join(pm.cproject.model.keys())
+            print("We can't instantiate node from project %s because we don't have model %s" % (pm.cproject.name, self.name))
+            print("We only have models : ")
+            print(", ".join(list(pm.cproject.model.keys())))
 
     def instantiate_widget(self, node=None, parent=None, edit=False,
                            autonomous=False):
