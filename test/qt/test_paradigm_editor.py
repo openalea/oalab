@@ -8,7 +8,7 @@ from openalea.oalab.paradigm.container import ParadigmContainer
 from openalea.oalab.testing.qtunittest import QtTestCase
 from openalea.vpltk.qt import QtGui, QtCore
 
-from PyQt4.QtTest import QTest
+from PyQt5.QtTest import QTest
 
 SAMPLE_CODE = "# sample"
 

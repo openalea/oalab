@@ -791,8 +791,8 @@ class OALabSplittableUi(SplittableUI):
     def __init__(self, parent=None, content=None):
         """Contruct a SplittableUI.
         :Parameters:
-         - parent (qt.QtGui.QWidget)  - The parent widget
-         - content (qt.QtGui.QWidget) - The widget to display in pane at level 0
+         - parent (QWidget)  - The parent widget
+         - content (QWidget) - The widget to display in pane at level 0
         """
         QtGui.QWidget.__init__(self, parent)
         self.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)

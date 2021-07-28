@@ -3,11 +3,11 @@
 # Form implementation generated from reading ui file 'oalab/example/control_sizes.ui'
 #
 # Created: Fri Apr  3 12:26:18 2015
-#      by: PyQt4 UI code generator 4.11.2
+#      by: PyQt5 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8

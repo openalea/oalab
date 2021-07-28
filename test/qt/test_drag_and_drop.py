@@ -7,7 +7,7 @@ from openalea.oalab.testing.qtunittest import QtTestCase
 from openalea.oalab.testing.drag_and_drop import DragAndDropWidget
 from openalea.oalab.service.drag_and_drop import add_drop_callback, add_drag_format, encode_to_qmimedata
 
-from PyQt4.QtTest import QTest
+from PyQt5.QtTest import QTest
 from openalea.vpltk.qt import QtGui, QtCore
 
 

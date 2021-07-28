@@ -143,7 +143,7 @@ def qt_painter(control, shape=None, preferred=None):
 
 def edit(control):
     import sys
-    if 'PyQt4.QtGui' in sys.modules or 'PySide.QtGui' in sys.modules:
+    if 'PyQt5.QtGui' in sys.modules or 'PySide.QtGui' in sys.modules:
         from openalea.vpltk.qt import QtGui
         if QtGui.QApplication.instance():
             if isinstance(control, Control):

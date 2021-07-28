@@ -20,7 +20,7 @@
 
 import unittest
 from openalea.vpltk.qt import QtGui, QtCore
-from PyQt4 import QtTest
+from PyQt5 import QtTest
 
 
 class QtTestCase(unittest.TestCase):

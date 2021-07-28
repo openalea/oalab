@@ -155,7 +155,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
     def moveCursor(self, operation, mode=QtGui.QTextCursor.MoveAnchor):
         """
         Convenience function to move the cursor
-        This function will be present in PyQT4.2
+        This function will be present in PyQt5.2
         """
         cursor = self.textCursor()
         cursor.movePosition(operation, mode)
