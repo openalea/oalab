@@ -3,7 +3,7 @@
 # Form implementation generated from reading ui file 'widget_container.ui'
 #
 # Created: Wed Jun 11 09:07:37 2014
-#      by: PyQt5 UI code generator 4.10.4
+#      by: PyQt4 UI code generator 4.10.4
 #
 # WARNING! All changes made in this file will be lost!
 
