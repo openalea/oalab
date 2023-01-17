@@ -141,7 +141,7 @@ output = success
 beautifull doc
 '''
     model, inputs, outputs = parse_doc(doc1)
-    print inputs
+    print(inputs)
     assert inputs[0].name == "x"
     assert inputs[0].default == "4"
     # assert inputs[0].interface == "IInt"

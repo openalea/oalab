@@ -86,7 +86,7 @@ class ProjectBrowserWidget(QtGui.QWidget):
     def _create_menus(self):
         # Menu used to display all available projects.
         # This menu is filled dynamically each time this menu is opened
-        self.menu_available_projects = QtGui.QMenu(u'Available Projects')
+        self.menu_available_projects = QtGui.QMenu('Available Projects')
         self.menu_available_projects.aboutToShow.connect(self._update_available_project_menu)
         self.action_available_project = {}  # Dict used to know what project corresponds to triggered action
 
@@ -126,9 +126,9 @@ class ProjectBrowserWidget(QtGui.QWidget):
             all_projects.setdefault(project.projectdir, []).append(project)
 
         home = path(get_default_home_dir())
-        for projectdir, _projects in all_projects.iteritems():
+        for projectdir, _projects in all_projects.items():
             relpath = home.relpathto(projectdir)
-            label = unicode(relpath)
+            label = str(relpath)
             menu = QtGui.QMenu(label, self.menu_available_projects)
             for project in sorted(_projects, key=lambda project: project.label):
                 icon = obj_icon(project, default=DEFAULT_PROJECT_ICON, paths=[project.path])
@@ -402,4 +402,4 @@ class ProjectBrowserView(QtGui.QTreeView, AbstractListener):
         self.set_project(None)
 
     def import_file(self):
-        print 'import_file'
+        print('import_file')

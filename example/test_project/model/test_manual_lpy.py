@@ -53,13 +53,13 @@ lsystem.axiom = "_(0.01)-(90)F(1)"
 
 print('\n----lsystem:')
 print(lsystem)
-print('\n----axialtree:', axialtree)
+print(('\n----axialtree:', axialtree))
 
 axialtree = lsystem.iterate(3)
 
 print('\n----lsystem:')
 print(lsystem)
-print('\n----axialtree:', axialtree)
+print(('\n----axialtree:', axialtree))
 
 
 lsystem.getLastIterationNb()  # iterate 4 -> getLastIterationNb == 3

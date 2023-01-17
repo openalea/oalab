@@ -90,7 +90,7 @@ shapes = {
 # Exclude interfaces that have widgets designed for controls
 rejected = ['IInt', 'IStr', 'IFloat']
 
-for interface, widget_class in InterfaceWidgetMap().items():
+for interface, widget_class in list(InterfaceWidgetMap().items()):
     iname = interface.__name__
     if iname in rejected:
         continue

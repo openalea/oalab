@@ -93,7 +93,7 @@ class WorldBrowser(GenericWorldBrowser, AbstractListener):
         item = index.model().itemFromIndex(index)
         world_name = item.text()
         if world_name in self.world:
-            print "World object named ", world_name, " : ", self.world[world_name]
+            print("World object named ", world_name, " : ", self.world[world_name])
 
     def clear(self):
         if self.world:
@@ -122,7 +122,7 @@ class WorldModel(QtGui.QStandardItemModel):
         self.clear()
         parentItem = self.invisibleRootItem()
         self.setHorizontalHeaderLabels(["World Objects", "Type"])
-        world_objects = world.keys()
+        world_objects = list(world.keys())
         for world_object in world_objects:
             item1 = QtGui.QStandardItem(world_object)
             objtype = type(world[world_object].obj).__name__
@@ -250,7 +250,7 @@ class WorldControlPanel(QtGui.QWidget, AbstractListener):
     def clear_managers(self):
         self._current = None
         self._cb_world_object.clear()
-        for name, manager in self._manager.items():
+        for name, manager in list(self._manager.items()):
             manager.clear_followers()
             del self._manager[name]
         self._set_manager(self._default_manager)
@@ -270,7 +270,7 @@ class WorldControlPanel(QtGui.QWidget, AbstractListener):
         if self.style == self.StyleTableView:
             self.model.set_world(world)
 
-        for object_name in world.keys():
+        for object_name in list(world.keys()):
             self.refresh_manager(world[object_name])
 
     def _fill_manager(self, manager, world_object):

@@ -163,7 +163,7 @@ class ControlPanelScene(QtGui.QGraphicsScene):
             event.acceptProposedAction()
         else:
             for fmt in event.mimeData().formats():
-                print fmt, event.mimeData().data(fmt)
+                print(fmt, event.mimeData().data(fmt))
             event.ignore()
             return False
 

@@ -66,7 +66,7 @@ class TestApplet(QtGui.QLineEdit):
         return [self.menu_edit, self.action_menu_1]
 
     def initialize(self):
-        print "initialize", self
+        print("initialize", self)
 
 
 class TestAppletPlugin(object):
@@ -86,7 +86,7 @@ if __name__ == '__main__':
     sample_widget = camel_case_to_lower(SAMPLE_WIDGET)
 
     def hello_world():
-        print 'Hello OpenAleaLab world'
+        print('Hello OpenAleaLab world')
 
     def change_applet(applet_name='TestApplet'):
         widget = ns[sample_widget]

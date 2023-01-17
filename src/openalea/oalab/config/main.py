@@ -8,7 +8,7 @@ from openalea.oalab.config.gui import MainWindowConfig
 
 class MainConfig(Application):
     classes = List([MainWindowConfig])
-    config_file = Unicode(u'', config=True,
+    config_file = Unicode('', config=True,
                   help="Load this config file")
 
     def initialize(self):

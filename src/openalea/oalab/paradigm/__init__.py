@@ -23,12 +23,12 @@ class IModelController(object):
     """
     """
 
-    default_name = unicode
-    default_file_name = unicode
-    pattern = unicode
-    extension = unicode
-    mimetype = unicode
-    icon = unicode
+    default_name = str
+    default_file_name = str
+    pattern = str
+    extension = str
+    mimetype = str
+    icon = str
 
     def __init__(self, **kwds):
         """

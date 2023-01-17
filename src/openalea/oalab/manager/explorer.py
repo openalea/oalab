@@ -35,7 +35,7 @@ class ManagerExplorerModel(QtGui.QStandardItemModel):
     def __init__(self):
         QtGui.QStandardItemModel.__init__(self)
 
-        self._headers = [u'Manager']
+        self._headers = ['Manager']
         self.setHorizontalHeaderLabels(self._headers)
         self._items = None
         self._group = {}
@@ -164,7 +164,7 @@ class ManagerExplorerView(QtGui.QTreeView):
     def set_items(self, items):
         self._model.set_items(items)
         if len(items):
-            first = self._model._group.values()[0][0]
+            first = list(self._model._group.values())[0][0]
             self.setCurrentIndex(self._model.indexFromItem(first))
         self.expandAll()
 

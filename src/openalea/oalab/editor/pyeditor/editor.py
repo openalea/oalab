@@ -107,12 +107,12 @@ class PyCodeEditor(PyCodeEditBase):
         txt = self.toPlainText()
         if txt is None:
             txt = ""
-        return unicode(txt).replace(u'\u2029', u'\n')  # replace paragraph separators by new lines
+        return str(txt).replace('\u2029', '\n')  # replace paragraph separators by new lines
 
     def get_selected_text(self):
         cursor = self.textCursor()
         txt = cursor.selectedText()
-        return unicode(txt).replace(u'\u2029', u'\n')  # replace paragraph separators by new lines
+        return str(txt).replace('\u2029', '\n')  # replace paragraph separators by new lines
 
     def get_code(self, start='sof', end='eof'):
         return self.get_text(start=start, end=end)

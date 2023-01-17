@@ -62,8 +62,8 @@ class ParadigmContainer(QtGui.QTabWidget):
 
         self._open_objects = {}
 
-        self.connect(self, QtCore.SIGNAL('tabCloseRequested(int)'), self.auto_close)
-        self.connect(self, QtCore.SIGNAL('currentChanged(int)'), self.safe_display_help)
+        self.tabCloseRequested.connect(self.auto_close)
+        self.currentChanged.connect(self.safe_display_help)
 
         self.add_default_tab()
         self.fine_tune()
@@ -114,7 +114,7 @@ class ParadigmContainer(QtGui.QTabWidget):
 
     def open_file(self, filepath=None):
         if filepath in(None, True, False):
-            filepath, filters = getopenfilename(self, u"Select file")
+            filepath, filters = getopenfilename(self, "Select file")
         if filepath is None:
             return
         filepath = path(filepath).normpath().abspath()

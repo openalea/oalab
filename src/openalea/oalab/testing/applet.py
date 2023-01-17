@@ -32,27 +32,27 @@ class TestMainWin(OALabMainWin):
         self.interp.user_ns['applet'] = applet
         self.interp.user_ns['applets'] = applets
 
-        print 'VARIABLES AVAILABLE IN SHELL ...'
+        print('VARIABLES AVAILABLE IN SHELL ...')
 
-        print '\nAPPLICATION:'
-        print '  - mainwin'
-        print '  - splittable'
-        print '  - QtCore'
-        print '  - QtGui'
+        print('\nAPPLICATION:')
+        print('  - mainwin')
+        print('  - splittable')
+        print('  - QtCore')
+        print('  - QtGui')
 
-        print '\nAPPLETS:'
+        print('\nAPPLETS:')
         for plugin in plugins('oalab.applet'):
             if plugin_instance_exists('oalab.applet', plugin.name):
                 varname = camel_case_to_lower(plugin.name)
                 self.interp.user_ns['plugin_%s' % varname] = plugin
                 self.interp.user_ns[varname] = plugin_instance('oalab.applet', plugin.name)
-                print '  -', varname
+                print('  -', varname)
 
-        print '\nFUNCTIONS:'
+        print('\nFUNCTIONS:')
         for f in kwds.pop('tests', []):
             self.interp.user_ns['run_%s' % f.__name__] = f
-            f.func_globals['ns'] = self.interp.user_ns
-            print '  - run_%s' % f.__name__
+            f.__globals__['ns'] = self.interp.user_ns
+            print('  - run_%s' % f.__name__)
 
         self.resize(QtCore.QSize(800, 600))
 

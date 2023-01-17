@@ -57,7 +57,7 @@ class QControlContainer(QtCore.QObject, ControlContainer):
                 action.triggered.connect(self._on_action_triggered)
 
     def actions(self):
-        return self._action.values()
+        return list(self._action.values())
 
     def _on_action_triggered(self, *args):
         control = self._control[self.sender()]

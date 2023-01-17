@@ -139,7 +139,7 @@ class Control(Node, AbstractListener):
         signal, data = event
         if signal == 'control_value_changed':
             self.invalidate()
-            print 'control changed'
+            print('control changed')
         elif signal == 'control_name_changed':
             ctrl, name = data
             self.set_input(0, name)

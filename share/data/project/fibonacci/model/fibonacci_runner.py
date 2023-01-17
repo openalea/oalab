@@ -10,7 +10,7 @@ output = xj
 fibo = Model("fibo")
 
 xi, xj = 1, 1
-print(xi, xj)
+print((xi, xj))
 
 for i in range(int(nb_step)-1):
     xi, xj = fibo(xi,xj)

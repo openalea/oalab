@@ -61,7 +61,7 @@ def test_load_project():
 def test_create_controllers():
     project = interp.locals['project']
     controllers = []
-    for name, data in project.model.items():
+    for name, data in list(project.model.items()):
         if data.mimetype == 'text/vnd-lpy':
             continue
         controller = paradigm_controller(data)

@@ -19,4 +19,4 @@ intercept = Y.mean() - X.mean() * slope
 
 # result2 = %R resid(lm(Y~X)); coef(lm(X~Y))
 
-print result1, result2
+print(result1, result2)

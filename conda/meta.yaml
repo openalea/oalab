@@ -1,40 +1,46 @@
-{% set version = "2.0.1" %}
+{% set data = load_setup_py_data() %}
 
 package:
   name: openalea.oalab
-  version: {{ version }}
+  version: {{ data.get('version') }}
 
 source:
   path: ..
 
 build:
+  noarch: python
   preserve_egg_dir: True
-  number: 2
-  script: python setup.py install --prefix=$PREFIX
+  number: 0
+  script: {{PYTHON}} setup.py install 
 
 requirements:
   build:
+    - python {{PY_VER}}
+    - setuptools
     - openalea.deploy
+    - six
   run:
     - openalea.deploy
     - openalea.core
     - openalea.vpltk
-    - ipython <5
+    - ipython 
 
 test:
   imports:
     - openalea.oalab
   requires:
-    - nose
+    - pytest
   source_files:
     - test/
     - test/*.py
 
   commands:
-    - nosetests -v
+    - cd test
+    - pytest -v test_*.py
+
 
 about:
-  home: http://github.com/openalea/oalab
+  home: {{ data.get('url') }}
   license: Cecill-c License
-  summary: OALab package for OpenAlea.
+  summary: {{ data.get('description') }}
 

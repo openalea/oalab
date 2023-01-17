@@ -8,9 +8,9 @@ MIME_DATA_CONTROLLER = {}
 
 
 def _fill_registery(registery, mimetypes):
-    if mimetypes in (None, unicode):
+    if mimetypes in (None, str):
         return
-    elif isinstance(mimetypes, basestring):
+    elif isinstance(mimetypes, str):
         registery.setdefault(mimetypes, []).append(plugin)
     elif isinstance(mimetypes, (list, tuple, set)):
         for mimetype in mimetypes:

@@ -50,15 +50,15 @@ class MiniLab(object):
     menu_names = ('File', 'Edit', 'Help')
 
     layout = {'parents': {0: None, 1: 0, 2: 0, 3: 1, 4: 1},
-              'properties': {0: {u'amount': 0.6957746478873239,
-                                 u'splitDirection': 2},
-                             1: {u'amount': 0.15247108307045215,
-                                 u'splitDirection': 1},
-                             2: {u'widget': {'applets': [{'name': u'ShellWidget'}],
+              'properties': {0: {'amount': 0.6957746478873239,
+                                 'splitDirection': 2},
+                             1: {'amount': 0.15247108307045215,
+                                 'splitDirection': 1},
+                             2: {'widget': {'applets': [{'name': 'ShellWidget'}],
                                              'properties': {}}},
-                             3: {u'widget': {'applets': [{'name': u'ProjectManager'}],
+                             3: {'widget': {'applets': [{'name': 'ProjectManager'}],
                                              'properties': {}}},
-                             4: {u'widget': {'applets': [{'name': u'EditorManager'}],
+                             4: {'widget': {'applets': [{'name': 'EditorManager'}],
                                              'properties': {}}}},
               'children': {0: [1, 2], 1: [3, 4]}}
 

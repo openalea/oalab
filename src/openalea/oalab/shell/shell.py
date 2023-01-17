@@ -20,7 +20,7 @@ __license__ = "CeCILL V2"
 __revision__ = " $Id: shell.py 3672 2012-12-05 12:28:19Z jcoste $"
 
 import sys
-from streamredirection import GraphicalStreamRedirection
+from .streamredirection import GraphicalStreamRedirection
 
 from openalea.vpltk.qt import QtGui, QtCore
 from openalea.vpltk.check.ipython import has_ipython
@@ -39,7 +39,7 @@ def get_shell_class():
     else:
         # Test QScintilla
         try:
-            from scishell import SciShell
+            from .scishell import SciShell
             return SciShell
 
         except ImportError:
@@ -155,7 +155,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
     def moveCursor(self, operation, mode=QtGui.QTextCursor.MoveAnchor):
         """
         Convenience function to move the cursor
-        This function will be present in PyQT4.2
+        This function will be present in PyQt4.2
         """
         cursor = self.textCursor()
         cursor.movePosition(operation, mode)
@@ -225,7 +225,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
         """
         Simulate stdin, stdout, and stderr.
         """
-        map(self.write, text)
+        list(map(self.write, text))
 
 
     def fakeUser(self, lines):
@@ -251,8 +251,8 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
         self.history.append(str(self.line))
         try:
             self.lines.append(str(self.line))
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
 
         source = '\n'.join(self.lines)
         self.more = self.interpreter.runsource(source)

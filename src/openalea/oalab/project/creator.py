@@ -62,7 +62,7 @@ class CreateProjectWidget(QtGui.QWidget):
         layout_metadata = QtGui.QFormLayout(self.widget_metadata)
         layout_metadata.setLabelAlignment(QtCore.Qt.AlignLeft)
 
-        for cat, metadata in Project.DEFAULT_METADATA.iteritems():
+        for cat, metadata in Project.DEFAULT_METADATA.items():
             label = QtGui.QLabel(metadata.name.capitalize().replace('_', ' '))
             editor = widget(metadata.interface, metadata.value)
             editor.setSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Preferred)
@@ -90,7 +90,7 @@ class CreateProjectWidget(QtGui.QWidget):
 
     def metadata(self):
         metadata = {}
-        for key, editor in self._metadata.iteritems():
+        for key, editor in self._metadata.items():
             metadata[key] = editor.value()
         return metadata
 
@@ -107,9 +107,9 @@ def main():
     widg.show()
     app.exec_()
     project = widg.project()
-    print project
-    for k, v in project.metadata.iteritems():
-        print '    - %s: %s' % (k, v)
+    print(project)
+    for k, v in project.metadata.items():
+        print('    - %s: %s' % (k, v))
 
 
 if __name__ == "__main__":

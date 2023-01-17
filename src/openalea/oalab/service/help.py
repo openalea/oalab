@@ -41,7 +41,7 @@ def get_doc(obj):
     # TODO: complete with other methods
     if hasattr(obj, "get_documentation"):
         return obj.get_documentation()
-    elif isinstance(obj, basestring):
+    elif isinstance(obj, str):
         return obj
     elif hasattr(obj, "__doc__"):
         return obj.__doc__

@@ -1,6 +1,6 @@
 from qtconsole.rich_jupyter_widget import RichJupyterWidget
 from qtconsole.inprocess import QtInProcessKernelManager
-from streamredirection import GraphicalStreamRedirection
+from .streamredirection import GraphicalStreamRedirection
 
 
 class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):

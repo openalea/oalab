@@ -72,7 +72,7 @@ class ThreadedRedirection(object):
         if self.guistream.thread() != qt.QtCore.QThread.currentThread():
             e = qt.QtCore.QEvent(qt.QtCore.QEvent.Type(RedirectionEventId))
             e.txt = str(txt)
-            qt.QtGui.QApplication.postEvent(self.guistream, e)
+            QApplication.postEvent(self.guistream, e)
             pass
         else:
             self.guistream.write(str(txt))

@@ -36,15 +36,15 @@ class Colormap (object):
         from scipy.interpolate import splrep, splev
         if len(self._color_points) == 0:
             return (0.0, 0.0, 0.0)
-        elif value <= np.min(self._color_points.keys()):
-            return self._color_points[np.min(self._color_points.keys())]
-        elif value >= np.max(self._color_points.keys()):
-            return self._color_points[np.max(self._color_points.keys())]
+        elif value <= np.min(list(self._color_points.keys())):
+            return self._color_points[np.min(list(self._color_points.keys()))]
+        elif value >= np.max(list(self._color_points.keys())):
+            return self._color_points[np.max(list(self._color_points.keys()))]
         else:
             return tuple([float(splev(value, self._color_map[channel], der=0)) for channel in [0, 1, 2]])
 
     def get_values(self):
-        return list(np.sort(self._color_points.keys()))
+        return list(np.sort(list(self._color_points.keys())))
 
     def __call__(self, value):
         return self.get_color(value)
@@ -59,12 +59,12 @@ class Colormap (object):
     def _compute(self):
         from scipy.interpolate import splrep, splev
         if len(self._color_points) > 1:
-            self._color_map = [splrep(np.sort(self._color_points.keys()), np.array(self._color_points.values())[
-                                      np.argsort(self._color_points.keys()), channel], s=0, k=1) for channel in [0, 1, 2]]
+            self._color_map = [splrep(np.sort(list(self._color_points.keys())), np.array(list(self._color_points.values()))[
+                                      np.argsort(list(self._color_points.keys())), channel], s=0, k=1) for channel in [0, 1, 2]]
 
     def __str__(self):
         # return self._color_points.__str__()
-        sorted_values = np.sort(self._color_points.keys())
+        sorted_values = np.sort(list(self._color_points.keys()))
 
         cmap_string = "{"
         for i, value in enumerate(sorted_values):
