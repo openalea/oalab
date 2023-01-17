@@ -45,8 +45,8 @@ setup_requires = ['openalea.deploy']
 install_requires = []
 
 # web sites where to find eggs
-dependency_links = ['http://openalea.gforge.inria.fr/pi']
-has_project = bool('openalea')
+dependency_links = []
+
 setup(
     name=name,
     version=version,
@@ -56,7 +56,7 @@ setup(
     author_email=authors_email,
     url=url,
     license=license,
-    keywords='',
+    keywords='openalea',
 
     # package installation
     packages=packages,
@@ -64,14 +64,14 @@ setup(
 
     # Namespace packages creation by deploy
     py_modules=['oalab_postinstall'],
-    namespace_packages=['openalea'],
+    #namespace_packages=['openalea'],
     # create_namespaces = False,
     zip_safe=False,
 
     # Dependencies
     setup_requires=setup_requires,
     install_requires=install_requires,
-    dependency_links=dependency_links,
+    #dependency_links=dependency_links,
 
 
     # Eventually include data in your package
