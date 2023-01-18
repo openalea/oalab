@@ -22,7 +22,7 @@ __revision__ = " $Id: shell.py 3672 2012-12-05 12:28:19Z jcoste $"
 import sys
 from .streamredirection import GraphicalStreamRedirection
 
-from openalea.vpltk.qt import QtGui, QtCore
+from openalea.vpltk.qt import QtGui, QtCore, QtWidgets
 from openalea.vpltk.check.ipython import has_ipython
 from openalea.vpltk.check.ipython_deps import has_full_deps
 
@@ -45,7 +45,7 @@ def get_shell_class():
         except ImportError:
             return PyCutExt
 
-class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
+class PyCutExt(QtWidgets.QTextEdit, GraphicalStreamRedirection):
 
     """
     PyCute is a Python shell for PyQt.
@@ -72,7 +72,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
         exit the interpreter by Ctrl-D.
         """
 
-        QtGui.QTextEdit.__init__(self, parent)
+        QtWidgets.QTextEdit.__init__(self, parent)
         GraphicalStreamRedirection.__init__(self)
 
         self.interpreter = interpreter
@@ -104,7 +104,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
 
         # user interface setup
         # self.setTextFormat(QtCore.Qt.PlainText)
-        self.setLineWrapMode(QtGui.QTextEdit.NoWrap)
+        self.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
         # self.setCaption('Python Shell')
 
 #         # font
@@ -459,7 +459,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
 
     def customEvent(self, event):
         GraphicalStreamRedirection.customEvent(self, event)
-        QtGui.QTextEdit.customEvent(self, event)
+        QtWidgets.QTextEdit.customEvent(self, event)
 
 
 
@@ -507,7 +507,7 @@ class SyntaxColor:
 
 def main():
     # Test the widget independently.
-    a = QtGui.QApplication(sys.argv)
+    a = QtWidgets.QApplication(sys.argv)
 
     # Restore default signal handler for CTRL+C
     import signal; signal.signal(signal.SIGINT, signal.SIG_DFL)
