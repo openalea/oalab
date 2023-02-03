@@ -199,7 +199,7 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
         Reimplemented slot to handle the paste action.
         """
 
-        lines = str(QtGui.QApplication.clipboard().text())
+        lines = str(QtWidgets.QApplication.clipboard().text())
         self.__executeLines(lines)
         
         
@@ -207,7 +207,7 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
         """
         Private method to handle the middle mouse button press.
         """
-        lines = str(QtGui.QApplication.clipboard().text(
+        lines = str(QtWidgets.QApplication.clipboard().text(
             QtGui.QClipboard.Selection))
         self.__executeLines(lines)
 

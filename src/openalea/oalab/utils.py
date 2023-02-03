@@ -21,11 +21,7 @@ __all__ = ['qicon']
 
 import pickle
 import openalea.oalab
-<<<<<<< HEAD
-from qtpy import QtGui, QtCore
-=======
 from qtpy import QtGui, QtCore, QtWidgets
->>>>>>> 09aa01c116e6a8482ffa5c61b749314eb0a8843a
 from openalea.vpltk.qt.compat import orientation_qt, orientation_int
 from openalea.core.customexception import CustomException, cast_error
 from openalea.deploy.shared_data import shared_data
@@ -145,10 +141,10 @@ class Splitter(QtWidgets.QSplitter):
         QtWidgets.QSplitter.__init__(self, parent=parent)
         self._applets = []
 
-        self._action_clear = QtGui.QAction('Clear', self)
+        self._action_clear = QtWidgets.QAction('Clear', self)
         self._action_clear.triggered.connect(self.clear)
 
-        self._action_switch = QtGui.QAction('Change orientation', self)
+        self._action_switch = QtWidgets.QAction('Change orientation', self)
         self._action_switch.triggered.connect(self.toggle_orientation)
 
     def menu_actions(self):

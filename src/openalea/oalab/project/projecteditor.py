@@ -22,7 +22,7 @@ TODO:
     - use project known categories instead of hard coded 'model', 'src', ...
 
 """
-from qtpy import QtGui
+from qtpy import QtGui, QtWidgets
 
 from openalea.core.service.data import DataClass, MimeType
 from openalea.core.service.plugin import plugin_instance_exists, plugin_instance
@@ -36,9 +36,9 @@ from openalea.oalab.widget import resources_rc
 class ProjectEditorWidget(ProjectBrowserWidget):
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
-        layout = QtGui.QVBoxLayout(self)
+        layout = QtWidgets.QVBoxLayout(self)
         self.view = ProjectEditorView()
         self._transfer_view_signals()
 
@@ -107,7 +107,7 @@ class ProjectEditorView(ProjectBrowserView):
 
     def create_menu(self):
 
-        menu = QtGui.QMenu(self)
+        menu = QtWidgets.QMenu(self)
         actions = ProjectBrowserView.create_menu(self).actions()
         if actions:
             menu.addActions(actions)

@@ -9,13 +9,13 @@ from openalea.deploy.shared_data import shared_data
 import openalea.oalab
 from openalea.oalab.control.widget import AbstractQtControlWidget
 from openalea.oalab.widget.basic import QFloatSlider, QSpanSlider, QColormapBar
-from qtpy import QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
 
-class BoolCheckBox(QtGui.QCheckBox, AbstractQtControlWidget):
+class BoolCheckBox(QtWidgets.QCheckBox, AbstractQtControlWidget):
 
     def __init__(self):
-        QtGui.QCheckBox.__init__(self)
+        QtWidgets.QCheckBox.__init__(self)
         AbstractQtControlWidget.__init__(self)
         self.setFocusPolicy(QtCore.Qt.StrongFocus)
         self.setAutoFillBackground(True)
@@ -31,10 +31,10 @@ class BoolCheckBox(QtGui.QCheckBox, AbstractQtControlWidget):
         return self.isChecked()
 
 
-class StrLineEdit(QtGui.QLineEdit, AbstractQtControlWidget):
+class StrLineEdit(QtWidgets.QLineEdit, AbstractQtControlWidget):
 
     def __init__(self):
-        QtGui.QLineEdit.__init__(self)
+        QtWidgets.QLineEdit.__init__(self)
         AbstractQtControlWidget.__init__(self)
         self.setMinimumHeight(20)
         self.setFocusPolicy(QtCore.Qt.StrongFocus)
@@ -76,14 +76,14 @@ class AbstractFloatWidget(AbstractQtControlWidget):
         control.interface.step = self.step()
 
 
-class FloatSlider(QtGui.QWidget, AbstractFloatWidget):
+class FloatSlider(QtWidgets.QWidget, AbstractFloatWidget):
     valueChanged = QtCore.Signal(float)
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
         self.slider = QFloatSlider(QtCore.Qt.Horizontal)
-        self.spinbox = QtGui.QDoubleSpinBox()
+        self.spinbox = QtWidgets.QDoubleSpinBox()
 
         # Fill background to avoid to see text or widget behind
         self.setAutoFillBackground(True)
@@ -101,7 +101,7 @@ class FloatSlider(QtGui.QWidget, AbstractFloatWidget):
         # self.slider.floatValueChanged.connect(self.valueChanged)
         self.spinbox.valueChanged.connect(self.valueChanged)
 
-        layout = QtGui.QHBoxLayout(self)
+        layout = QtWidgets.QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
 
         layout.addWidget(self.spinbox)
@@ -143,10 +143,10 @@ class FloatSlider(QtGui.QWidget, AbstractFloatWidget):
         self.spinbox.setValue(value)
 
 
-class FloatSpinBox(QtGui.QDoubleSpinBox, AbstractFloatWidget):
+class FloatSpinBox(QtWidgets.QDoubleSpinBox, AbstractFloatWidget):
 
     def __init__(self):
-        QtGui.QSpinBox.__init__(self)
+        QtWidgets.QSpinBox.__init__(self)
         AbstractFloatWidget.__init__(self)
         self.value_changed_signal = self.valueChanged
         self.setMinimumHeight(18)
@@ -214,30 +214,30 @@ class AbstractIntWidget(AbstractQtControlWidget):
         control.interface.max = self.maximum()
 
 
-class IntSpinBox(QtGui.QSpinBox, AbstractIntWidget):
+class IntSpinBox(QtWidgets.QSpinBox, AbstractIntWidget):
 
     def __init__(self):
-        QtGui.QSpinBox.__init__(self)
+        QtWidgets.QSpinBox.__init__(self)
         AbstractIntWidget.__init__(self)
         self.value_changed_signal = self.valueChanged
 
 
-class IntSimpleSlider(QtGui.QSlider, AbstractIntWidget):
+class IntSimpleSlider(QtWidgets.QSlider, AbstractIntWidget):
 
     def __init__(self):
-        QtGui.QSlider.__init__(self)
+        QtWidgets.QSlider.__init__(self)
         AbstractIntWidget.__init__(self)
         self.value_changed_signal = self.valueChanged
 
 
-class IntSlider(QtGui.QWidget, AbstractIntWidget):
+class IntSlider(QtWidgets.QWidget, AbstractIntWidget):
     valueChanged = QtCore.Signal(int)
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
-        self.slider = QtGui.QSlider(QtCore.Qt.Horizontal)
-        self.spinbox = QtGui.QSpinBox()
+        self.slider = QtWidgets.QSlider(QtCore.Qt.Horizontal)
+        self.spinbox = QtWidgets.QSpinBox()
 
         # Fill background to avoid to see text or widget behind
         self.setAutoFillBackground(True)
@@ -254,7 +254,7 @@ class IntSlider(QtGui.QWidget, AbstractIntWidget):
         self.spinbox.valueChanged.connect(self.slider.setValue)
         self.slider.valueChanged.connect(self.valueChanged)
 
-        layout = QtGui.QHBoxLayout(self)
+        layout = QtWidgets.QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
 
         layout.addWidget(self.spinbox)
@@ -285,10 +285,10 @@ class IntSlider(QtGui.QWidget, AbstractIntWidget):
         self.spinbox.setValue(value)
 
 
-class IntDial(QtGui.QDial, AbstractIntWidget):
+class IntDial(QtWidgets.QDial, AbstractIntWidget):
 
     def __init__(self):
-        QtGui.QDial.__init__(self)
+        QtWidgets.QDial.__init__(self)
         self.setNotchesVisible(True)
         AbstractIntWidget.__init__(self)
         self.value_changed_signal = self.valueChanged
@@ -317,14 +317,14 @@ class AbstractIntRangeWidget(AbstractQtControlWidget):
         control.interface.max = self.maximum()
 
 
-class IntRangeSpinBoxes(QtGui.QWidget, AbstractIntRangeWidget):
+class IntRangeSpinBoxes(QtWidgets.QWidget, AbstractIntRangeWidget):
     valueChanged = QtCore.Signal(tuple)
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
-        self.start_spinbox = QtGui.QSpinBox()
-        self.end_spinbox = QtGui.QSpinBox()
+        self.start_spinbox = QtWidgets.QSpinBox()
+        self.end_spinbox = QtWidgets.QSpinBox()
 
         # Fill background to avoid to see text or widget behind
         self.setAutoFillBackground(True)
@@ -339,7 +339,7 @@ class IntRangeSpinBoxes(QtGui.QWidget, AbstractIntRangeWidget):
         self.start_spinbox.valueChanged.connect(self.notify_start_value_changed)
         self.end_spinbox.valueChanged.connect(self.notify_end_value_changed)
 
-        layout = QtGui.QHBoxLayout(self)
+        layout = QtWidgets.QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
 
         layout.addWidget(self.start_spinbox)
@@ -410,14 +410,14 @@ class IntRangeSimpleSlider(QSpanSlider, AbstractIntRangeWidget):
         return (self.lowerValue(), self.upperValue())
 
 
-class IntRangeSlider(QtGui.QWidget, AbstractIntRangeWidget):
+class IntRangeSlider(QtWidgets.QWidget, AbstractIntRangeWidget):
     valueChanged = QtCore.Signal(tuple)
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
-        self.start_spinbox = QtGui.QSpinBox()
-        self.end_spinbox = QtGui.QSpinBox()
+        self.start_spinbox = QtWidgets.QSpinBox()
+        self.end_spinbox = QtWidgets.QSpinBox()
         self.slider = QSpanSlider(QtCore.Qt.Horizontal)
 
         # Fill background to avoid to see text or widget behind
@@ -447,7 +447,7 @@ class IntRangeSlider(QtGui.QWidget, AbstractIntRangeWidget):
 
         self.slider.spanChanged.connect(self.notify_value_changed)
 
-        layout = QtGui.QHBoxLayout(self)
+        layout = QtWidgets.QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
 
         layout.addWidget(self.start_spinbox)
@@ -518,11 +518,11 @@ class ColormapRectangle(QColormapBar, AbstractQtControlWidget):
         AbstractQtControlWidget.apply(self, control)
 
 
-class ColormapSwitcher(QtGui.QWidget, AbstractQtControlWidget):
+class ColormapSwitcher(QtWidgets.QWidget, AbstractQtControlWidget):
     valueChanged = QtCore.Signal(dict)
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
         self.colormap_bar = QColormapBar()
         self.colormap_bar.setMinimumHeight(20)
@@ -533,7 +533,7 @@ class ColormapSwitcher(QtGui.QWidget, AbstractQtControlWidget):
         # self.label = QtGui.QLabel(self)
         # self.label.setText("Colormap")
 
-        self.combobox = QtGui.QComboBox(self)
+        self.combobox = QtWidgets.QComboBox(self)
 
         # self.setMinimumHeight(50)
 
@@ -560,7 +560,7 @@ class ColormapSwitcher(QtGui.QWidget, AbstractQtControlWidget):
         self.combobox.currentIndexChanged.connect(self.updateColormap)
         self.colormap_bar.valueChanged.connect(self.valueChanged)
 
-        layout = QtGui.QHBoxLayout(self)
+        layout = QtWidgets.QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
 
         # line = QtGui.QHBoxLayout(self)

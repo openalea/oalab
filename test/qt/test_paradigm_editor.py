@@ -1,4 +1,5 @@
 
+from io import open
 
 from openalea.core.data import PythonFile
 from openalea.core.model import PythonModel
@@ -6,9 +7,6 @@ from openalea.core.path import tempdir
 
 from openalea.oalab.paradigm.container import ParadigmContainer
 from openalea.oalab.testing.qtunittest import QtTestCase
-from qtpy import QtGui, QtCore
-
-from PyQt5.QtTest import QTest
 
 SAMPLE_CODE = "# sample"
 

@@ -17,7 +17,7 @@
 ###############################################################################
 __revision__ = ""
 
-from qtpy import QtGui
+from qtpy import QtWidgets
 from openalea.core.compositenode import CompositeNodeFactory
 from openalea.core.package import Package
 from openalea.visualea.node_treeview import NodeFactoryTreeView
@@ -49,7 +49,7 @@ class OALabTreeView(NodeFactoryTreeView):
 class OALabSearchView(SearchListView):
 
     def __init__(self, parent=None):
-        main_win = QtGui.QWidget()
+        main_win = QtWidgets.QWidget()
         super(OALabSearchView, self).__init__(main_win)
 
     def mouseDoubleClickEvent(self, event):

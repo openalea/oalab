@@ -46,7 +46,7 @@ class QControlContainer(QtCore.QObject, ControlContainer):
         for control in self.controls():
             interface = control.interface
             label = control.label
-            action = QtGui.QAction(label, parent)
+            action = QtWidgets.QAction(label, parent)
             self._control[action] = control
             self._action[control] = action
             if'IBool' in str(interface.__class__):

@@ -82,7 +82,7 @@ class ProjectExplorer(ManagerExplorer):
 def main():
     import sys
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     selector = ProjectExplorer()
     selector.show()
     app.exec_()

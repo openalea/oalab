@@ -76,7 +76,7 @@ def main():
         from openalea.core.settings import get_openalea_home_dir
         from openalea.core.path import path as Path
 
-        app = QtGui.QApplication(sys.argv)
+        app = QtWidgets.QApplication(sys.argv)
 
         win = None
         # Run all extension matching session.extension

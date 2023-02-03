@@ -2,7 +2,7 @@ from openalea.core.control import Control
 from openalea.core.control.manager import ControlContainer
 from openalea.core.service.interface import interface_name
 from openalea.core.service.plugin import plugins
-from qtpy import QtGui
+from qtpy import QtGui, QtWidgets
 from openalea.oalab.utils import ModalDialog
 
 import weakref
@@ -79,7 +79,7 @@ def qt_dialog(control=None, **kwds):
     widget = qt_editor(control, **kwds)
     widget.autoapply(control, autoapply)
     dialog = ModalDialog(widget)
-    if dialog.exec_() == QtGui.QDialog.Accepted:
+    if dialog.exec_() == QtWidgets.QDialog.Accepted:
         return widget.value()
     else:
         return None
@@ -95,7 +95,7 @@ def qt_editor(control, shape=None, preferred=None, **kwds):
 
     if widget_class:
         widget = None
-        if issubclass(widget_class, QtGui.QWidget):
+        if issubclass(widget_class, QtWidgets.QWidget):
             widget = widget_class()
         else:
             widget = widget_class.edit(control, shape)
@@ -106,8 +106,8 @@ def qt_editor(control, shape=None, preferred=None, **kwds):
 
 
 def qt_container(container, **kwargs):
-    widget = QtGui.QWidget()
-    layout = QtGui.QFormLayout(widget)
+    widget = QtWidgets.QWidget()
+    layout = QtWidgets.QFormLayout(widget)
     widget.editor = {}
     widget.control = {}
     for control in container.controls():
@@ -150,7 +150,7 @@ def edit(control):
         'PyQt4.QtGui' in sys.modules 
         ) :
         from qtpy import QtGui
-        if QtGui.QApplication.instance():
+        if QtWidgets.QApplication.instance():
             if isinstance(control, Control):
                 return qt_editor(control)
             elif isinstance(control, ControlContainer):

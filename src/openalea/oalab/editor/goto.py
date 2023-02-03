@@ -17,10 +17,10 @@
 ###############################################################################
 __revision__ = ""
 
-from qtpy import QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
 
-class GoToWidget(QtGui.QWidget):
+class GoToWidget(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(GoToWidget, self).__init__()
@@ -28,8 +28,8 @@ class GoToWidget(QtGui.QWidget):
         self.setMinimumSize(100, 100)
         self.setWindowTitle("Go To Line")
 
-        self.actionGo = QtGui.QAction("Go to line", self)
-        self.lineEdit = QtGui.QLineEdit()
+        self.actionGo = QtWidgets.QAction("Go to line", self)
+        self.lineEdit = QtWidgets.QLineEdit()
         self.btnGo = QtGui.QToolButton()
         self.btnGo.setDefaultAction(self.actionGo)
 

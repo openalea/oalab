@@ -85,7 +85,7 @@ def test_magic_getdoc():
 This is the doc of my model
 """
 %pylab inline
-print "ok"
+print ("ok")
 '''
     d = get_docstring(model_src)
     assert d is not None
@@ -119,7 +119,7 @@ output = success
 beautifull doc
 """
 
-print "ok"
+print ("ok")
 '''
     d = get_docstring(model_src)
     inputs, outputs = parse_input_and_output(d)
@@ -251,7 +251,7 @@ input = x:int=4, y:float=3.14
 beautifull doc
 """
 
-print "ok"
+print ("ok")
 '''
     model, inputs, outputs = parse_docstring(model_src)
 
@@ -273,7 +273,7 @@ input = x="blablabla([1,2,3,4,5,6],['something'])", y="Here is a string, with br
 beautifull doc
 """
 
-print "ok"
+print ("ok")
 '''
     model, inputs, outputs = parse_docstring(model_src)
 
@@ -292,7 +292,7 @@ input = x="input=True,False", y="input = output = [1,2]"
 beautifull doc
 """
 
-print "ok"
+print ("ok")
 '''
     model, inputs, outputs = parse_docstring(model_src)
 
@@ -308,7 +308,7 @@ def test_parse_interface():
     model_src = '''"""
 input = a:ISequence, b:int, c="blabla", d=3.14, e=[1,2,3]
 """
-print "ok"
+print ("ok")
 '''
     model, inputs, outputs = parse_docstring(model_src)
     assert str(inputs[0].interface) == "ISequence"

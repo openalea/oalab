@@ -14,20 +14,20 @@
 #
 #       OpenAlea WebSite : http://openalea.gforge.inria.fr
 #
-from qtpy import QtGui, QtCore
+from qtpy import QtGui, QtWidgets
 import sys
 
 
-class InputsModel(QtGui.QWidget):
+class InputsModel(QtWidgets.QWidget):
     def __init__(self, world={}, parent=None):
         super(InputsModel, self).__init__(parent=parent)
         self.world = world
 
         layout = QtGui.QGridLayout(self)
 
-        self.label = QtGui.QLabel("Inputs: ")
+        self.label = QtWidgets.QLabel("Inputs: ")
 
-        self.combo_input = QtGui.QComboBox(self)
+        self.combo_input = QtWidgets.QComboBox(self)
         self.combo_input.addItems(list(world.keys()))
 
         self.add_button = QtGui.QPushButton("Add Input")
@@ -60,15 +60,15 @@ class InputsModel(QtGui.QWidget):
         print(self.get_current())
 
 
-class OutputsModel(QtGui.QWidget):
+class OutputsModel(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super(OutputsModel, self).__init__(parent=parent)
 
         layout = QtGui.QGridLayout(self)
 
-        self.label = QtGui.QLabel("Outputs: ")
+        self.label = QtWidgets.QLabel("Outputs: ")
 
-        self.line_output = QtGui.QLineEdit(self)
+        self.line_output = QtWidgets.QLineEdit(self)
 
         self.add_button = QtGui.QPushButton("Add Output")
         self.add_button.clicked.connect(self.add_input)
@@ -100,7 +100,7 @@ class OutputsModel(QtGui.QWidget):
         print(self.get_current())
 
 
-class InAndOutModel(QtGui.QWidget):
+class InAndOutModel(QtWidgets.QWidget):
     def __init__(self, world={}, parent=None):
         super(InAndOutModel, self).__init__(parent=parent)
         self.world = world
@@ -129,7 +129,7 @@ class InAndOutModel(QtGui.QWidget):
 
 
 def main():
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     a = dict()
     a[""] = None

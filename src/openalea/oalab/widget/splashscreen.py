@@ -31,6 +31,6 @@ def show_splash_screen():
               "Loading modules..."
     splash.showMessage(message, QtCore.Qt.AlignCenter | QtCore.Qt.AlignBottom)
     # -- make sure qt really display the message before importing the modules.--
-    QtGui.QApplication.processEvents()
+    QtWidgets.QApplication.processEvents()
     return splash
 

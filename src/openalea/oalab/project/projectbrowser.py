@@ -32,10 +32,10 @@ from openalea.oalab.project.qtmodel import ProjectModel
 from openalea.oalab.project.preview import DEFAULT_PROJECT_ICON
 from openalea.oalab.utils import ModalDialog, qicon, obj_icon
 from openalea.oalab.widget import resources_rc
-from qtpy import QtGui, QtCore
+from qtpy import QtGui, QtCore, QtWidgets
 
 
-class ProjectBrowserWidget(QtGui.QWidget):
+class ProjectBrowserWidget(QtWidgets.QWidget):
     item_added = QtCore.Signal(object, str, str) # project, category, name
     item_clicked = QtCore.Signal(object, str, str) # project, category, name
     item_double_clicked = QtCore.Signal(object, str, str) # project, category, name
@@ -44,9 +44,9 @@ class ProjectBrowserWidget(QtGui.QWidget):
     project_open = QtCore.Signal(object) # new project
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
-        layout = QtGui.QVBoxLayout(self)
+        layout = QtWidgets.QVBoxLayout(self)
         self.view = ProjectBrowserView()
         self._transfer_view_signals()
 
@@ -70,7 +70,7 @@ class ProjectBrowserWidget(QtGui.QWidget):
         self.view.project_open.connect(self.project_open.emit)
 
     def _create_actions(self):
-        self.actionNewProj = QtGui.QAction(qicon("new_project.png"), "New Project", self)
+        self.actionNewProj = QtWidgets.QAction(qicon("new_project.png"), "New Project", self)
         self.actionNewProj.triggered.connect(self.new_project)
         self.actionNewProj.setShortcut(self.tr("Ctrl+Shift+N"))
 
@@ -86,7 +86,7 @@ class ProjectBrowserWidget(QtGui.QWidget):
     def _create_menus(self):
         # Menu used to display all available projects.
         # This menu is filled dynamically each time this menu is opened
-        self.menu_available_projects = QtGui.QMenu('Available Projects')
+        self.menu_available_projects = QtWidgets.QMenu('Available Projects')
         self.menu_available_projects.aboutToShow.connect(self._update_available_project_menu)
         self.action_available_project = {}  # Dict used to know what project corresponds to triggered action
 
@@ -107,7 +107,7 @@ class ProjectBrowserWidget(QtGui.QWidget):
 
     def menus(self):
         actions = [action[2] for action in self.toolbar_actions()]
-        menu = QtGui.QMenu('File', self)
+        menu = QtWidgets.QMenu('File', self)
         menu.addActions(actions)
         menu.addSeparator()
         menu.addMenu(self.menu_available_projects)
@@ -129,10 +129,10 @@ class ProjectBrowserWidget(QtGui.QWidget):
         for projectdir, _projects in all_projects.items():
             relpath = home.relpathto(projectdir)
             label = str(relpath)
-            menu = QtGui.QMenu(label, self.menu_available_projects)
+            menu = QtWidgets.QMenu(label, self.menu_available_projects)
             for project in sorted(_projects, key=lambda project: project.label):
                 icon = obj_icon(project, default=DEFAULT_PROJECT_ICON, paths=[project.path])
-                action = QtGui.QAction(icon, project.label, self.menu_available_projects)
+                action = QtWidgets.QAction(icon, project.label, self.menu_available_projects)
                 action.triggered.connect(self._on_open_project_triggered)
                 menu.addAction(action)
                 self.action_available_project[action] = project
@@ -172,7 +172,7 @@ class ProjectBrowserWidget(QtGui.QWidget):
         config.write()
 
 
-class ProjectBrowserView(QtGui.QTreeView, AbstractListener):
+class ProjectBrowserView(QtWidgets.QTreeView, AbstractListener):
     item_added = QtCore.Signal(object, str, str) # project, category, name
     item_clicked = QtCore.Signal(object, str, str) # project, category, name
     item_double_clicked = QtCore.Signal(object, str, str) # project, category, name
@@ -181,7 +181,7 @@ class ProjectBrowserView(QtGui.QTreeView, AbstractListener):
     project_open = QtCore.Signal(object) # new project
 
     def __init__(self):
-        QtGui.QTreeView.__init__(self)
+        QtWidgets.QTreeView.__init__(self)
         AbstractListener.__init__(self)
 
         self._model = ProjectModel()
@@ -202,21 +202,21 @@ class ProjectBrowserView(QtGui.QTreeView, AbstractListener):
     def _create_actions(self):
         self._actions = []
 
-        self.actionEditMeta = QtGui.QAction(
+        self.actionEditMeta = QtWidgets.QAction(
             qicon("adwaita_accessories-dictionary.png"),
             "Edit Project Information",
             self)
         self.actionEditMeta.triggered.connect(self.edit_metadata)
 
-        self.actionCloseProj = QtGui.QAction(qicon("close_project.png"), "Close project", self)
+        self.actionCloseProj = QtWidgets.QAction(qicon("close_project.png"), "Close project", self)
         self.actionCloseProj.triggered.connect(self.close)
         self.actionCloseProj.setShortcut(self.tr("Ctrl+Shift+W"))
 
-        self.actionOpenProj = QtGui.QAction(qicon("open_project.png"), "Open Project", self)
+        self.actionOpenProj = QtWidgets.QAction(qicon("open_project.png"), "Open Project", self)
         self.actionOpenProj.triggered.connect(self.open_project)
         self.actionOpenProj.setShortcut(self.tr('Ctrl+Shift+O'))
 
-        self.action_save_proj = QtGui.QAction(qicon("save_project.png"), "Save Project", self)
+        self.action_save_proj = QtWidgets.QAction(qicon("save_project.png"), "Save Project", self)
         self.action_save_proj.triggered.connect(self.save_project)
         self.action_save_proj.setShortcut(self.tr('Ctrl+Shift+S'))
 
@@ -283,7 +283,7 @@ class ProjectBrowserView(QtGui.QTreeView, AbstractListener):
     #  Contextual menu
 
     def create_menu(self):
-        menu = QtGui.QMenu(self)
+        menu = QtWidgets.QMenu(self)
         project, category, obj = self.selected_data()
 
         if project and category is None:
@@ -291,26 +291,26 @@ class ProjectBrowserView(QtGui.QTreeView, AbstractListener):
             menu.addAction(self.actionCloseProj)
 
         elif category == 'category' and obj == 'data':
-            import_data = QtGui.QAction(qicon('import.png'), 'Import data', self)
+            import_data = QtWidgets.QAction(qicon('import.png'), 'Import data', self)
             import_data.triggered.connect(self.open)
             menu.addAction(import_data)
 
         if category in ['model', 'src', 'startup', 'doc', 'data', 'lib']:
-            editAction = QtGui.QAction(qicon('open.png'), 'Open "%s"' % obj, self)
+            editAction = QtWidgets.QAction(qicon('open.png'), 'Open "%s"' % obj, self)
             menu.addAction(editAction)
             editAction.triggered.connect(self.open)
 
-            rename = QtGui.QAction(qicon('Crystal_Clear_action_editcopy.png'), 'Rename', self)
+            rename = QtWidgets.QAction(qicon('Crystal_Clear_action_editcopy.png'), 'Rename', self)
             rename.triggered.connect(self.rename)
             menu.addAction(rename)
 
-            remove = QtGui.QAction(qicon('Crystal_Clear_action_edit_remove.png'), 'Remove', self)
+            remove = QtWidgets.QAction(qicon('Crystal_Clear_action_edit_remove.png'), 'Remove', self)
             remove.triggered.connect(self.remove)
             menu.addAction(remove)
 
             menu.addSeparator()
 
-            deleteAction = QtGui.QAction(qicon('Crystal_Clear_action_stop.png'), 'Delete', self)
+            deleteAction = QtWidgets.QAction(qicon('Crystal_Clear_action_stop.png'), 'Delete', self)
             menu.addAction(deleteAction)
             deleteAction.triggered.connect(self.delete)
 
@@ -391,7 +391,7 @@ class ProjectBrowserView(QtGui.QTreeView, AbstractListener):
             if category in project.categories:
                 data = project.get(category, name)
 
-                confirm = QtGui.QLabel('Remove %s ?' % data.path)
+                confirm = QtWidgets.QLabel('Remove %s ?' % data.path)
                 dialog = ModalDialog(confirm)
                 if dialog.exec_():
                     project.remove(category, data)

@@ -34,11 +34,11 @@ from openalea.oalab.utils import qicon
 from openalea.oalab.widget import resources_rc  # do not remove this import else icon are not drawn
 from openalea.oalab.widget.pages import WelcomePage
 
-from qtpy import QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 from openalea.vpltk.qt.compat import getopenfilename, getsavefilename
 
 
-class ParadigmContainer(QtGui.QTabWidget):
+class ParadigmContainer(QtWidgets.QTabWidget):
 
     """
     Widget to edit and run models.
@@ -338,27 +338,27 @@ class ModelEditorApplet(ParadigmContainer):
 
     def _create_actions(self):
         # Create actions
-        self.actionRun = QtGui.QAction(qicon("run.png"), "Run", self)
-        self.actionRunInShell = QtGui.QAction(qicon("run.png"), "Run in shell", self)
+        self.actionRun = QtWidgets.QAction(qicon("run.png"), "Run", self)
+        self.actionRunInShell = QtWidgets.QAction(qicon("run.png"), "Run in shell", self)
 
-        menu_run = QtGui.QMenu("Run", self)
+        menu_run = QtWidgets.QMenu("Run", self)
         menu_run.addActions([self.actionRun, self.actionRunInShell])
 
         self.toolbutton_run = QtGui.QToolButton(self)
         self.toolbutton_run.setMenu(menu_run)
         self.toolbutton_run.setDefaultAction(self.actionRun)
 
-        self.actionAnimate = QtGui.QAction(qicon("play.png"), "Animate", self)
-        self.actionStep = QtGui.QAction(qicon("step.png"), "Step", self)
-        self.actionStop = QtGui.QAction(qicon("pause.png"), "Stop", self)
-        self.actionInit = QtGui.QAction(qicon("rewind.png"), "Init", self)
-        self.actionRunSelection = QtGui.QAction(qicon("run.png"), "Run subpart", self)
+        self.actionAnimate = QtWidgets.QAction(qicon("play.png"), "Animate", self)
+        self.actionStep = QtWidgets.QAction(qicon("step.png"), "Step", self)
+        self.actionStop = QtWidgets.QAction(qicon("pause.png"), "Stop", self)
+        self.actionInit = QtWidgets.QAction(qicon("rewind.png"), "Init", self)
+        self.actionRunSelection = QtWidgets.QAction(qicon("run.png"), "Run subpart", self)
 
         # File I/O
-        self.actionCloseCurrent = QtGui.QAction(qicon("close_file.png"), "Close current tab", self)
-        self.actionOpenFile = QtGui.QAction(qicon("open_file.png"), "Open file", self)
-        self.actionSave = QtGui.QAction(qicon("save_file.png"), "Save File", self)
-        self.actionSaveAs = QtGui.QAction(qicon("save_file.png"), "Save As", self)
+        self.actionCloseCurrent = QtWidgets.QAction(qicon("close_file.png"), "Close current tab", self)
+        self.actionOpenFile = QtWidgets.QAction(qicon("open_file.png"), "Open file", self)
+        self.actionSave = QtWidgets.QAction(qicon("save_file.png"), "Save File", self)
+        self.actionSaveAs = QtWidgets.QAction(qicon("save_file.png"), "Save As", self)
 
         # Add shortcuts
         #self.actionInit.setShortcut("F1")
@@ -448,7 +448,7 @@ class ModelEditorApplet(ParadigmContainer):
 
     def menus(self):
 
-        menu_project = QtGui.QMenu("File", self)
+        menu_project = QtWidgets.QMenu("File", self)
 
         menu_project.addActions([
             self.actionOpenFile,

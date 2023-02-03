@@ -30,7 +30,7 @@ class PainterInterfaceObject(AbstractPainter):
         painter.save()
 
         pen = QtGui.QPen()
-        if option and option.state & QtGui.QStyle.State_Selected:
+        if option and option.state & QtWidgets.QStyle.State_Selected:
             painter.fillRect(option.rect, option.palette.highlight())
             pen.setColor(option.palette.highlightedText().color())
         else:

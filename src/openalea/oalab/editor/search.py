@@ -17,11 +17,11 @@
 ###############################################################################
 __revision__ = ""
 
-from qtpy import QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 from openalea.core import logger
 
 
-class SearchWidget(QtGui.QWidget):
+class SearchWidget(QtWidgets.QWidget):
 
     def __init__(self, parent=None, session=None):
         super(SearchWidget, self).__init__(parent)
@@ -32,13 +32,13 @@ class SearchWidget(QtGui.QWidget):
         self.setMinimumSize(100, 100)
         self.setWindowTitle("Search")
 
-        self.actionSearch = QtGui.QAction("Search Next", self)
-        self.actionBackSearch = QtGui.QAction("Search Previous", self)
-        self.actionReplace = QtGui.QAction("Replace All", self)
-        self.lineEdit = QtGui.QLineEdit()
-        self.lineEditReplace = QtGui.QLineEdit()
-        self.textSearch = QtGui.QLabel("Search :")
-        self.textReplaceBy = QtGui.QLabel("Replace by :")
+        self.actionSearch = QtWidgets.QAction("Search Next", self)
+        self.actionBackSearch = QtWidgets.QAction("Search Previous", self)
+        self.actionReplace = QtWidgets.QAction("Replace All", self)
+        self.lineEdit = QtWidgets.QLineEdit()
+        self.lineEditReplace = QtWidgets.QLineEdit()
+        self.textSearch = QtWidgets.QLabel("Search :")
+        self.textReplaceBy = QtWidgets.QLabel("Replace by :")
 
         self.btnNext = QtGui.QToolButton()
         self.btnPrev = QtGui.QToolButton()
@@ -50,8 +50,8 @@ class SearchWidget(QtGui.QWidget):
         self.btnPrev.setDefaultAction(self.actionBackSearch)
         self.btnNext.setDefaultAction(self.actionSearch)
 
-        self.caseBtn = QtGui.QCheckBox("Match Case")
-        self.wholeBtn = QtGui.QCheckBox("Whole Word (Disabled if case sensitive)")
+        self.caseBtn = QtWidgets.QCheckBox("Match Case")
+        self.wholeBtn = QtWidgets.QCheckBox("Whole Word (Disabled if case sensitive)")
 
         QtCore.QObject.connect(self.actionBackSearch, QtCore.SIGNAL('triggered(bool)'), self.searchBack)
         QtCore.QObject.connect(self.actionSearch, QtCore.SIGNAL('triggered(bool)'), self.search)

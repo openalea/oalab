@@ -123,7 +123,7 @@ def main():
     from qtpy import QtGui
     import sys
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     from openalea.core.service.ipython import interpreter
     interpreter = interpreter()
@@ -133,7 +133,7 @@ def main():
     shellwdgt = ShellWidget(interpreter=interpreter)
     interpreter.user_ns['shell'] = shellwdgt
 
-    mainWindow = QtGui.QMainWindow()
+    mainWindow = QtWidgets.QMainWindow()
     mainWindow.setCentralWidget(shellwdgt)
     mainWindow.show()
 

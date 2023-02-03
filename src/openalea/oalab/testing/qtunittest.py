@@ -19,8 +19,7 @@
 ###############################################################################
 
 import unittest
-from qtpy import QtGui, QtCore
-from PyQt5 import QtTest
+from qtpy import QtWidgets, QtCore, QtTest
 
 
 class QtTestCase(unittest.TestCase):
@@ -30,9 +29,9 @@ class QtTestCase(unittest.TestCase):
     def init(self):
         self._pause = False
         self._duration = 0
-        self.instance = QtGui.QApplication.instance()
+        self.instance = QtWidgets.QApplication.instance()
         if self.instance is None:
-            self.app = QtGui.QApplication([])
+            self.app = QtWidgets.QApplication([])
         else:
             self.app = self.instance
 

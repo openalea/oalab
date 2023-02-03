@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 from openalea.core.path import path as Path
 
 import sys
@@ -11,7 +11,7 @@ except IndexError:
     print('usage: script outputdir')
     sys.exit(1)
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 
 from openalea.oalab.service.qt_control import qt_widget_plugins
 from openalea.core.service.interface import interface_names
@@ -55,15 +55,15 @@ for iname in interface_names():
                 kwargs = {}
             control = Control('c', iname, widget=plugin.name, **kwargs)
             w_editor_class = plugin.load()
-            if issubclass(w_editor_class, QtGui.QWidget):
+            if issubclass(w_editor_class, QtWidgets.QWidget):
                 w_editor = w_editor_class()
             else:
                 w_editor = w_editor_class.edit(control, shape=shape)
             if w_editor:
                 w_editor.set(control)
-                widget = QtGui.QWidget()
+                widget = QtWidgets.QWidget()
                 widget.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-                layout = QtGui.QVBoxLayout(widget)
+                layout = QtWidgets.QVBoxLayout(widget)
                 layout.setContentsMargins(1, 1, 1, 1)
                 if size:
                     widget.setMinimumSize(*size)

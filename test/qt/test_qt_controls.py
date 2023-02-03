@@ -1,11 +1,11 @@
 
-from qtpy import QtGui
+from qtpy import QtWidgets
 from openalea.core.service.control import create_control
 from openalea.oalab.service.qt_control import qt_editor
 
-instance = QtGui.QApplication.instance()
+instance = QtWidgets.QApplication.instance()
 if instance is None:
-    app = QtGui.QApplication([])
+    app = QtWidgets.QApplication([])
 
 
 control = create_control('i', 'IInt', 250, dict(min=200, max=300))

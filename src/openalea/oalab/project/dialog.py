@@ -5,7 +5,7 @@ from openalea.core.service.plugin import plugins
 from openalea.core.service.project import write_project_settings
 from openalea.oalab.project.creator import CreateProjectWidget
 from openalea.oalab.utils import ModalDialog
-from qtpy import QtGui
+from qtpy import QtGui, QtWidgets
 
 
 def rename_model(project, category, name):
@@ -42,7 +42,7 @@ def new_project():
         return project
 
 
-class SelectCategory(QtGui.QWidget):
+class SelectCategory(QtWidgets.QWidget):
 
     def __init__(self, filename="", categories=None, dtypes=None, parent=None):
         super(SelectCategory, self).__init__(parent=parent)
@@ -60,20 +60,20 @@ class SelectCategory(QtGui.QWidget):
 
         layout = QtGui.QFormLayout(self)
 
-        self.label = QtGui.QLabel("Select in which category you want to add this file: ")
-        self.l_dtypes = QtGui.QLabel("Data type")
-        self.label2 = QtGui.QLabel("New filename: ")
+        self.label = QtWidgets.QLabel("Select in which category you want to add this file: ")
+        self.l_dtypes = QtWidgets.QLabel("Data type")
+        self.label2 = QtWidgets.QLabel("New filename: ")
 
-        self.combo = QtGui.QComboBox(self)
+        self.combo = QtWidgets.QComboBox(self)
         self.combo.addItems(categories)
         if 'model' in categories:
             self.combo.setCurrentIndex(categories.index('model'))
 
-        self.combo_dtypes = QtGui.QComboBox(self)
+        self.combo_dtypes = QtWidgets.QComboBox(self)
         self.combo_dtypes.addItems(dtypes)
         self.combo_dtypes.setCurrentIndex(0)
 
-        self.line = QtGui.QLineEdit(filename)
+        self.line = QtWidgets.QLineEdit(filename)
 
         layout.addRow(self.label, self.combo)
         layout.addRow(self.l_dtypes, self.combo_dtypes)
@@ -91,7 +91,7 @@ class SelectCategory(QtGui.QWidget):
         return str(self.combo_dtypes.currentText())
 
 
-class RenameModel(QtGui.QWidget):
+class RenameModel(QtWidgets.QWidget):
 
     def __init__(self, models, model_name="", parent=None):
         super(RenameModel, self).__init__(parent=parent)
@@ -99,14 +99,14 @@ class RenameModel(QtGui.QWidget):
 
         layout = QtGui.QGridLayout(self)
 
-        self.label = QtGui.QLabel("Select model you want to rename: ")
-        self.label2 = QtGui.QLabel("Write new name: ")
-        self.combo = QtGui.QComboBox(self)
+        self.label = QtWidgets.QLabel("Select model you want to rename: ")
+        self.label2 = QtWidgets.QLabel("Write new name: ")
+        self.combo = QtWidgets.QComboBox(self)
         self.combo.addItems(self.models)
         if not model_name:
             model_name = self.models[0]
         self.combo.setCurrentIndex(self.models.index(model_name))
-        self.line = QtGui.QLineEdit(str(model_name))
+        self.line = QtWidgets.QLineEdit(str(model_name))
 
 #         self.ok_button = QtGui.QPushButton("Ok")
 

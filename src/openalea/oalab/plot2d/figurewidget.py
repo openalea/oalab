@@ -110,7 +110,7 @@ class MplFigureWidget(QtGui.QFrame):
         self.setFrameShadow(QtGui.QFrame.Plain)
         self.setContentsMargins(1, 1, 1, 1)
 
-        self._layout = QtGui.QVBoxLayout(self)
+        self._layout = QtWidgets.QVBoxLayout(self)
         self._layout.addWidget(self.canvas)
         self._layout.setContentsMargins(1, 1, 1, 1)
 

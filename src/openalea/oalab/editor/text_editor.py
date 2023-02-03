@@ -17,7 +17,7 @@
 ###############################################################################
 __revision__ = ""
 
-from qtpy import QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 from openalea.core.path import path
 from openalea.oalab.editor.search import SearchWidget
 from openalea.oalab.editor.completion import DictionaryCompleter
@@ -34,7 +34,7 @@ except ImportError:
     logger.warning("You should install **flake8** (using: pip install flake8)")
 
 
-class RichTextEditor(QtGui.QWidget):
+class RichTextEditor(QtWidgets.QWidget):
     textChanged = QtCore.Signal()
 
     def __init__(self, parent=None):
@@ -49,7 +49,7 @@ class RichTextEditor(QtGui.QWidget):
         self.goto_widget = GoToWidget(parent=self.editor)
         self.search_widget = SearchWidget(parent=self.editor)
 
-        self.layout = QtGui.QVBoxLayout()
+        self.layout = QtWidgets.QVBoxLayout()
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.layout.addWidget(self.editor)
         self.layout.addWidget(self.search_widget)
@@ -135,11 +135,11 @@ def fix_indentation(text, n=4):
     return text.replace('\t', ' ' * n)
 
 
-class TextEditor(QtGui.QTextEdit):
+class TextEditor(QtWidgets.QTextEdit):
 
     def __init__(self, parent=None):
         super(TextEditor, self).__init__(parent)
-        self.setLineWrapMode(QtGui.QTextEdit.NoWrap)
+        self.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
         self.indentation = "    "
         self.completer = None
         self.name = None
@@ -574,14 +574,14 @@ def main():
     from openalea.oalab.shell import get_shell_class
     from openalea.core.service.ipython import interpreter
     from openalea.oalab.editor.highlight import Highlighter
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     edit = TextEditor()
     Highlighter(edit)
     interp = interpreter()
     shell = get_shell_class()(interp)
 
-    win = QtGui.QMainWindow()
+    win = QtWidgets.QMainWindow()
     win.setCentralWidget(edit)
 
     dock_widget = QtGui.QDockWidget("IPython", win)

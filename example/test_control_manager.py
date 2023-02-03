@@ -1,6 +1,6 @@
 
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from openalea.core.control.manager import ControlManager
 from openalea.oalab.control.manager import ControlManagerWidget
 from openalea.oalab.control.panel import ControlPanel
@@ -57,10 +57,10 @@ def disp_controls():
 if __name__ == '__main__':
 
     from openalea.oalab.testing.applet import TestMainWin
-    instance = QtGui.QApplication.instance()
+    instance = QtWidgets.QApplication.instance()
 
     if instance is None:
-        app = QtGui.QApplication([])
+        app = QtWidgets.QApplication([])
     else:
         app = instance
 

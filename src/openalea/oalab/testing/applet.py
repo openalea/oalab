@@ -135,10 +135,10 @@ class TestNApplets(TestMainWin):
 
 
 def test_applet(*args, **kwds):
-    instance = QtGui.QApplication.instance()
+    instance = QtWidgets.QApplication.instance()
 
     if instance is None:
-        app = QtGui.QApplication([])
+        app = QtWidgets.QApplication([])
     else:
         app = instance
 

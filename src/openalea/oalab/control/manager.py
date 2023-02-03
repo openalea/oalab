@@ -18,7 +18,7 @@
 
 import weakref
 
-from qtpy import QtGui, QtCore
+from qtpy import QtGui, QtCore, QtWidgets
 from openalea.core.observer import AbstractListener
 
 from openalea.oalab.utils import Splitter
@@ -63,10 +63,10 @@ class ControlManagerWidget(Splitter, AbstractListener):
         if not controls:
             return
 
-        widget = QtGui.QWidget()
+        widget = QtWidgets.QWidget()
         widget.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
-        layout = QtGui.QVBoxLayout(widget)
+        layout = QtWidgets.QVBoxLayout(widget)
         for control in controls:
             subwidget = qt_editor(control, shape='large', preferred=control.widget)
             layout.addWidget(subwidget)

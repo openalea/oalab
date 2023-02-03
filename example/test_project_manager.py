@@ -1,6 +1,6 @@
 
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from openalea.oalab.service.applet import get_applet
 from openalea.oalab.widget.mainwindow import MainWindow
 from openalea.oalab.session.session import Session
@@ -8,9 +8,9 @@ from openalea.core.service.plugin import plugins
 from openalea.core.service.ipython import interpreter
 
 if __name__ == '__main__':
-    instance = QtGui.QApplication.instance()
+    instance = QtWidgets.QApplication.instance()
     if instance is None:
-        app = QtGui.QApplication([])
+        app = QtWidgets.QApplication([])
     else:
         app = instance
 

@@ -3,7 +3,7 @@
 from qtpy import QtGui
 from openalea.oalab.editor.text_editor import RichTextEditor
 
-class PlainTextEdit(QtGui.QPlainTextEdit):
+class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def setText(self, txt):
         self.setPlainText(txt)
 

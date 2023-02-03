@@ -42,7 +42,7 @@ Full example:
 
 __revision__ = ""
 
-from qtpy import QtGui, QtCore
+from qtpy import QtGui, QtCore, QtWidgets
 
 """
 # To generate images
@@ -100,7 +100,7 @@ style = """
 
 def fill_panedmenu(menu, actions):
     for action in actions:
-        if isinstance(action, QtGui.QAction):
+        if isinstance(action, QtWidgets.QAction):
             menu.addBtnByAction('Default', 'Default', action, 0)
         elif isinstance(action, (list, tuple)):
             menu.addBtnByAction(*action)
@@ -112,15 +112,15 @@ def fill_panedmenu(menu, actions):
                 action.get('style', 0)
             ]
             menu.addBtnByAction(*args)
-        elif isinstance(action, QtGui.QMenu):
+        elif isinstance(action, QtWidgets.QMenu):
             pass
-        elif isinstance(action, QtGui.QWidget):
+        elif isinstance(action, QtWidgets.QWidget):
             menu.addWidget(action)
         else:
             continue
 
 
-class PanedMenu(QtGui.QTabWidget):
+class PanedMenu(QtWidgets.QTabWidget):
 
     """
     A widget that tries to mimic menu of Microsoft Office 2010.
@@ -214,7 +214,7 @@ class PanedMenu(QtGui.QTabWidget):
             self.setCurrentIndex(index)
 
 
-class Pane(QtGui.QWidget):
+class Pane(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         # TODO : scroll doesn't work yet
@@ -244,7 +244,7 @@ class Pane(QtGui.QWidget):
         self.group_name.append(name)
 
 
-class Group(QtGui.QWidget):
+class Group(QtWidgets.QWidget):
 
     def __init__(self, name, orientation=QtCore.Qt.Horizontal):
         super(Group, self).__init__()
@@ -257,10 +257,10 @@ class Group(QtGui.QWidget):
         self.orientation = orientation
 
         if orientation == QtCore.Qt.Horizontal:
-            self.layout = QtGui.QHBoxLayout()
+            self.layout = QtWidgets.QHBoxLayout()
             self.layout.setAlignment(QtCore.Qt.AlignLeft)
         else:
-            self.layout = QtGui.QVBoxLayout()
+            self.layout = QtWidgets.QVBoxLayout()
             self.layout.setAlignment(QtCore.Qt.AlignTop)
         self.setLayout(self.layout)
 
@@ -348,12 +348,12 @@ class Group(QtGui.QWidget):
                 widget.hide()
 
 
-class SubGroupH(QtGui.QWidget):
+class SubGroupH(QtWidgets.QWidget):
 
     def __init__(self):
         super(SubGroupH, self).__init__()
         self.setObjectName('SubGroupH')
-        self.layout = QtGui.QHBoxLayout()
+        self.layout = QtWidgets.QHBoxLayout()
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.layout.setSpacing(0)
         self.layout.setAlignment(QtCore.Qt.AlignLeft)
@@ -366,12 +366,12 @@ class SubGroupH(QtGui.QWidget):
         self.layout.addWidget(widget)
 
 
-class SubGroupV(QtGui.QWidget):
+class SubGroupV(QtWidgets.QWidget):
 
     def __init__(self):
         super(SubGroupV, self).__init__()
         self.setObjectName('SubGroupV')
-        self._layout = QtGui.QVBoxLayout(self)
+        self._layout = QtWidgets.QVBoxLayout(self)
 
         self.fine_tune()
 
@@ -386,7 +386,7 @@ class SubGroupV(QtGui.QWidget):
         self._layout.addWidget(widget)
 
 
-class SubGroupGrid(QtGui.QWidget):
+class SubGroupGrid(QtWidgets.QWidget):
 
     def __init__(self, row_number=2):
         super(SubGroupGrid, self).__init__()
@@ -418,7 +418,7 @@ class ToolButton(QtGui.QToolButton):
         self.setObjectName('ToolButton')
         self.setAutoRaise(True)
 
-        if isinstance(action, QtGui.QAction):
+        if isinstance(action, QtWidgets.QAction):
             self.setDefaultAction(action)
         else:
             self.setText(str(action))
@@ -451,11 +451,11 @@ class SmallToolButton(ToolButton):
 import weakref
 
 
-class ContextualMenu(QtGui.QWidget):
+class ContextualMenu(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent=parent)
-        self._layout = QtGui.QHBoxLayout(self)
+        QtWidgets.QWidget.__init__(self, parent=parent)
+        self._layout = QtWidgets.QHBoxLayout(self)
         self._current_group = None
         self._group = {}
         self.clear()
@@ -519,19 +519,19 @@ if __name__ == '__main__':
     import sys
     from qtpy import QtGui
 
-    instance = QtGui.QApplication.instance()
+    instance = QtWidgets.QApplication.instance()
     if instance is None:
-        qapp = QtGui.QApplication(sys.argv)
+        qapp = QtWidgets.QApplication(sys.argv)
     else:
         qapp = instance
 
     # Example: create a panel with one group containing 1 big and 3 small buttons
     menu = PanedMenu()
 
-    act0 = QtGui.QAction('Action', menu)
-    act1 = QtGui.QAction('act 1', menu)
-    act2 = QtGui.QAction('act 2', menu)
-    act3 = QtGui.QAction('act 3', menu)
+    act0 = QtWidgets.QAction('Action', menu)
+    act1 = QtWidgets.QAction('act 1', menu)
+    act2 = QtWidgets.QAction('act 2', menu)
+    act3 = QtWidgets.QAction('act 3', menu)
 
     menu.addBtnByAction('Panel', 'group', act0, PanedMenu.BigButton)
     menu.addBtnByAction('Panel', 'group', act1, PanedMenu.SmallButton)
