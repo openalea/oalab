@@ -24,6 +24,7 @@ requirements:
     - openalea.core
     - openalea.vpltk
     - ipython 
+    - configobj
 
 test:
   imports:
