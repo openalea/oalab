@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 
 from openalea.core.service.interface import interface_label
 from openalea.core.control import Control

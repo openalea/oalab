@@ -16,7 +16,7 @@
 #       OpenAlea WebSite : http://openalea.gforge.inria.fr
 #
 ###############################################################################
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 from openalea.vpltk.qt.compat import getexistingdirectory
 
 

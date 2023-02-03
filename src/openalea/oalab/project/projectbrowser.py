@@ -32,7 +32,7 @@ from openalea.oalab.project.qtmodel import ProjectModel
 from openalea.oalab.project.preview import DEFAULT_PROJECT_ICON
 from openalea.oalab.utils import ModalDialog, qicon, obj_icon
 from openalea.oalab.widget import resources_rc
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 
 class ProjectBrowserWidget(QtGui.QWidget):

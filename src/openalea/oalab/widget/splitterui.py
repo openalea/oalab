@@ -22,7 +22,7 @@ __revision__ = " $Id: splitterui.py 4222 2014-04-23 09:15:04Z gbaty $ "
 Contains the implementation of a recursively splittable UI.
 """
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 
 try:
     from openalea.core import logger

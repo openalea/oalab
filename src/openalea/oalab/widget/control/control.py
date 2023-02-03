@@ -9,7 +9,7 @@ from openalea.deploy.shared_data import shared_data
 import openalea.oalab
 from openalea.oalab.control.widget import AbstractQtControlWidget
 from openalea.oalab.widget.basic import QFloatSlider, QSpanSlider, QColormapBar
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 
 
 class BoolCheckBox(QtGui.QCheckBox, AbstractQtControlWidget):

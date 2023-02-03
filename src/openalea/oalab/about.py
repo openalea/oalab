@@ -20,15 +20,15 @@ import openalea.core
 import openalea.oalab
 import random
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from openalea.oalab.pluginwidget.explorer import PluginExplorer
 
 from openalea.deploy.shared_data import shared_data
 from openalea.core.formatting.util import icon_path
 from openalea.core.formatting.html import html_section, html_list
 
-from openalea.vpltk.qt import QT_API
-from openalea.vpltk.qt import QtGui
+from qtpy import QT_API
+from qtpy import QtGui
 
 from openalea.core.plugin.formatting.text import format_author
 from openalea.core import authors as auth

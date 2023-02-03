@@ -21,7 +21,7 @@ __all__ = ['qicon']
 
 import pickle
 import openalea.oalab
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 from openalea.vpltk.qt.compat import orientation_qt, orientation_int
 from openalea.core.customexception import CustomException, cast_error
 from openalea.deploy.shared_data import shared_data

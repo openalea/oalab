@@ -18,7 +18,7 @@
 #
 ###############################################################################
 
-from openalea.vpltk.qt import QtCore
+from qtpy import QtCore
 from openalea.oalab.mimedata.codec import MimeCodec
 
 

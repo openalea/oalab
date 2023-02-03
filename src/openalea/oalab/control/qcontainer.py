@@ -18,7 +18,7 @@
 #
 ###############################################################################
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 from openalea.core.control import Control
 from openalea.core.control.manager import ControlContainer
 

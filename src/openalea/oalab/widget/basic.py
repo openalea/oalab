@@ -21,7 +21,7 @@
 This module contains basic widget like QFloatSlider, QSpanSlider, ... 
 """
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 
 
 class QFloatSlider(QtGui.QSlider):

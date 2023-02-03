@@ -17,7 +17,7 @@
 ###############################################################################
 __revision__ = ""
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 import keyword
 import builtins
 

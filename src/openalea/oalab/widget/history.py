@@ -16,7 +16,7 @@
 #
 ###############################################################################
 __revision__ = ""
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 from openalea.oalab.editor.highlight import Highlighter
 from . import resources_rc  # do not remove this import else icon are not drawn
 
@@ -75,7 +75,7 @@ class HistoryWidget(QtGui.QTextBrowser):
 
 
 def main():
-    from openalea.vpltk.qt import QtCore, QtGui
+    from qtpy import QtCore, QtGui
     from openalea.core.service.ipython import interpreter as interpreter_
     from openalea.oalab.shell import ShellWidget
     import sys

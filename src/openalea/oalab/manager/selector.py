@@ -18,7 +18,7 @@
 
 from openalea.oalab.utils import obj_icon, ModalDialog
 from openalea.oalab.widget.pages import WelcomePage
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 
 class ManagerItemSelector(WelcomePage):
@@ -82,7 +82,7 @@ def select_manager_item(manager, group, parent=None, **kwargs):
 
 if __name__ == '__main__':
     import sys
-    from openalea.vpltk.qt import QtGui
+    from qtpy import QtGui
     from openalea.core.service.project import default_project_manager
     from openalea.core.service.plugin import default_plugin_manager
 

@@ -19,7 +19,7 @@
 ###############################################################################
 __revision__ = ""
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 
 
 class Margin(QtGui.QWidget):

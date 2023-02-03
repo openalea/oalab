@@ -22,7 +22,7 @@ TODO:
     - use project known categories instead of hard coded 'model', 'src', ...
 
 """
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 
 from openalea.core.service.data import DataClass, MimeType
 from openalea.core.service.plugin import plugin_instance_exists, plugin_instance

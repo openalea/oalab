@@ -19,7 +19,7 @@
 ###############################################################################
 
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 
 
 import openalea.oalab.service.qt_control as scontrol

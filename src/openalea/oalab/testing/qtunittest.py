@@ -19,7 +19,7 @@
 ###############################################################################
 
 import unittest
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 from PyQt5 import QtTest
 
 

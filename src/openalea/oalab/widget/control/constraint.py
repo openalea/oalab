@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openalea.vpltk.qt import QtGui    
+from qtpy import QtGui
 
 class IntConstraintWidget(QtGui.QWidget):
     def __init__(self):

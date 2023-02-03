@@ -2,7 +2,7 @@
 __all__ = ["PreferenceWidget"]
 
 import ast
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from openalea.core import settings
 from openalea.oalab.service.qt_control import qt_editor
 from openalea.core.service.interface import guess_interface, new_interface

@@ -34,7 +34,7 @@ from openalea.oalab.utils import qicon
 from openalea.oalab.widget import resources_rc  # do not remove this import else icon are not drawn
 from openalea.oalab.widget.pages import WelcomePage
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 from openalea.vpltk.qt.compat import getopenfilename, getsavefilename
 
 

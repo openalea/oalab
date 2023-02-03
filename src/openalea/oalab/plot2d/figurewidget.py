@@ -20,7 +20,7 @@
 #
 ###############################################################################
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 import matplotlib
 from matplotlib import pyplot

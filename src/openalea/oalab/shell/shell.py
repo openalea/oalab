@@ -22,7 +22,7 @@ __revision__ = " $Id: shell.py 3672 2012-12-05 12:28:19Z jcoste $"
 import sys
 from .streamredirection import GraphicalStreamRedirection
 
-from openalea.vpltk.qt import QtGui, QtCore, QtWidgets
+from qtpy import QtGui, QtCore, QtWidgets
 from openalea.vpltk.check.ipython import has_ipython
 from openalea.vpltk.check.ipython_deps import has_full_deps
 

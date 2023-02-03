@@ -1,5 +1,5 @@
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 from openalea.core.project import Project
 from openalea.core.project.manager import ProjectManager
 from openalea.core.project.formatting.html import html_metainfo_summary, html_item_summary

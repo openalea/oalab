@@ -17,7 +17,7 @@
 ###############################################################################
 __revision__ = ""
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 from openalea.oalab import metainfo
 
 def show_splash_screen():

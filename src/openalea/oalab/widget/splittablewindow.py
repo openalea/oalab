@@ -33,7 +33,7 @@ from openalea.oalab.control.qcontainer import QControlContainer
 from openalea.oalab.utils import ModalDialog, obj_icon, qicon, Splitter
 from openalea.oalab.widget.menu import ContextualMenu
 from openalea.oalab.widget.splitterui import SplittableUI, BinaryTree
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 from openalea.vpltk.qt.compat import tabposition_int, tabposition_qt
 
 from openalea.oalab.about import About

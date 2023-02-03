@@ -1,5 +1,5 @@
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from openalea.core.service.control import create_control
 from openalea.oalab.service.qt_control import qt_editor
 

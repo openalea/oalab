@@ -19,7 +19,7 @@
 #
 ###############################################################################
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 
 # Load SampleCustomData, associated codecs and register its
 from openalea.oalab.testing.mimedata import SampleCustomData

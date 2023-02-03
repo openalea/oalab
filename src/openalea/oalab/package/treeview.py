@@ -17,7 +17,7 @@
 ###############################################################################
 __revision__ = ""
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from openalea.core.compositenode import CompositeNodeFactory
 from openalea.core.package import Package
 from openalea.visualea.node_treeview import NodeFactoryTreeView

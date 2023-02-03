@@ -17,7 +17,7 @@
 ###############################################################################
 __revision__ = ""
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from pygments.formatters.html import HtmlFormatter
 from pygments.lexers import guess_lexer_for_filename, PythonLexer
 from pygments.styles import get_style_by_name

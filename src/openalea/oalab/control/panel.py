@@ -1,5 +1,5 @@
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 from openalea.core.observer import AbstractListener
 from openalea.oalab.service.qt_control import qt_editor
 

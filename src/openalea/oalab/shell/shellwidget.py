@@ -120,7 +120,7 @@ class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):
 
 
 def main():
-    from openalea.vpltk.qt import QtGui
+    from qtpy import QtGui
     import sys
 
     app = QtGui.QApplication(sys.argv)

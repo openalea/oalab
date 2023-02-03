@@ -1,6 +1,6 @@
 
 import weakref
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 
 class WidgetSwitcher(QtGui.QWidget):

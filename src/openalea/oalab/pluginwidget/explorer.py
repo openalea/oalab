@@ -21,7 +21,7 @@ import pkg_resources
 import openalea.core
 import openalea.oalab
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 from openalea.core.path import path as Path
 from openalea.core.path import tempdir

@@ -29,7 +29,7 @@ PluginVisualeaWidgetSelectors = []
 
 import openalea.visualea.gui_catalog
 from openalea.core.interface import InterfaceWidgetMap
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 from openalea.oalab.control.widget import AbstractQtControlWidget, OpenAleaControlWidget
 
 

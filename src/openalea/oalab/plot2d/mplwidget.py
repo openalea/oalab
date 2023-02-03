@@ -3,7 +3,7 @@
 import os
 import numpy as np
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 import matplotlib as mpl
 from matplotlib.figure import Figure

@@ -31,7 +31,7 @@ import itertools
 from openalea.core.customexception import CustomException
 from openalea.oalab.mimedata import MimeCodecManager
 from openalea.oalab.utils import ModalDialog, make_error_dialog
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 
 from openalea.oalab.service.mimedata import (possible_conv, compatible_mime,

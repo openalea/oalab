@@ -1,6 +1,6 @@
 
 from openalea.oalab.widget.splittablewindow import OALabMainWin
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 from openalea.core.service.ipython import interpreter
 from openalea.core.service.plugin import (plugin_instance_exists, plugin_instance,
                                           plugin_instances, plugins, debug_plugins)

@@ -24,7 +24,7 @@ from openalea.core.path import path
 from openalea.core.project import Project
 from openalea.core.service.project import create_project
 from openalea.oalab.service.qt_control import widget
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 
 class CreateProjectWidget(QtGui.QWidget):

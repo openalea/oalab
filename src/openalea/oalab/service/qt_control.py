@@ -2,7 +2,7 @@ from openalea.core.control import Control
 from openalea.core.control.manager import ControlContainer
 from openalea.core.service.interface import interface_name
 from openalea.core.service.plugin import plugins
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from openalea.oalab.utils import ModalDialog
 
 import weakref
@@ -149,7 +149,7 @@ def edit(control):
         'Pyside2.QtGui' in sys.modules or 
         'PyQt4.QtGui' in sys.modules 
         ) :
-        from openalea.vpltk.qt import QtGui
+        from qtpy import QtGui
         if QtGui.QApplication.instance():
             if isinstance(control, Control):
                 return qt_editor(control)

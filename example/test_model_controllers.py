@@ -18,7 +18,7 @@ from openalea.core.world.world import World
 from openalea.oalab.service.paradigm import paradigm_controller
 
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 
 from openalea.core.service.ipython import interpreter
 interp = interpreter()

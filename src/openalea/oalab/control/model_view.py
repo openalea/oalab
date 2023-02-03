@@ -16,7 +16,7 @@
 #
 ###############################################################################
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 from openalea.core.control.manager import ControlContainer
 from openalea.core.control.pyserial import save_controls

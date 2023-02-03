@@ -21,7 +21,7 @@ __revision__ = ""
 __all__ = ['WelcomePage']
 
 import math
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 """
         if style is None:
             style = self.STYLE_MEDIUM

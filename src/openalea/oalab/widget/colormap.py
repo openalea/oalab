@@ -20,7 +20,7 @@ import openalea.image
 from openalea.oalab.colormap.colormap_utils import Colormap, colormap_from_file
 from openalea.oalab.control.widget import AbstractQtControlWidget
 from openalea.oalab.widget.basic import QFloatSlider, QSpanSlider, QColormapBar
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 
 
 class ColormapRectangle(QtGui.QColormapBar, AbstractQtControlWidget):

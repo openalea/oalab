@@ -72,7 +72,7 @@ def main():
     cli.parse()
 
     if session.gui:
-        from openalea.vpltk.qt import QtGui
+        from qtpy import QtGui
         from openalea.core.settings import get_openalea_home_dir
         from openalea.core.path import path as Path
 

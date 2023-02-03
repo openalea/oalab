@@ -19,7 +19,7 @@
 
 from itertools import groupby
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 from openalea.vpltk.qt.compat import getexistingdirectory
 
 from openalea.oalab.utils import obj_icon, qicon

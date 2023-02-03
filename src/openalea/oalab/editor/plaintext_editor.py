@@ -1,6 +1,6 @@
 
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from openalea.oalab.editor.text_editor import RichTextEditor
 
 class PlainTextEdit(QtGui.QPlainTextEdit):

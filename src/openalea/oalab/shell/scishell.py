@@ -20,7 +20,7 @@ __license__ = "CeCILL V2"
 __revision__ = " $Id: scishell.py 3672 2012-12-05 12:28:19Z jcoste $"
 
 import os, sys
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 #from openalea.vpltk.qt.QtCore import Qt
 Qt = QtCore.Qt
 

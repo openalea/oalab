@@ -42,7 +42,7 @@ Full example:
 
 __revision__ = ""
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 """
 # To generate images
@@ -517,7 +517,7 @@ class ContextualMenu(QtGui.QWidget):
 if __name__ == '__main__':
 
     import sys
-    from openalea.vpltk.qt import QtGui
+    from qtpy import QtGui
 
     instance = QtGui.QApplication.instance()
     if instance is None:
