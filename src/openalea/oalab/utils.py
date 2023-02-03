@@ -21,7 +21,7 @@ __all__ = ['qicon']
 
 import pickle
 import openalea.oalab
-from openalea.vpltk.qt import QtGui, QtCore
+from openalea.vpltk.qt import QtGui, QtCore, QtWidgets
 from openalea.vpltk.qt.compat import orientation_qt, orientation_int
 from openalea.core.customexception import CustomException, cast_error
 from openalea.deploy.shared_data import shared_data
@@ -101,12 +101,12 @@ def qicon_path(obj, savedir, default=None, paths=None, packages=None):
     return icon_path
 
 
-class ModalDialog(QtGui.QDialog):
+class ModalDialog(QtWidgets.QDialog):
 
     def __init__(self, widget, parent=None, buttons=None):
-        QtGui.QDialog.__init__(self, parent)
+        QtWidgets.QDialog.__init__(self, parent)
 
-        _bbox = QtGui.QDialogButtonBox
+        _bbox = QtWidgets.QDialogButtonBox
         if buttons is None:
             buttons = _bbox.Ok | _bbox.Cancel
 
@@ -121,24 +121,24 @@ class ModalDialog(QtGui.QDialog):
         if ok:
             ok.setDefault(True)
 
-        layout = QtGui.QVBoxLayout(self)
+        layout = QtWidgets.QVBoxLayout(self)
         layout.setSpacing(0)
         layout.setContentsMargins(0, 5, 0, 5)
         layout.addWidget(widget)
         layout.addWidget(self.bbox)
 
     def set_valid(self, validity):
-        ok = self.bbox.button(QtGui.QDialogButtonBox.Ok)
+        ok = self.bbox.button(QtWidgets.QDialogButtonBox.Ok)
         if ok:
             ok.setEnabled(validity)
 
 
-class Splitter(QtGui.QSplitter):
+class Splitter(QtWidgets.QSplitter):
 
     ORIENTATION = QtCore.Qt.Vertical
 
     def __init__(self, parent=None):
-        QtGui.QSplitter.__init__(self, parent=parent)
+        QtWidgets.QSplitter.__init__(self, parent=parent)
         self._applets = []
 
         self._action_clear = QtGui.QAction('Clear', self)
@@ -175,12 +175,12 @@ class Splitter(QtGui.QSplitter):
 
 
 def password():
-    _widget = QtGui.QWidget()
-    _layout = QtGui.QVBoxLayout(_widget)
-    _password = QtGui.QLineEdit()
-    _password.setEchoMode(QtGui.QLineEdit.Password)
+    _widget = QtWidgets.QWidget()
+    _layout = QtWidgets.QVBoxLayout(_widget)
+    _password = QtWidgets.QLineEdit()
+    _password.setEchoMode(QtWidgets.QLineEdit.Password)
 
-    _layout.addWidget(QtGui.QLabel("Password ?"))
+    _layout.addWidget(QtWidgets.QLabel("Password ?"))
     _layout.addWidget(_password)
 
     dialog = ModalDialog(_widget)
@@ -189,11 +189,11 @@ def password():
 
 
 def raw_input_dialog(prompt=None, size=None):
-    _widget = QtGui.QWidget()
-    _layout = QtGui.QVBoxLayout(_widget)
-    _line = QtGui.QLineEdit()
+    _widget = QtWidgets.QWidget()
+    _layout = QtWidgets.QVBoxLayout(_widget)
+    _line = QtWidgets.QLineEdit()
 
-    _layout.addWidget(QtGui.QLabel("Input ?"))
+    _layout.addWidget(QtWidgets.QLabel("Input ?"))
     _layout.addWidget(_line)
 
     dialog = ModalDialog(_widget)
@@ -203,20 +203,20 @@ def raw_input_dialog(prompt=None, size=None):
         return '\n'
 
 
-def make_error_dialog(e, parent=None, icon=QtGui.QMessageBox.Critical):
+def make_error_dialog(e, parent=None, icon=QtWidgets.QMessageBox.Critical):
     if not isinstance(e, CustomException):
         e = cast_error(e, CustomException)
 
-    mbox = QtGui.QMessageBox(parent)
+    mbox = QtWidgets.QMessageBox(parent)
     mbox.setDetailedText(e.getDesc())
     mbox.setText(e.getMessage())
     mbox.setWindowTitle(e.getTitle())
-    mbox.setStandardButtons(QtGui.QMessageBox.Ok)
-    mbox.setDefaultButton(QtGui.QMessageBox.Ok)
-    mbox.setIcon(QtGui.QMessageBox.Information)
+    mbox.setStandardButtons(QtWidgets.QMessageBox.Ok)
+    mbox.setDefaultButton(QtWidgets.QMessageBox.Ok)
+    mbox.setIcon(QtWidgets.QMessageBox.Information)
 
     return mbox.exec_()
 
 
 def make_info_dialog(e, parent=None):
-    return make_error_dialog(e, parent, icon=QtGui.QMessageBox.Information)
+    return make_error_dialog(e, parent, icon=QtWidgets.QMessageBox.Information)
