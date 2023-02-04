@@ -517,7 +517,7 @@ class TextEditor(QtWidgets.QTextEdit):
             return
 
         completer.setWidget(self)
-        completer.setCompletionMode(QtGui.QCompleter.PopupCompletion)
+        completer.setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
         completer.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
         self.completer = completer
         QtCore.QObject.connect(self.completer, QtCore.SIGNAL("activated(const QString&)"), self.insertCompletion)

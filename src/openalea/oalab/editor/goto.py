@@ -17,7 +17,7 @@
 ###############################################################################
 __revision__ = ""
 
-from qtpy import QtCore, QtGui, QtWidgets
+from qtpy import QtCore, QtWidgets
 
 
 class GoToWidget(QtWidgets.QWidget):
@@ -30,13 +30,13 @@ class GoToWidget(QtWidgets.QWidget):
 
         self.actionGo = QtWidgets.QAction("Go to line", self)
         self.lineEdit = QtWidgets.QLineEdit()
-        self.btnGo = QtGui.QToolButton()
+        self.btnGo = QtWidgets.QToolButton()
         self.btnGo.setDefaultAction(self.actionGo)
 
         QtCore.QObject.connect(self.actionGo, QtCore.SIGNAL('triggered(bool)'), self.go)
         QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL('returnPressed()'), self.go)
 
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.setAlignment(QtCore.Qt.AlignLeft)
 
         layout.addWidget(self.lineEdit, 0, 0)
