@@ -35,7 +35,7 @@ from openalea.oalab.widget import resources_rc  # do not remove this import else
 from openalea.oalab.widget.pages import WelcomePage
 
 from qtpy import QtCore, QtGui, QtWidgets
-from openalea.vpltk.qt.compat import getopenfilename, getsavefilename
+from openalea.oalab.qt.compat import getopenfilename, getsavefilename
 
 
 class ParadigmContainer(QtWidgets.QTabWidget):

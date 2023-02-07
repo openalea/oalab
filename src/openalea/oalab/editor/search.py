@@ -40,9 +40,9 @@ class SearchWidget(QtWidgets.QWidget):
         self.textSearch = QtWidgets.QLabel("Search :")
         self.textReplaceBy = QtWidgets.QLabel("Replace by :")
 
-        self.btnNext = QtGui.QToolButton()
-        self.btnPrev = QtGui.QToolButton()
-        self.btnReplace = QtGui.QToolButton()
+        self.btnNext = QtWidgets.QToolButton()
+        self.btnPrev = QtWidgets.QToolButton()
+        self.btnReplace = QtWidgets.QToolButton()
         self.btnReplace.setMinimumSize(100, 40)
         self.btnNext.setMinimumSize(100, 40)
         self.btnPrev.setMinimumSize(100, 40)
@@ -53,12 +53,12 @@ class SearchWidget(QtWidgets.QWidget):
         self.caseBtn = QtWidgets.QCheckBox("Match Case")
         self.wholeBtn = QtWidgets.QCheckBox("Whole Word (Disabled if case sensitive)")
 
-        QtCore.QObject.connect(self.actionBackSearch, QtCore.SIGNAL('triggered(bool)'), self.searchBack)
-        QtCore.QObject.connect(self.actionSearch, QtCore.SIGNAL('triggered(bool)'), self.search)
-        QtCore.QObject.connect(self.actionReplace, QtCore.SIGNAL('triggered(bool)'), self.replaceall)
-        QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL('returnPressed()'), self.search)
+        self.actionBackSearch.triggered.connect(self.searchBack)
+        self.actionSearch.triggered.connect(self.search)
+        self.actionReplace.triggered.connect(self.replaceall)
+        self.lineEdit.returnPressed.connect(self.search)
 
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.setAlignment(QtCore.Qt.AlignLeft)
 
         layout.addWidget(self.textSearch, 0, 0)

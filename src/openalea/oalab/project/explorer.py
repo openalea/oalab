@@ -17,7 +17,7 @@
 #
 ###############################################################################
 from qtpy import QtGui, QtCore
-from openalea.vpltk.qt.compat import getexistingdirectory
+from openalea.oalab.qt.compat import getexistingdirectory
 
 
 from openalea.core.path import path as Path

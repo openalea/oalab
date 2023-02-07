@@ -34,7 +34,7 @@ from openalea.oalab.utils import ModalDialog, obj_icon, qicon, Splitter
 from openalea.oalab.widget.menu import ContextualMenu
 from openalea.oalab.widget.splitterui import SplittableUI, BinaryTree
 from qtpy import QtGui, QtCore, QtWidgets
-from openalea.vpltk.qt.compat import tabposition_int, tabposition_qt
+from openalea.oalab.qt.compat import tabposition_int, tabposition_qt
 
 from openalea.oalab.about import About
 from openalea.oalab.pluginwidget.explorer import PluginExplorer

@@ -65,7 +65,6 @@ class CheckSizes(Ui_Form, QtWidgets.QWidget):
 
 
 from openalea.oalab.gui.control.widget_tester import ControlWidgetTester
-from openalea.vpltk.qt.designer import generate_pyfile_from_uifile
 
 if __name__ == '__main__':
     import sys

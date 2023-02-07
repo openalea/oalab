@@ -29,7 +29,7 @@ from openalea.core.control.manager import ControlManager
 from openalea.oalab.gui.control.qcontainer import QControlContainer
 from openalea.oalab.gui.control.model_view import ControlView, ControlModel
 
-from openalea.vpltk.qt.designer import generate_pyfile_from_uifile
+from openalea.visualea.qt.designer import generate_pyfile_from_uifile
 
 generate_pyfile_from_uifile(__name__)
 from openalea.oalab.gui.control.designer._widget_tester import Ui_WidgetTester

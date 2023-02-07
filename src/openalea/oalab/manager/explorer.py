@@ -20,7 +20,6 @@
 from itertools import groupby
 
 from qtpy import QtGui, QtCore, QtWidgets
-from openalea.vpltk.qt.compat import getexistingdirectory
 
 from openalea.oalab.utils import obj_icon, qicon
 from openalea.oalab.widget.switcher import WidgetSwitcher

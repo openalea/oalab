@@ -20,11 +20,12 @@ __license__ = "CeCILL V2"
 __revision__ = " $Id: shell.py 3672 2012-12-05 12:28:19Z jcoste $"
 
 import sys
-from .streamredirection import GraphicalStreamRedirection
+from openalea.oalab.shell.streamredirection import GraphicalStreamRedirection
 
 from qtpy import QtGui, QtCore, QtWidgets
-from openalea.vpltk.check.ipython import has_ipython
-from openalea.vpltk.check.ipython_deps import has_full_deps
+from openalea.oalab.shell.ipython import has_ipython
+from openalea.oalab.shell.ipython_deps import has_full_deps
+from openalea.core.interpreter import get_interpreter_class
 
 def get_shell_class():
     """
@@ -39,7 +40,7 @@ def get_shell_class():
     else:
         # Test QScintilla
         try:
-            from .scishell import SciShell
+            from openalea.oalab.shell.scishell import SciShell
             return SciShell
 
         except ImportError:

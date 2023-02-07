@@ -36,9 +36,14 @@ class TestCaseParadigmEditor(QtTestCase):
         memory_code = "# How are you ?"
         hdd_code = "# Fine!"
 
-        pyqode = self.widget.currentWidget()
+        editor_wd = self.widget.currentWidget()
 
-        pyqode.setPlainText(memory_code)
+        try:
+            # pyqode
+            editor_wd.setPlainText(memory_code)
+        except:
+            # oalab.editor.text_editor
+            editor_wd.set_text(memory_code)
 
         # Unchanged because data has not been saved
         self.assertEqual(self.data.content, SAMPLE_CODE)
@@ -49,10 +54,17 @@ class TestCaseParadigmEditor(QtTestCase):
         self.assertFalse(self.data.path.exists())
         self.assertEqual(self.data.content, memory_code)
 
-        pyqode.setPlainText(hdd_code)
+        
+        try:
+            # pyqode
+            editor_wd.setPlainText(hdd_code)
+        except:
+            # oalab.editor.text_editor
+            editor_wd.set_text(hdd_code)
+            
         self.widget.save()
         # SAVE: change data object and save to disk
         with open(self.data.path, 'r') as f:
             disk_code = f.read()
-        self.assertEqual(self.data.content, hdd_code)
+        self.assertEqual(self.data.content.decode('ASCII'), hdd_code)
         self.assertEqual(disk_code, hdd_code)

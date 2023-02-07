@@ -24,7 +24,7 @@ Full example:
 
 .. code-block:: python
 
-    from openalea.vpltk.qt import QtGui
+    from qtpy import QtGui
     from openalea.oalab.widget.menu import PanedMenu
 
     # Create ribbon bar

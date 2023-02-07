@@ -6,7 +6,7 @@ from openalea.oalab.service.qt_control import qt_editor
 MODE_VIEW = 0
 # MODE_EDIT = 1
 MODE_DESIGN = 1
-from openalea.vpltk.qt.designer import generate_pyfile_from_uifile
+from openalea.visualea.qt.designer import generate_pyfile_from_uifile
 
 generate_pyfile_from_uifile(__name__)
 from openalea.oalab.gui.control.designer._panel import Ui_WidgetContainer

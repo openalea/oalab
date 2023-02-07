@@ -38,14 +38,23 @@ class PythonModelController(ParadigmController):
     mimetype_model = PythonModel.mimetype
 
     def _default_editor(self):
-        try:
-            from openalea.oalab.editor.pyeditor import PyCodeEditor as Editor
-            editor = Editor(parent=self.parent)
-        except ImportError:
-            from openalea.oalab.editor.text_editor import RichTextEditor as Editor
-            from openalea.oalab.editor.highlight import Highlighter
-            editor = Editor(parent=self.parent)
-            Highlighter(editor.editor)
+        # F. Bauget 2023-02-07  :
+        # disabled PyCodeEditor because there is an incompatibility of pyqode with pyflakes >2.4
+        # in`pyqode/python/backend/workers.py` it uses a deprecated message 'messages.ReturnWithArgsInsideGenerator,'
+        # line 186
+        # see for example this issue https://github.com/PyCQA/pyflakes/issues/733
+        from openalea.oalab.editor.text_editor import RichTextEditor as Editor
+        from openalea.oalab.editor.highlight import Highlighter
+        editor = Editor(parent = self.parent)
+        Highlighter(editor.editor)
+        # try:
+        #     from openalea.oalab.editor.pyeditor import PyCodeEditor as Editor
+        #     editor = Editor(parent=self.parent)
+        # except ImportError:
+        #     from openalea.oalab.editor.text_editor import RichTextEditor as Editor
+        #     from openalea.oalab.editor.highlight import Highlighter
+        #     editor = Editor(parent=self.parent)
+        #     Highlighter(editor.editor)
 
         from openalea.oalab.service.drag_and_drop import add_drop_callback
 
