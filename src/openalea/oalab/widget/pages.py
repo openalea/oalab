@@ -159,7 +159,7 @@ class WelcomePage(QtWidgets.QWidget):
             qsize = QtCore.QSize(*style['icon_size'])
             button.setIconSize(qsize)
 
-            self._layout.addWidget(button, i / self.nx, i % self.nx)
+            self._layout.addWidget(button, i // self.nx, i % self.nx)
 
     def resizeEvent(self, event):
         nx = self._compute_layout_info()
