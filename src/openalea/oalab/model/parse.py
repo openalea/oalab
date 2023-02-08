@@ -120,9 +120,9 @@ def prepare_inputs(inputs_info, *args, **kwargs):
         if args:
             inputs = list(args)
             if len(inputs) == 1:
-                if isinstance(inputs, collections.Iterable):
+                if isinstance(inputs, collections.abc.Iterable):
                     inputs = inputs[0]
-                elif isinstance(inputs, collections.Iterable):
+                elif isinstance(inputs, collections.abc.Iterable):
                     inputs = list(inputs)
                 inputs = [inputs]
             inputs.reverse()
