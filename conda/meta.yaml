@@ -22,8 +22,8 @@ requirements:
   run:
     - openalea.deploy
     - openalea.core
-    - openalea.vpltk
     - ipython 
+    - qtconsole
     - configobj
 
 test:
