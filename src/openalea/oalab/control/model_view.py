@@ -95,7 +95,7 @@ class ControlView(QtWidgets.QTreeView):
 
     def save_controls(self, filename=None):
         if not filename:
-            filename = QtGui.QFileDialog.getSaveFileName(self, 'Select python file')
+            filename, _ = QtGui.QFileDialog.getSaveFileName(self, 'Select python file')
         if filename:
             save_controls(self.model()._manager.controls(), filename)
 
@@ -116,7 +116,7 @@ class ControlView(QtWidgets.QTreeView):
 
     def export_lpy(self):
         from openalea.plantlab.lpycontrol import export_lpy_controls
-        filename = QtGui.QFileDialog.getSaveFileName(self, 'Select L-Py file')
+        filename, _ = QtGui.QFileDialog.getSaveFileName(self, 'Select L-Py file')
         if filename:
             mcontrols = [(c.name, c.interface, c.value) for c in self.model()._manager.controls()]
             export_lpy_controls(mcontrols, filename)
