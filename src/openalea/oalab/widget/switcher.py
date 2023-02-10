@@ -13,7 +13,7 @@ class WidgetSwitcher(QtWidgets.QWidget):
         self._layout.setContentsMargins(0, 0, 0, 0)
         self._layout.setSpacing(0)
 
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
 
     def set_widget(self, widget_class, *args, **kwargs):
         """
@@ -28,7 +28,7 @@ class WidgetSwitcher(QtWidgets.QWidget):
             del previous
 
         widget = widget_class(*args, **kwargs)
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
         widget.setSizePolicy(p(p.MinimumExpanding, p.MinimumExpanding))
         widget.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self._layout.addWidget(widget)

@@ -224,7 +224,7 @@ class ManagerExplorer(QtWidgets.QWidget):
 
         self._layout = QtGui.QGridLayout(self)
 
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
 
         self._explorer = ManagerExplorerView()
         self._explorer.item_changed.connect(self._on_item_changed)

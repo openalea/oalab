@@ -61,7 +61,7 @@ class ProjectEditorWidget(ProjectBrowserWidget):
 
     def toolbars(self):
         toolbars = ProjectBrowserWidget.toolbars(self)
-        toolbar_paradigm = QtGui.QToolBar("Paradigms")
+        toolbar_paradigm = QtWidgets.QToolBar("Paradigms")
         toolbar_paradigm.addActions(self.view.paradigm.actions())
         return toolbars + [toolbar_paradigm]
 

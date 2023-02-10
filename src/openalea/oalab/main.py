@@ -22,6 +22,7 @@ import sys
 
 from openalea.core.service.plugin import debug_plugin, plugins
 from openalea.oalab.cli.parser import CommandLineParser
+from qtpy import QtWidgets
 
 
 def launch_lab(plugin_class):

@@ -50,7 +50,7 @@ from openalea.lpy.gui.compile_ui import check_rc_generation
 check_rc_generation('resources.qrc')
 """
 
-Policy = QtGui.QSizePolicy
+Policy = QtWidgets.QSizePolicy
 size_policy_xsmall = Policy(Policy.Maximum, Policy.Preferred)
 size_policy_ysmall = Policy(Policy.Preferred, Policy.Maximum)
 size_policy_preferred = Policy(Policy.Preferred, Policy.Preferred)
@@ -221,7 +221,7 @@ class Pane(QtWidgets.QWidget):
         super(Pane, self).__init__()
         self.setObjectName('Pane')
         self.group_name = list()
-        self._layout = QtGui.QGridLayout(self)
+        self._layout = QtWidgets.QGridLayout(self)
         self.fine_tune()
 
     def fine_tune(self):
@@ -393,7 +393,7 @@ class SubGroupGrid(QtWidgets.QWidget):
         self._count = 0
         self.row_number = row_number
         self.setObjectName('SubGroupGrid')
-        self.layout = QtGui.QGridLayout(self)
+        self.layout = QtWidgets.QGridLayout(self)
 
         self.fine_tune()
 
@@ -411,7 +411,7 @@ class SubGroupGrid(QtWidgets.QWidget):
         self._count += 1
 
 
-class ToolButton(QtGui.QToolButton):
+class ToolButton(QtWidgets.QToolButton):
 
     def __init__(self, action, icon=None):
         super(ToolButton, self).__init__()

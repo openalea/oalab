@@ -5,7 +5,7 @@ from qtpy import QtGui, QtWidgets
 class IntConstraintWidget(QtWidgets.QWidget):
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
-        layout = QtGui.QFormLayout(self)
+        layout = QtWidgets.QFormLayout(self)
 
         self.e_min = QtWidgets.QLineEdit('0')
         self.e_max = QtWidgets.QLineEdit('100')
@@ -36,7 +36,7 @@ class IntConstraintWidget(QtWidgets.QWidget):
 class FloatConstraintWidget(QtWidgets.QWidget):
     def __init__(self):
         QtWidgets.QWidget.__init__(self)
-        layout = QtGui.QFormLayout(self)
+        layout = QtWidgets.QFormLayout(self)
 
         self.e_min = QtWidgets.QLineEdit('0.0')
         self.e_max = QtWidgets.QLineEdit('1.0')

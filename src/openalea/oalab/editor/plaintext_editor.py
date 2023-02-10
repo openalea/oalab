@@ -1,6 +1,6 @@
 
 
-from qtpy import QtGui
+from qtpy import QtWidgets
 from openalea.oalab.editor.text_editor import RichTextEditor
 
 class PlainTextEdit(QtWidgets.QPlainTextEdit):
@@ -13,7 +13,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
         :param text: text you want to set
         """
-        self.setPlainText(txt)
+        self.setPlainText(txt.decode("utf-8"))
 
     def get_selected_text(self):
         cursor = self.textCursor()

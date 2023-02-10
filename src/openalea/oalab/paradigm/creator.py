@@ -137,7 +137,7 @@ class ParadigmInfoSelector(QtWidgets.QWidget):
         if isinstance(error, CustomException):
             message = error.getMessage()
         elif isinstance(error, Warning):
-            message = error.message
+            message = error.args[0]
         else:
             message = None
         if message:

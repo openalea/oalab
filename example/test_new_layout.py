@@ -33,9 +33,9 @@ class TestApplet(QtWidgets.QLineEdit):
 
         self.action_menu_1 = QtWidgets.QAction(icon, 'A1 [widget.menu_actions]', self)
 
-        self.toolbar_1 = QtGui.QToolBar("Toolbar 1")
+        self.toolbar_1 = QtWidgets.QToolBar("Toolbar 1")
         self.toolbar_1.addAction(self.action_context_1)
-        self.toolbar_2 = QtGui.QToolBar("Toolbar 2")
+        self.toolbar_2 = QtWidgets.QToolBar("Toolbar 2")
         self.toolbar_2.addAction(self.action_context_2)
 
     def toolbars(self):

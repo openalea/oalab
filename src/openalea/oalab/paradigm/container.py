@@ -344,7 +344,7 @@ class ModelEditorApplet(ParadigmContainer):
         menu_run = QtWidgets.QMenu("Run", self)
         menu_run.addActions([self.actionRun, self.actionRunInShell])
 
-        self.toolbutton_run = QtGui.QToolButton(self)
+        self.toolbutton_run = QtWidgets.QToolButton(self)
         self.toolbutton_run.setMenu(menu_run)
         self.toolbutton_run.setDefaultAction(self.actionRun)
 
@@ -417,7 +417,7 @@ class ModelEditorApplet(ParadigmContainer):
 
     def toolbars(self):
 
-        tb_run = QtGui.QToolBar("Run")
+        tb_run = QtWidgets.QToolBar("Run")
         tb_run.addWidget(self.toolbutton_run)
         tb_run.addActions([
             self.actionAnimate,
@@ -426,7 +426,7 @@ class ModelEditorApplet(ParadigmContainer):
             self.actionInit,
         ])
 
-        tb_edit = QtGui.QToolBar("Edit")
+        tb_edit = QtWidgets.QToolBar("Edit")
         tb_edit.addActions([
             self.actionOpenFile,
             self.actionSave,
@@ -434,7 +434,7 @@ class ModelEditorApplet(ParadigmContainer):
             self.actionCloseCurrent,
         ])
 
-        #tb_paradigm = QtGui.QToolBar("Paradigms")
+        #tb_paradigm = QtWidgets.QToolBar("Paradigms")
         #tb_paradigm.addActions(self.paradigm.actions())
         #return [tb_run, tb_edit, tb_paradigm]
 
@@ -479,6 +479,6 @@ class ModelEditorApplet(ParadigmContainer):
     def _set_run_mode(self, mode=True):
         for action in self._run_actions:
             action.setEnabled(mode)
-            if isinstance(action, QtGui.QToolButton):
+            if isinstance(action, QtWidgets.QToolButton):
                 for act in action.actions():
                     act.setEnabled(mode)

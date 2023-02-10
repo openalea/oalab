@@ -151,7 +151,7 @@ class WorldControlPanel(QtWidgets.QWidget, AbstractListener):
         self._manager = {}
 
         self._cb_world_object = QtWidgets.QComboBox()
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
         self._cb_world_object.setSizePolicy(p(p.Expanding, p.Maximum))
         self._cb_world_object.currentIndexChanged.connect(self._selected_object_changed)
 

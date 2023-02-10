@@ -139,11 +139,11 @@ class LayoutSelector(QtWidgets.QWidget):
         QtWidgets.QWidget.__init__(self)
         self._layout = QtWidgets.QVBoxLayout(self)
 
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
 
         self._cb_layout = QtWidgets.QComboBox()
         self._cb_layout.setSizePolicy(p(p.MinimumExpanding, p.Maximum))
-        self._stack = QtGui.QStackedWidget()
+        self._stack = QtWidgets.QStackedWidget()
 
         self._cb_layout.activated.connect(self._stack.setCurrentIndex)
 
@@ -193,7 +193,7 @@ class AppletFrame(QtWidgets.QWidget):
         self._l_title.hide()
         self._menu = ContextualMenu()
 
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
         self._l_title.setSizePolicy(p(p.MinimumExpanding, p.Maximum))
         self._l_title.setAlignment(QtCore.Qt.AlignVCenter)
 
@@ -249,7 +249,7 @@ class AppletFrame(QtWidgets.QWidget):
         self._layout.insertWidget(1, applet)
         _plugin = plugin(applet.name, 'oalab.applet')
         self._l_title.setText(_plugin.label)
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
         applet.setSizePolicy(p(p.MinimumExpanding, p.MinimumExpanding))
 
     def applet(self):
@@ -795,7 +795,7 @@ class OALabSplittableUi(SplittableUI):
          - content (QWidget) - The widget to display in pane at level 0
         """
         QtWidgets.QWidget.__init__(self, parent)
-        self.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.setAcceptDrops(True)
         # -- our backbone: --
         self._g = OABinaryTree()

@@ -58,7 +58,7 @@ class SelectCategory(QtWidgets.QWidget):
             dtypes.append('Other')
         self.categories = categories
 
-        layout = QtGui.QFormLayout(self)
+        layout = QtWidgets.QFormLayout(self)
 
         self.label = QtWidgets.QLabel("Select in which category you want to add this file: ")
         self.l_dtypes = QtWidgets.QLabel("Data type")

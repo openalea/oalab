@@ -39,7 +39,7 @@ class CreateProjectWidget(QtWidgets.QWidget):
         self.widget_metadata = QtWidgets.QWidget()
         self.widget_path = QtWidgets.QWidget()
 
-        layout_path = QtGui.QFormLayout(self.widget_path)
+        layout_path = QtWidgets.QFormLayout(self.widget_path)
 
         # Name and path
         if proj is None:
@@ -59,13 +59,13 @@ class CreateProjectWidget(QtWidgets.QWidget):
 
         # Metadata
         self._metadata = {}
-        layout_metadata = QtGui.QFormLayout(self.widget_metadata)
+        layout_metadata = QtWidgets.QFormLayout(self.widget_metadata)
         layout_metadata.setLabelAlignment(QtCore.Qt.AlignLeft)
 
         for cat, metadata in Project.DEFAULT_METADATA.items():
             label = QtWidgets.QLabel(metadata.name.capitalize().replace('_', ' '))
             editor = widget(metadata.interface, metadata.value)
-            editor.setSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Preferred)
+            editor.setSizePolicy(QtWidgets.QSizePolicy.MinimumExpanding, QtWidgets.QSizePolicy.Preferred)
             self._metadata[cat] = editor
             layout_metadata.addRow(label, editor)
 

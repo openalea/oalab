@@ -455,7 +455,7 @@ class SplittableUI(QtWidgets.QWidget):
          - content (QtGui.QWidget) - The widget to display in pane at level 0
         """
         QtWidgets.QWidget.__init__(self, parent)
-        self.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.setAcceptDrops(True)
         # -- our backbone: --
         self._g = BinaryTree()

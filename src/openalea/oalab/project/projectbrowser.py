@@ -101,7 +101,7 @@ class ProjectBrowserWidget(QtWidgets.QWidget):
 
     def toolbars(self):
         actions = [action[2] for action in self._actions]
-        toolbar = QtGui.QToolBar("Project")
+        toolbar = QtWidgets.QToolBar("Project")
         toolbar.addActions(actions)
         return [toolbar]
 
@@ -189,8 +189,8 @@ class ProjectBrowserView(QtWidgets.QTreeView, AbstractListener):
         self.setModel(self._model)
         self._model.dataChanged.connect(self._on_model_changed)
 
-        self.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
-        self.connect(self, QtCore.SIGNAL('doubleClicked(const QModelIndex&)'), self.open)
+        self.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
+        self.doubleClicked.connect(self.open)
 
         self.setHeaderHidden(True)
         self.setDragEnabled(True)
@@ -349,7 +349,7 @@ class ProjectBrowserView(QtWidgets.QTreeView, AbstractListener):
         project, category, name = self.selected_data()
         if project and category:
             if category == 'category' and name == 'data':
-                p = QtGui.QFileDialog.getOpenFileName(self, 'Select File to open', project.path, "All (*)")
+                p = QtWidgets.QFileDialog.getOpenFileName(self, 'Select File to open', project.path, "All (*)")
                 if p:
                     p = path(p)
                     project.add(name, path=p)
