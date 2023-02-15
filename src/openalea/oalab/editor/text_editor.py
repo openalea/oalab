@@ -266,7 +266,7 @@ class TextEditor(QtWidgets.QTextEdit):
         return "Project"
 
     def setText(self, txt):
-        self.setPlainText(txt.decode("utf-8") )
+        self.setPlainText(txt)
 
     def set_text(self, txt):
         """
