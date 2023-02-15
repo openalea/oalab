@@ -313,16 +313,6 @@ print ("ok")
     model, inputs, outputs = parse_docstring(model_src)
     assert str(inputs[0].interface) == "ISequence"
     assert str(inputs[1].interface) == "IInt"
-#     assert str(inputs[2].interface) == "IStr"
+    assert str(inputs[2].interface) == "IStr"
     assert str(inputs[3].interface) == "IFloat"
     assert str(inputs[4].interface) == "ISequence"
-    print(eval(inputs[2].default))
-    print(type(eval(inputs[2].default)))
-    from openalea.core.interface import IInterface, TypeInterfaceMap
-    from openalea.core.service.plugin import plugins
-    import six
-    interfaces = []
-    type_to_iname = {}
-    for (typ, interface) in TypeInterfaceMap().items():
-        type_to_iname[typ] = [interface.__name__]
-    assert str(inputs[2].interface) == "IStr"
