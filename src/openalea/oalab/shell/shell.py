@@ -20,11 +20,12 @@ __license__ = "CeCILL V2"
 __revision__ = " $Id: shell.py 3672 2012-12-05 12:28:19Z jcoste $"
 
 import sys
-from streamredirection import GraphicalStreamRedirection
+from openalea.oalab.shell.streamredirection import GraphicalStreamRedirection
 
-from openalea.vpltk.qt import QtGui, QtCore
-from openalea.vpltk.check.ipython import has_ipython
-from openalea.vpltk.check.ipython_deps import has_full_deps
+from qtpy import QtGui, QtCore, QtWidgets
+from openalea.oalab.shell.ipython import has_ipython
+from openalea.oalab.shell.ipython_deps import has_full_deps
+from openalea.core.interpreter import get_interpreter_class
 
 def get_shell_class():
     """
@@ -39,13 +40,13 @@ def get_shell_class():
     else:
         # Test QScintilla
         try:
-            from scishell import SciShell
+            from openalea.oalab.shell.scishell import SciShell
             return SciShell
 
         except ImportError:
             return PyCutExt
 
-class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
+class PyCutExt(QtWidgets.QTextEdit, GraphicalStreamRedirection):
 
     """
     PyCute is a Python shell for PyQt.
@@ -72,7 +73,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
         exit the interpreter by Ctrl-D.
         """
 
-        QtGui.QTextEdit.__init__(self, parent)
+        QtWidgets.QTextEdit.__init__(self, parent)
         GraphicalStreamRedirection.__init__(self)
 
         self.interpreter = interpreter
@@ -104,7 +105,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
 
         # user interface setup
         # self.setTextFormat(QtCore.Qt.PlainText)
-        self.setLineWrapMode(QtGui.QTextEdit.NoWrap)
+        self.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
         # self.setCaption('Python Shell')
 
 #         # font
@@ -155,7 +156,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
     def moveCursor(self, operation, mode=QtGui.QTextCursor.MoveAnchor):
         """
         Convenience function to move the cursor
-        This function will be present in PyQT4.2
+        This function will be present in PyQt4.2
         """
         cursor = self.textCursor()
         cursor.movePosition(operation, mode)
@@ -225,7 +226,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
         """
         Simulate stdin, stdout, and stderr.
         """
-        map(self.write, text)
+        list(map(self.write, text))
 
 
     def fakeUser(self, lines):
@@ -251,8 +252,8 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
         self.history.append(str(self.line))
         try:
             self.lines.append(str(self.line))
-        except Exception, e:
-            print e
+        except Exception as e:
+            print(e)
 
         source = '\n'.join(self.lines)
         self.more = self.interpreter.runsource(source)
@@ -459,7 +460,7 @@ class PyCutExt(QtGui.QTextEdit, GraphicalStreamRedirection):
 
     def customEvent(self, event):
         GraphicalStreamRedirection.customEvent(self, event)
-        QtGui.QTextEdit.customEvent(self, event)
+        QtWidgets.QTextEdit.customEvent(self, event)
 
 
 
@@ -507,7 +508,7 @@ class SyntaxColor:
 
 def main():
     # Test the widget independently.
-    a = QtGui.QApplication(sys.argv)
+    a = QtWidgets.QApplication(sys.argv)
 
     # Restore default signal handler for CTRL+C
     import signal; signal.signal(signal.SIGINT, signal.SIG_DFL)

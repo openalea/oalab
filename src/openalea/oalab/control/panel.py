@@ -1,21 +1,21 @@
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore, QtWidgets
 from openalea.core.observer import AbstractListener
 from openalea.oalab.service.qt_control import qt_editor
 
 MODE_VIEW = 0
 # MODE_EDIT = 1
 MODE_DESIGN = 1
-from openalea.vpltk.qt.designer import generate_pyfile_from_uifile
+from openalea.visualea.qt.designer import generate_pyfile_from_uifile
 
 generate_pyfile_from_uifile(__name__)
 from openalea.oalab.gui.control.designer._panel import Ui_WidgetContainer
 
 
-class WidgetContainer2(QtGui.QWidget, Ui_WidgetContainer):
+class WidgetContainer2(QtWidgets.QWidget, Ui_WidgetContainer):
 
     def __init__(self, title):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.setupUi(self)
         self.l_title.setText(title)
         self._decorations = [self.line, self.line_2, self.l_title,
@@ -27,12 +27,12 @@ class WidgetContainer2(QtGui.QWidget, Ui_WidgetContainer):
             deco.setVisible(state)
 
 
-class WidgetContainer(QtGui.QWidget):
+class WidgetContainer(QtWidgets.QWidget):
 
     def __init__(self, widget, title):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.widget = widget
-        self.layout = QtGui.QVBoxLayout(self)
+        self.layout = QtWidgets.QVBoxLayout(self)
         self.layout.addWidget(widget)
 
     def set_mode(self, mode):
@@ -40,7 +40,7 @@ class WidgetContainer(QtGui.QWidget):
             self.widget.setStyleSheet("background-color:rgba(200,200,255,100);")
             self.setStyleSheet("background-color:rgba(200,200,255,100);")
         else:
-            color = QtGui.QApplication.palette().color(QtGui.QPalette.Window)
+            color = QtWidgets.QApplication.palette().color(QtGui.QPalette.Window)
             r = color.red()
             g = color.green()
             b = color.blue()
@@ -156,14 +156,14 @@ class ControlPanelScene(QtGui.QGraphicsScene):
         if event.mimeData().hasFormat('openalealab/control'):
             event.acceptProposedAction()
         else:
-            return QtGui.QWidget.dragEnterEvent(self, event)
+            return QtWidgets.QWidget.dragEnterEvent(self, event)
 
     def dragMoveEvent(self, event):
         if event.mimeData().hasFormat('openalealab/control'):
             event.acceptProposedAction()
         else:
             for fmt in event.mimeData().formats():
-                print fmt, event.mimeData().data(fmt)
+                print(fmt, event.mimeData().data(fmt))
             event.ignore()
             return False
 
@@ -177,7 +177,7 @@ class ControlPanelScene(QtGui.QGraphicsScene):
             self.add_control(control, pos)
             event.acceptProposedAction()
         else:
-            return QtGui.QWidget.dropEvent(self, event)
+            return QtWidgets.QWidget.dropEvent(self, event)
 
 
 class ControlGraphicsView(QtGui.QGraphicsView):
@@ -195,13 +195,13 @@ class ControlGraphicsView(QtGui.QGraphicsView):
         self.scene.set_mode(mode)
 
 
-class ControlPanel(QtGui.QWidget):
+class ControlPanel(QtWidgets.QWidget):
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
-        self.layout = QtGui.QVBoxLayout(self)
+        QtWidgets.QWidget.__init__(self)
+        self.layout = QtWidgets.QVBoxLayout(self)
         self.view = ControlGraphicsView()
-        self.cb_edit_mode = QtGui.QComboBox()
+        self.cb_edit_mode = QtWidgets.QComboBox()
         for mode in ['User mode (change values)', 'Designer mode (place widgets)']:
             self.cb_edit_mode.addItem(mode)
         self.layout.addWidget(self.view)

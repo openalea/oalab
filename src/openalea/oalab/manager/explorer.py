@@ -19,8 +19,7 @@
 
 from itertools import groupby
 
-from openalea.vpltk.qt import QtGui, QtCore
-from openalea.vpltk.qt.compat import getexistingdirectory
+from qtpy import QtGui, QtCore, QtWidgets
 
 from openalea.oalab.utils import obj_icon, qicon
 from openalea.oalab.widget.switcher import WidgetSwitcher
@@ -35,7 +34,7 @@ class ManagerExplorerModel(QtGui.QStandardItemModel):
     def __init__(self):
         QtGui.QStandardItemModel.__init__(self)
 
-        self._headers = [u'Manager']
+        self._headers = ['Manager']
         self.setHorizontalHeaderLabels(self._headers)
         self._items = None
         self._group = {}
@@ -146,12 +145,12 @@ class ManagerExplorerModel(QtGui.QStandardItemModel):
             return self._group[self.itemFromIndex(idx)][0].item
 
 
-class ManagerExplorerView(QtGui.QTreeView):
+class ManagerExplorerView(QtWidgets.QTreeView):
     item_changed = QtCore.Signal(object)
     search_item_request = QtCore.Signal()
 
     def __init__(self, parent=None):
-        QtGui.QTreeView.__init__(self, parent=parent)
+        QtWidgets.QTreeView.__init__(self, parent=parent)
         self.setContentsMargins(0, 0, 0, 0)
         self._model = ManagerExplorerModel()
         self.setModel(self._model)
@@ -164,7 +163,7 @@ class ManagerExplorerView(QtGui.QTreeView):
     def set_items(self, items):
         self._model.set_items(items)
         if len(items):
-            first = self._model._group.values()[0][0]
+            first = list(self._model._group.values())[0][0]
             self.setCurrentIndex(self._model.indexFromItem(first))
         self.expandAll()
 
@@ -174,7 +173,7 @@ class ManagerExplorerView(QtGui.QTreeView):
                 self.search_item_request.emit()
             else:
                 self.item_changed.emit(self._model.item(idx))
-        return QtGui.QTreeView.selectionChanged(self, selected, deselected)
+        return QtWidgets.QTreeView.selectionChanged(self, selected, deselected)
 
     def groupby(self, **kwds):
         self._model.groupby(**kwds)
@@ -187,16 +186,16 @@ class ManagerExplorerView(QtGui.QTreeView):
         self._model.default_item_icon = icon_path
 
 
-class FilterBox(QtGui.QWidget):
+class FilterBox(QtWidgets.QWidget):
     filter_changed = QtCore.Signal(str)
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent)
-        self._layout = QtGui.QHBoxLayout(self)
+        QtWidgets.QWidget.__init__(self, parent)
+        self._layout = QtWidgets.QHBoxLayout(self)
         self.setContentsMargins(0, 0, 0, 0)
         self._layout.setContentsMargins(0, 0, 0, 0)
 
-        self._cb_groupby = QtGui.QComboBox()
+        self._cb_groupby = QtWidgets.QComboBox()
         self._cb_groupby.currentIndexChanged.connect(self._on_current_index_changed)
 
         self._layout.addWidget(self._cb_groupby)
@@ -216,16 +215,16 @@ class FilterBox(QtGui.QWidget):
                 return
 
 
-class ManagerExplorer(QtGui.QWidget):
+class ManagerExplorer(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self, parent=parent)
+        QtWidgets.QWidget.__init__(self, parent=parent)
 
         self._current = None
 
         self._layout = QtGui.QGridLayout(self)
 
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
 
         self._explorer = ManagerExplorerView()
         self._explorer.item_changed.connect(self._on_item_changed)
@@ -237,7 +236,7 @@ class ManagerExplorer(QtGui.QWidget):
         self._switcher = WidgetSwitcher(parent=self)
         self._switcher.setSizePolicy(p(p.MinimumExpanding, p.MinimumExpanding))
 
-        self._layout.addWidget(QtGui.QLabel("Group by ..."), 0, 0)
+        self._layout.addWidget(QtWidgets.QLabel("Group by ..."), 0, 0)
         self._layout.addWidget(self._filter_box, 0, 1)
         self._layout.addWidget(self._explorer, 1, 0, 1, 2)
         self._layout.addWidget(self._switcher, 1, 2)

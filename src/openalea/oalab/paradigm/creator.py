@@ -24,7 +24,7 @@ from openalea.core.service.plugin import debug_plugin, plugins
 from openalea.core.service.plugin import plugin_instance_exists, plugin_instance, plugins
 from openalea.oalab.utils import ModalDialog, qicon
 from openalea.oalab.widget import resources_rc
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore, QtWidgets
 
 
 class ParadigmCreator(QtCore.QObject):
@@ -47,7 +47,7 @@ class ParadigmCreator(QtCore.QObject):
             if applet:
                 name = applet.default_name
                 self._name_to_applet[name] = applet
-                action = QtGui.QAction(qicon(applet.icon), "New " + name, self._parent)
+                action = QtWidgets.QAction(qicon(applet.icon), "New " + name, self._parent)
                 action.triggered.connect(self._on_action_triggered)
                 self._name_to_action[name] = action
                 self._action_to_name[action] = name
@@ -59,7 +59,7 @@ class ParadigmCreator(QtCore.QObject):
             applet_class = self._name_to_applet[dtype]
         else:
             # Check in paradigm.extension
-            for value in self._name_to_applet.values():
+            for value in list(self._name_to_applet.values()):
                 if dtype == value.extension:
                     applet_class = value
         if applet_class is None:
@@ -68,7 +68,7 @@ class ParadigmCreator(QtCore.QObject):
         return applet_class(data=obj).instantiate_widget()
 
     def actions(self):
-        return self._action_to_name.keys()
+        return list(self._action_to_name.keys())
 
     def action(self, paradigm):
         """
@@ -85,7 +85,7 @@ class ParadigmCreator(QtCore.QObject):
         self.paradigm_clicked.emit(self.dtype)
 
 
-class ParadigmInfoSelector(QtGui.QWidget):
+class ParadigmInfoSelector(QtWidgets.QWidget):
 
     validity_changed = QtCore.Signal(bool)
 
@@ -98,17 +98,17 @@ class ParadigmInfoSelector(QtGui.QWidget):
         self.categories = categories
         self.dtypes = dtypes
 
-        layout = QtGui.QFormLayout(self)
+        layout = QtWidgets.QFormLayout(self)
 
-        self.l_categories = QtGui.QLabel("Select in which category you want to add this file: ")
-        self.l_dtypes = QtGui.QLabel("Data type")
-        self.l_name = QtGui.QLabel("Name: ")
-        self.l_notes = QtGui.QLabel("Note:")
-        self.l_info = QtGui.QLabel("All is ok")
+        self.l_categories = QtWidgets.QLabel("Select in which category you want to add this file: ")
+        self.l_dtypes = QtWidgets.QLabel("Data type")
+        self.l_name = QtWidgets.QLabel("Name: ")
+        self.l_notes = QtWidgets.QLabel("Note:")
+        self.l_info = QtWidgets.QLabel("All is ok")
 
         # Category selector
         if len(self.categories) > 1:
-            self.cb_categories = QtGui.QComboBox(self)
+            self.cb_categories = QtWidgets.QComboBox(self)
             self.cb_categories.addItems(categories)
             if 'model' in categories:
                 self.cb_categories.setCurrentIndex(categories.index('model'))
@@ -118,14 +118,14 @@ class ParadigmInfoSelector(QtGui.QWidget):
 
         if len(self.dtypes) > 1:
             # Dtype selector
-            self.cb_dtypes = QtGui.QComboBox(self)
+            self.cb_dtypes = QtWidgets.QComboBox(self)
             self.cb_dtypes.addItems(dtypes)
             self.cb_dtypes.setCurrentIndex(0)
             self.cb_dtypes.currentIndexChanged.connect(self.check_data)
 
             layout.addRow(self.l_dtypes, self.cb_dtypes)
 
-        self.line = QtGui.QLineEdit(name)
+        self.line = QtWidgets.QLineEdit(name)
         self.line.textChanged.connect(self.check)
         layout.addRow(self.l_name, self.line)
         layout.addRow(self.l_notes, self.l_info)
@@ -137,7 +137,7 @@ class ParadigmInfoSelector(QtGui.QWidget):
         if isinstance(error, CustomException):
             message = error.getMessage()
         elif isinstance(error, Warning):
-            message = error.message
+            message = error.args[0]
         else:
             message = None
         if message:

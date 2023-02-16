@@ -17,7 +17,7 @@
 ###############################################################################
 __revision__ = ""
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 from openalea.core.path import path
 from openalea.oalab.editor.search import SearchWidget
 from openalea.oalab.editor.completion import DictionaryCompleter
@@ -34,7 +34,7 @@ except ImportError:
     logger.warning("You should install **flake8** (using: pip install flake8)")
 
 
-class RichTextEditor(QtGui.QWidget):
+class RichTextEditor(QtWidgets.QWidget):
     textChanged = QtCore.Signal()
 
     def __init__(self, parent=None):
@@ -49,7 +49,7 @@ class RichTextEditor(QtGui.QWidget):
         self.goto_widget = GoToWidget(parent=self.editor)
         self.search_widget = SearchWidget(parent=self.editor)
 
-        self.layout = QtGui.QVBoxLayout()
+        self.layout = QtWidgets.QVBoxLayout()
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.layout.addWidget(self.editor)
         self.layout.addWidget(self.search_widget)
@@ -135,11 +135,11 @@ def fix_indentation(text, n=4):
     return text.replace('\t', ' ' * n)
 
 
-class TextEditor(QtGui.QTextEdit):
+class TextEditor(QtWidgets.QTextEdit):
 
     def __init__(self, parent=None):
         super(TextEditor, self).__init__(parent)
-        self.setLineWrapMode(QtGui.QTextEdit.NoWrap)
+        self.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
         self.indentation = "    "
         self.completer = None
         self.name = None
@@ -171,10 +171,10 @@ class TextEditor(QtGui.QTextEdit):
         font = "Courier"
         try:
             font = config.get("Text Editor", "Font")
-        except settings.NoSectionError, e:
+        except settings.NoSectionError as e:
             config.add_section("Text Editor")
             config.add_option("Text Editor", "Font", str(font))
-        except settings.NoOptionError, e:
+        except settings.NoOptionError as e:
             config.add_option("Text Editor", "Font", str(font))
         self.set_font(font)
 
@@ -182,10 +182,10 @@ class TextEditor(QtGui.QTextEdit):
         try:
             font_size = config.get("Text Editor", "Font Size")
             font_size = int(font_size)
-        except settings.NoSectionError, e:
+        except settings.NoSectionError as e:
             config.add_section("Text Editor")
             config.add_option("Text Editor", "Font Size", str(font_size))
-        except settings.NoOptionError, e:
+        except settings.NoOptionError as e:
             config.add_option("Text Editor", "Font Size", str(font_size))
         self.set_font_size(font_size)
 
@@ -193,10 +193,10 @@ class TextEditor(QtGui.QTextEdit):
         try:
             display_tab = config.get("Text Editor", "Display Tab and Spaces")
             display_tab = bool(eval(display_tab))
-        except settings.NoSectionError, e:
+        except settings.NoSectionError as e:
             config.add_section("Text Editor")
             config.add_option("Text Editor", "Display Tab and Spaces", str(display_tab))
-        except settings.NoOptionError, e:
+        except settings.NoOptionError as e:
             config.add_option("Text Editor", "Display Tab and Spaces", str(display_tab))
         self.show_tab_and_spaces(display_tab)
 
@@ -281,7 +281,7 @@ class TextEditor(QtGui.QTextEdit):
     def get_selected_text(self):
         cursor = self.textCursor()
         txt = cursor.selectedText()
-        return unicode(txt).replace(u'\u2029', u'\n')  # replace paragraph separators by new lines
+        return str(txt).replace('\u2029', '\n')  # replace paragraph separators by new lines
 
     def get_text(self, start='sof', end='eof'):
         """
@@ -294,7 +294,7 @@ class TextEditor(QtGui.QTextEdit):
         txt = self.toPlainText()
         if txt is None:
             txt = ""
-        return unicode(txt).replace(u'\u2029', u'\n')  # replace paragraph separators by new lines
+        return str(txt).replace('\u2029', '\n')  # replace paragraph separators by new lines
 
     def replace_tab(self):
         """
@@ -517,7 +517,7 @@ class TextEditor(QtGui.QTextEdit):
             return
 
         completer.setWidget(self)
-        completer.setCompletionMode(QtGui.QCompleter.PopupCompletion)
+        completer.setCompletionMode(QtWidgets.QCompleter.PopupCompletion)
         completer.setCaseSensitivity(QtCore.Qt.CaseInsensitive)
         self.completer = completer
         QtCore.QObject.connect(self.completer, QtCore.SIGNAL("activated(const QString&)"), self.insertCompletion)
@@ -574,14 +574,14 @@ def main():
     from openalea.oalab.shell import get_shell_class
     from openalea.core.service.ipython import interpreter
     from openalea.oalab.editor.highlight import Highlighter
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     edit = TextEditor()
     Highlighter(edit)
     interp = interpreter()
     shell = get_shell_class()(interp)
 
-    win = QtGui.QMainWindow()
+    win = QtWidgets.QMainWindow()
     win.setCentralWidget(edit)
 
     dock_widget = QtGui.QDockWidget("IPython", win)

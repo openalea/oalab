@@ -17,7 +17,7 @@
 ###############################################################################
 
 
-from openalea.vpltk.qt import QtCore
+from qtpy import QtCore
 from openalea.core.observer import AbstractListener
 
 
@@ -119,20 +119,20 @@ class AbstractQtControlWidget(AbstractControlWidget):
         if signal:
             if hasattr(signal, 'connect') and hasattr(signal, 'disconnect'):
                 signal.connect(method)
-            elif isinstance(signal, basestring):
+            elif isinstance(signal, str):
                 self.connect(self, QtCore.SIGNAL(signal), method)
             else:
-                raise NotImplementedError, 'Signal %s support is not implemented' % signal
+                raise NotImplementedError('Signal %s support is not implemented' % signal)
 
     def _disconnect(self, method):
         signal = self.value_changed_signal
         if signal:
             if hasattr(signal, 'connect') and hasattr(signal, 'disconnect'):
                 signal = signal.signal
-            elif isinstance(signal, basestring):
+            elif isinstance(signal, str):
                 pass
             else:
-                raise NotImplementedError, 'Signal %s support is not implemented' % signal
+                raise NotImplementedError('Signal %s support is not implemented' % signal)
             self.disconnect(self, QtCore.SIGNAL(signal), method)
 
     def autoapply(self, control, auto=True):

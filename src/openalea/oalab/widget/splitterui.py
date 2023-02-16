@@ -22,7 +22,7 @@ __revision__ = " $Id: splitterui.py 4222 2014-04-23 09:15:04Z gbaty $ "
 Contains the implementation of a recursively splittable UI.
 """
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
 try:
     from openalea.core import logger
@@ -33,7 +33,7 @@ try:
         myLogger.log(level, msg)
 except:
     def log(level, msg):
-        print "debug messsage", level, msg
+        print("debug messsage", level, msg)
 
 from collections import deque
 
@@ -105,7 +105,7 @@ class BinaryTree(object):
         """
 
         def visit(self, vid):
-            print vid
+            print(vid)
             return False, False  # don't ignore first or second child
 
     def __init__(self):
@@ -120,13 +120,13 @@ class BinaryTree(object):
         self._toParents[0] = None
 
     def toString(self, props=[]):
-        filteredProps = dict((vid, dict((k, v) for k, v in di.iteritems() if k in props))
-                             for vid, di in self._properties.iteritems())
+        filteredProps = dict((vid, dict((k, v) for k, v in di.items() if k in props))
+                             for vid, di in self._properties.items())
         return repr(self._toChildren) + ", " + repr(self._toParents) + ", " + repr(filteredProps)
 
     @classmethod
     def _convert_keys_to_int(cls, dic):
-        for k in dic.keys():
+        for k in list(dic.keys()):
             if isinstance(k, int):
                 continue
             dic[int(k)] = dic[k]
@@ -144,7 +144,7 @@ class BinaryTree(object):
         cls._convert_keys_to_int(toCh)
         cls._convert_keys_to_int(props)
 
-        g.__vid = max(props.iterkeys()) + 1
+        g.__vid = max(props.keys()) + 1
         g._toChildren = toCh.copy()
         g._toParents = toPar.copy()
         g._properties = props.copy()
@@ -159,7 +159,7 @@ class BinaryTree(object):
 
         g = cls()
         toCh, toPar, props = tup
-        g.__vid = max(props.iterkeys()) + 1
+        g.__vid = max(props.keys()) + 1
         g._toChildren = toCh.copy()
         g._toParents = toPar.copy()
         g._properties = props.copy()
@@ -396,7 +396,7 @@ class DraggableWidget(object):
         elif typ == QtCore.QEvent.HoverLeave:
             self._hovered = False
             self.update()
-        return QtGui.QWidget.event(self, event)
+        return QtWidgets.QWidget.event(self, event)
 
     def mousePressEvent(self, event):
         if event.buttons() & QtCore.Qt.LeftButton:
@@ -407,7 +407,7 @@ class DraggableWidget(object):
             self._oldpos = event.pos() - self._offset + self.geometry().topLeft()
             self._startpos = event.pos() - self._offset + self.geometry().topLeft()
         else:
-            QtGui.QWidget.mousePressEvent(self, event)
+            QtWidgets.QWidget.mousePressEvent(self, event)
 
     def mouseMoveEvent(self, event):
         if self._isMoving:
@@ -419,7 +419,7 @@ class DraggableWidget(object):
                 self.setGeometry(geom)
             self._oldpos = newPt
         else:
-            QtGui.QWidget.mouseMoveEvent(self, event)
+            QtWidgets.QWidget.mouseMoveEvent(self, event)
 
     def mouseReleaseEvent(self, event):
         if event.buttons() & QtCore.Qt.LeftButton:
@@ -428,10 +428,10 @@ class DraggableWidget(object):
             self._offset = None
             self._startpos = None
         else:
-            QtGui.QWidget.mouseReleaseEvent(self, event)
+            QtWidgets.QWidget.mouseReleaseEvent(self, event)
 
 
-class SplittableUI(QtGui.QWidget):
+class SplittableUI(QtWidgets.QWidget):
 
     """A widget that tries to mimic the Blender UI.
     Each pane contains a settable widget."""
@@ -454,8 +454,8 @@ class SplittableUI(QtGui.QWidget):
          - parent (QtGui.QWidget)  - The parent widget
          - content (QtGui.QWidget) - The widget to display in pane at level 0
         """
-        QtGui.QWidget.__init__(self, parent)
-        self.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        QtWidgets.QWidget.__init__(self, parent)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.setAcceptDrops(True)
         # -- our backbone: --
         self._g = BinaryTree()
@@ -590,7 +590,7 @@ class SplittableUI(QtGui.QWidget):
 
     def getAllContents(self, reparent=None):
         widgets = []
-        for vid in self._g._properties.iterkeys():
+        for vid in self._g._properties.keys():
             wid = self.getContentAt(vid)
             if wid is not None:
                 widgets.append(wid)
@@ -608,14 +608,14 @@ class SplittableUI(QtGui.QWidget):
 
     def takeAllContents(self, reparent=None):
         taken = []
-        for vid in self._g._properties.iterkeys():
+        for vid in self._g._properties.keys():
             wid = self.takeContentAt(vid, reparent)
             if wid is not None:
                 taken.append(wid)
         return taken
 
     def hasContent(self, widget):
-        for vid, prop in self._g._properties.iteritems():
+        for vid, prop in self._g._properties.items():
             if "widget" in prop and prop["widget"] == widget:
                 return vid
         return -1
@@ -745,7 +745,7 @@ class SplittableUI(QtGui.QWidget):
         """Called by tear offs when a collapse is requested.
         `paneId` will collapse following `orientation` at `amount`*pane-width/height."""
         if collapseType == 2:
-            print "Cannot handle collapse to foreign nodes yet"
+            print("Cannot handle collapse to foreign nodes yet")
             return
         parent = self._g.parent(paneId)
         siblings = self._g.children(parent)
@@ -808,7 +808,7 @@ class SplittableUI(QtGui.QWidget):
         """Reimplemented to call `computeGeoms`."""
         self._geomCache[0] = self.contentsRect()
         self.computeGeoms(baseNode=0)
-        QtGui.QWidget.resizeEvent(self, event)
+        QtWidgets.QWidget.resizeEvent(self, event)
 
     def dragEnterEvent(self, event):
         """While the user hasn't released the object, this method is called
@@ -823,7 +823,7 @@ class SplittableUI(QtGui.QWidget):
 
     def paintEvent(self, event):
         painter = QtGui.QPainter(self)
-        QtGui.QWidget.paintEvent(self, event)
+        QtWidgets.QWidget.paintEvent(self, event)
         # paintingVisitor = self.DebugPaintingVisitor(self._g, self._geomCache, painter)
         # self._g.visit_i_breadth_first(paintingVisitor)
 
@@ -1001,7 +1001,7 @@ class SplittableUI(QtGui.QWidget):
 
             return False, False
 
-    class TearOff(QtGui.QWidget, DraggableWidget):
+    class TearOff(QtWidgets.QWidget, DraggableWidget):
 
         """A widget drawn at top right and bottom left hand corner of each
         SplittableUI pane and that allows the user to split/collapse panes"""
@@ -1028,7 +1028,7 @@ class SplittableUI(QtGui.QWidget):
              - `bottom` (bool) - Is this tear off at the bottom left?
             """
 
-            QtGui.QWidget.__init__(self, parent)
+            QtWidgets.QWidget.__init__(self, parent)
             DraggableWidget.__init__(self)
             self._g = graph
             self._vid = refVid
@@ -1107,7 +1107,7 @@ class SplittableUI(QtGui.QWidget):
             else:
                 painter.drawConvexPolygon(QtGui.QPolygon([rect.topRight(), rect.bottomRight(), rect.topLeft()]))
 
-    class SplitterHandle(QtGui.QWidget, DraggableWidget):
+    class SplitterHandle(QtWidgets.QWidget, DraggableWidget):
 
         """Basically a reimplementation of QtGui.QSplitterHandle.
         The original one needed a reference to a QtGui.QSplitter.
@@ -1123,7 +1123,7 @@ class SplittableUI(QtGui.QWidget):
                                Vertical means that it seperates two vertical siblings (its horizontal)
              - `parent` (SplitterUI) - The parent splittable ui.
             """
-            QtGui.QWidget.__init__(self, parent)
+            QtWidgets.QWidget.__init__(self, parent)
             DraggableWidget.__init__(self)
             self._g = graph
             self._refVid = refVid
@@ -1186,8 +1186,8 @@ class SplittableUI(QtGui.QWidget):
         def paintEvent(self, event):
             # -- Required for stylesheets to work. Search for QWidget here:
             # http://doc.qt.nokia.com/latest/stylesheet-reference.html --
-            QStyle = QtGui.QStyle
-            opt = QtGui.QStyleOption()
+            QStyle = QtWidgets.QStyle
+            opt = QtWidgets.QStyleOption()
             opt.initFrom(self)
             painter = QtGui.QPainter(self)
             self.style().drawPrimitive(QStyle.PE_Widget, opt, painter, self)
@@ -1199,8 +1199,8 @@ class SplittableUI(QtGui.QWidget):
 
 # Small testing example
 if __name__ == "__main__":
-    app = QtGui.QApplication(["Muahaha"])
-    mw = QtGui.QMainWindow()
+    app = QtWidgets.QApplication(["Muahaha"])
+    mw = QtWidgets.QMainWindow()
     splittable = SplittableUI(parent=mw)
     mw.setCentralWidget(splittable)
     mw.show()

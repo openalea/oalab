@@ -29,7 +29,7 @@ PluginVisualeaWidgetSelectors = []
 
 import openalea.visualea.gui_catalog
 from openalea.core.interface import InterfaceWidgetMap
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 from openalea.oalab.control.widget import AbstractQtControlWidget, OpenAleaControlWidget
 
 
@@ -90,7 +90,7 @@ shapes = {
 # Exclude interfaces that have widgets designed for controls
 rejected = ['IInt', 'IStr', 'IFloat']
 
-for interface, widget_class in InterfaceWidgetMap().items():
+for interface, widget_class in list(InterfaceWidgetMap().items()):
     iname = interface.__name__
     if iname in rejected:
         continue

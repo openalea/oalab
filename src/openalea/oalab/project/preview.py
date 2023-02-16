@@ -1,5 +1,5 @@
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtWidgets
 from openalea.core.project import Project
 from openalea.core.project.manager import ProjectManager
 from openalea.core.project.formatting.html import html_metainfo_summary, html_item_summary
@@ -35,7 +35,7 @@ def html_project_summary(project):
     return html
 
 
-class Preview(QtGui.QTextEdit):
+class Preview(QtWidgets.QTextEdit):
 
     """
     This widget displays meta-information about project.
@@ -61,9 +61,9 @@ def main():
     from openalea.core.project.manager import ProjectManager
     import sys
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
-    tabwidget = QtGui.QTabWidget()
+    tabwidget = QtWidgets.QTabWidget()
 
     project_manager = ProjectManager()
     project_manager.discover()

@@ -97,7 +97,7 @@ def notebook_editor(control, shape=None, preferred=None, preferences=None):
     elif preferences and iname in preferences:
         notebookclass = preferences[iname].value
     elif iname in preferred_widgets:
-        notebookclass = preferred_widgets[iname].values()[0]
+        notebookclass = list(preferred_widgets[iname].values())[0]
 
     if notebookclass:
         widget = NotebookControlWidget(notebookclass=notebookclass)
@@ -110,7 +110,7 @@ def select_default_widgets():
     box = widgets.ContainerWidget(description="Select default widgets")
     dic = {}
     children = []
-    for iname, widget_dict in preferred_widgets.iteritems():
+    for iname, widget_dict in preferred_widgets.items():
         iclass = interface_class(iname)
 #         for name, notebookclass in widgets.iteritems():
         values = widget_dict

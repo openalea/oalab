@@ -17,10 +17,10 @@
 ###############################################################################
 __revision__ = ""
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtWidgets
 
 
-class GoToWidget(QtGui.QWidget):
+class GoToWidget(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super(GoToWidget, self).__init__()
@@ -28,15 +28,15 @@ class GoToWidget(QtGui.QWidget):
         self.setMinimumSize(100, 100)
         self.setWindowTitle("Go To Line")
 
-        self.actionGo = QtGui.QAction("Go to line", self)
-        self.lineEdit = QtGui.QLineEdit()
-        self.btnGo = QtGui.QToolButton()
+        self.actionGo = QtWidgets.QAction("Go to line", self)
+        self.lineEdit = QtWidgets.QLineEdit()
+        self.btnGo = QtWidgets.QToolButton()
         self.btnGo.setDefaultAction(self.actionGo)
 
-        QtCore.QObject.connect(self.actionGo, QtCore.SIGNAL('triggered(bool)'), self.go)
-        QtCore.QObject.connect(self.lineEdit, QtCore.SIGNAL('returnPressed()'), self.go)
+        self.actionGo.triggered.connect(self.go)
+        self.lineEdit.returnPressed.connect(self.go)
 
-        layout = QtGui.QGridLayout()
+        layout = QtWidgets.QGridLayout()
         layout.setAlignment(QtCore.Qt.AlignLeft)
 
         layout.addWidget(self.lineEdit, 0, 0)

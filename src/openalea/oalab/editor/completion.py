@@ -17,16 +17,16 @@
 ###############################################################################
 __revision__ = ""
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtWidgets
 import keyword
-import __builtin__
+import builtins
 
 
-class DictionaryCompleter(QtGui.QCompleter):
+class DictionaryCompleter(QtWidgets.QCompleter):
 
     def __init__(self, parent=None):
         super(DictionaryCompleter, self).__init__(parent)
-        self.basic_words = keyword.kwlist + __builtin__.__dict__.keys()
+        self.basic_words = keyword.kwlist + list(builtins.__dict__.keys())
 
         self.update_dict()
 
@@ -34,8 +34,8 @@ class DictionaryCompleter(QtGui.QCompleter):
         """
         Use it to add new words from locals() and globals()
         """
-        words = self.basic_words + locals().keys() + globals().keys()
-        QtGui.QCompleter.__init__(self, words, self.parent())
+        words = self.basic_words + list(locals().keys()) + list(globals().keys())
+        QtWidgets.QCompleter.__init__(self, words, self.parent())
 
     def add_words(self, words):
         """

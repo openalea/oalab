@@ -32,41 +32,41 @@ class DefaultLab(MiniLab):
         'properties': {
             0: {'amount': 0.04774535809018567, 'splitDirection': 2},
             1: {'widget':
-                {'applets': [{'name': u'ContextualMenu'}],
+                {'applets': [{'name': 'ContextualMenu'}],
                  'properties': {'position': 0}
                  }},
             2: {'amount': 0.1609375, 'splitDirection': 1},
             3: {'amount': 0.4850467289719626, 'splitDirection': 2},
             4: {'amount': 0.6540136901057871, 'splitDirection': 1},
             5: {'widget':
-                {'applets': [{'name': u'ProjectManager'}],
+                {'applets': [{'name': 'ProjectManager'}],
                  'properties': {'position': 0, 'title': '<b>Project</b>'}
                  }},
             6: {'widget':
                 {'applets': [
-                    {'name': u'ControlManager'},
-                    {'name': u'World'},
-                    {'name': u'PkgManagerWidget'}],
+                    {'name': 'ControlManager'},
+                    {'name': 'World'},
+                    {'name': 'PkgManagerWidget'}],
                  'properties': {'position': 0}
                  }},
             7: {'amount': 0.7252336448598131, 'splitDirection': 2},
             8: {'amount': 0.4803738317757009, 'splitDirection': 2},
             9: {'widget':
-                {'applets': [{'name': u'FigureWidget'}],
+                {'applets': [{'name': 'FigureWidget'}],
                     'properties': {'position': 2, 'title': '<b>2D</b> Viewers'}
                  }},
             10: {'widget':
-                 {'applets': [{'name': u'Viewer3D'}, ],
+                 {'applets': [{'name': 'Viewer3D'}, ],
                      'properties': {'position': 2, 'title': '<b>3D</b> Viewers'}}},
             11: {'widget':
-                 {'applets': [{'name': u'EditorManager'}],
+                 {'applets': [{'name': 'EditorManager'}],
                   'properties': {'position': 0}}},
             12: {'widget':
                  {'applets': [
-                     {'name': u'ShellWidget'},
-                     {'name': u'HistoryWidget'},
-                     {'name': u'HelpWidget'},
-                     {'name': u'Logger'}],
+                     {'name': 'ShellWidget'},
+                     {'name': 'HistoryWidget'},
+                     {'name': 'HelpWidget'},
+                     {'name': 'Logger'}],
                   'properties': {'position': 2}
                   }}
         }}

@@ -16,9 +16,9 @@
 #
 ###############################################################################
 __revision__ = ""
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 from openalea.oalab.editor.highlight import Highlighter
-import resources_rc  # do not remove this import else icon are not drawn
+from . import resources_rc  # do not remove this import else icon are not drawn
 
 
 class HistoryWidget(QtGui.QTextBrowser):
@@ -32,9 +32,9 @@ class HistoryWidget(QtGui.QTextBrowser):
         Highlighter(self)
         self.setAccessibleName("HistoryWidget")
         self.setText("")
-        self.setLineWrapMode(QtGui.QTextEdit.NoWrap)
+        self.setLineWrapMode(QtWidgets.QTextEdit.NoWrap)
 
-        clear_action = QtGui.QAction(QtGui.QIcon(":/images/resources/editraise.png"), "Clear History", self)
+        clear_action = QtWidgets.QAction(QtGui.QIcon(":/images/resources/editraise.png"), "Clear History", self)
         QtCore.QObject.connect(clear_action, QtCore.SIGNAL('triggered(bool)'), self.clear)
         self._actions = [["Edit", "History", clear_action, 0]]
 
@@ -75,12 +75,12 @@ class HistoryWidget(QtGui.QTextBrowser):
 
 
 def main():
-    from openalea.vpltk.qt import QtCore, QtGui
+    from qtpy import QtCore, QtGui
     from openalea.core.service.ipython import interpreter as interpreter_
     from openalea.oalab.shell import ShellWidget
     import sys
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     history = HistoryWidget()
     # Set interpreter
@@ -91,7 +91,7 @@ def main():
     # Set Shell Widget
     shellwdgt = ShellWidget(interpreter)
 
-    mainWindow = QtGui.QMainWindow()
+    mainWindow = QtWidgets.QMainWindow()
 
     dock_widget = QtGui.QDockWidget("shell", mainWindow)
     dock_widget.setWidget(shellwdgt)

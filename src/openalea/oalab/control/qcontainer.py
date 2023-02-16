@@ -18,7 +18,7 @@
 #
 ###############################################################################
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 from openalea.core.control import Control
 from openalea.core.control.manager import ControlContainer
 
@@ -46,9 +46,9 @@ class QControlContainer(QtCore.QObject, ControlContainer):
         for control in self.controls():
             interface = control.interface
             label = control.label
-            action = QtGui.QAction(label, parent)
+            action = QtWidgets.QAction(label, parent)
             self._control[action] = control
-            self._action[control] = action
+            self._action[control.label] = action
             if'IBool' in str(interface.__class__):
                 action.setCheckable(True)
                 action.setChecked(control.value)
@@ -57,7 +57,7 @@ class QControlContainer(QtCore.QObject, ControlContainer):
                 action.triggered.connect(self._on_action_triggered)
 
     def actions(self):
-        return self._action.values()
+        return list(self._action.values())
 
     def _on_action_triggered(self, *args):
         control = self._control[self.sender()]

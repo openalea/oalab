@@ -51,9 +51,9 @@ def parse_docstring_r(code):
     comment = get_docstring_r(code)
     inputs, outputs = parse_input_and_output(comment)
     if inputs:
-        inputs = map(InputObj, inputs)
+        inputs = list(map(InputObj, inputs))
     if outputs:
-        outputs = map(OutputObj, outputs)
+        outputs = list(map(OutputObj, outputs))
 
     cmdline = parse_cmdline(comment)
     return 'Rfunction', inputs, outputs, cmdline
@@ -120,9 +120,9 @@ def prepare_inputs(inputs_info, *args, **kwargs):
         if args:
             inputs = list(args)
             if len(inputs) == 1:
-                if isinstance(inputs, collections.Iterable):
+                if isinstance(inputs, collections.abc.Iterable):
                     inputs = inputs[0]
-                elif isinstance(inputs, collections.Iterable):
+                elif isinstance(inputs, collections.abc.Iterable):
                     inputs = list(inputs)
                 inputs = [inputs]
             inputs.reverse()
@@ -143,7 +143,7 @@ def prepare_inputs(inputs_info, *args, **kwargs):
                 not_set_inputs_info_dict = dict((inp.name, inp) for inp in not_set_inputs_info)
                 for name in kwargs:
                     value = kwargs[name]
-                    if name in not_set_inputs_info_dict.keys():
+                    if name in list(not_set_inputs_info_dict.keys()):
                         _inputs[name] = value
                         not_set_inputs_info.remove(not_set_inputs_info_dict[name])
                         del not_set_inputs_info_dict[name]

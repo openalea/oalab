@@ -1,9 +1,9 @@
 
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtWidgets
 from openalea.oalab.editor.text_editor import RichTextEditor
 
-class PlainTextEdit(QtGui.QPlainTextEdit):
+class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def setText(self, txt):
         self.setPlainText(txt)
 
@@ -13,12 +13,12 @@ class PlainTextEdit(QtGui.QPlainTextEdit):
 
         :param text: text you want to set
         """
-        self.setPlainText(txt)
+        self.setPlainText(txt.decode("utf-8"))
 
     def get_selected_text(self):
         cursor = self.textCursor()
         txt = cursor.selectedText()
-        return unicode(txt).replace(u'\u2029', u'\n') # replace paragraph separators by new lines
+        return str(txt).replace('\u2029', '\n') # replace paragraph separators by new lines
 
     def get_text(self, start='sof', end='eof'):
         """
@@ -31,7 +31,7 @@ class PlainTextEdit(QtGui.QPlainTextEdit):
         txt = self.toPlainText()
         if txt is None:
             txt = ""
-        return unicode(txt).replace(u'\u2029', u'\n') # replace paragraph separators by new lines
+        return str(txt).replace('\u2029', '\n') # replace paragraph separators by new lines
 
 
 class PlainTextEditor(RichTextEditor):

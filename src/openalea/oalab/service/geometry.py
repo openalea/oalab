@@ -40,7 +40,7 @@ def to_shape3d(obj):
         try:
             result = pgl.Scene(obj)
             return result
-        except Exception, e:
+        except Exception as e:
             pass
 
     # Case _repr_geom_
@@ -50,7 +50,7 @@ def to_shape3d(obj):
     if isinstance(obj, WorldObject):
         return to_shape3d(obj.data)
 
-    for types, function in __registry.iteritems():
+    for types, function in __registry.items():
         if isinstance(obj, types):
             return to_shape3d(function(obj))
 

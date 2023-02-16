@@ -19,7 +19,7 @@
 #
 ###############################################################################
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui, QtWidgets
 
 # Load SampleCustomData, associated codecs and register its
 from openalea.oalab.testing.mimedata import SampleCustomData
@@ -44,10 +44,10 @@ class DragModel(QtGui.QStandardItemModel):
         return encode_to_qmimedata(data, 'custom/data')
 
 
-class DragWidget(QtGui.QTreeView):
+class DragWidget(QtWidgets.QTreeView):
 
     def __init__(self):
-        QtGui.QTreeView.__init__(self)
+        QtWidgets.QTreeView.__init__(self)
 
         self.setDragEnabled(True)
         self.setDragDropMode(self.DragOnly)
@@ -55,10 +55,10 @@ class DragWidget(QtGui.QTreeView):
         self.setModel(self.model)
 
 
-class DropWidget(QtGui.QLabel):
+class DropWidget(QtWidgets.QLabel):
 
     def __init__(self):
-        QtGui.QLabel.__init__(self, "Drop here .................................................")
+        QtWidgets.QLabel.__init__(self, "Drop here .................................................")
         add_drop_callback(self, 'openalea/interface.IImage', self.drop)
         add_drop_callback(self, 'openalea/interface.IPath', self.drop)
         add_drop_callback(self, 'openalealab/control', self.drop)
@@ -69,11 +69,11 @@ class DropWidget(QtGui.QLabel):
         self.setText(repr(data))
 
 
-class DragAndDropWidget(QtGui.QWidget):
+class DragAndDropWidget(QtWidgets.QWidget):
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
-        layout = QtGui.QHBoxLayout(self)
+        QtWidgets.QWidget.__init__(self)
+        layout = QtWidgets.QHBoxLayout(self)
 
         self.drag = DragWidget()
         self.drop = DropWidget()

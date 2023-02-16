@@ -20,12 +20,11 @@ __license__ = "CeCILL V2"
 __revision__ = " $Id: scishell.py 3672 2012-12-05 12:28:19Z jcoste $"
 
 import os, sys
-from openalea.vpltk.qt import QtCore, QtGui
-#from openalea.vpltk.qt.QtCore import Qt
+from qtpy import QtCore, QtGui
 Qt = QtCore.Qt
 
-from PyQt4.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
-from streamredirection import *
+from PyQt5.Qsci import QsciScintilla, QsciLexerPython, QsciAPIs
+from .streamredirection import *
 
 
 class SciShell(QsciScintilla,GraphicalStreamRedirection):
@@ -199,7 +198,7 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
         Reimplemented slot to handle the paste action.
         """
 
-        lines = unicode(QtGui.QApplication.clipboard().text())
+        lines = str(QtWidgets.QApplication.clipboard().text())
         self.__executeLines(lines)
         
         
@@ -207,7 +206,7 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
         """
         Private method to handle the middle mouse button press.
         """
-        lines = unicode(QtGui.QApplication.clipboard().text(
+        lines = str(QtWidgets.QApplication.clipboard().text(
             QtGui.QClipboard.Selection))
         self.__executeLines(lines)
 
@@ -326,7 +325,7 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
         ctrl = ev.modifiers() & Qt.ControlModifier
         shift = ev.modifiers() & Qt.ShiftModifier
         # See it is text to insert.
-        if(self.keymap.has_key(key) and not shift and not ctrl):
+        if(key in self.keymap and not shift and not ctrl):
             self.keymap[key]()
 
         elif ev == QtGui.QKeySequence.Paste:
@@ -356,7 +355,7 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
             self.SendScintilla(QsciScintilla.SCI_TAB)
         elif self.__isCursorOnLastLine():
             line, index = self.getCursorPosition()
-            buf = unicode(self.text(line)).replace(sys.ps1, "").replace(sys.ps2, "")
+            buf = str(self.text(line)).replace(sys.ps1, "").replace(sys.ps2, "")
             if self.more and not buf[:index-len(sys.ps2)].strip():
                 self.SendScintilla(QsciScintilla.SCI_TAB)
              
@@ -421,7 +420,7 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
                 self.incrementalSearchActive = False
                 line, col = self.__getEndPos()
                 self.setCursorPosition(line,col)
-                buf = unicode(self.text(line)).replace(sys.ps1, "").replace(sys.ps2, "")
+                buf = str(self.text(line)).replace(sys.ps1, "").replace(sys.ps2, "")
                 self.insert('\n')
                 self.__executeCommand(buf)
 
@@ -494,7 +493,7 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
             self.SendScintilla(QsciScintilla.SCI_LINEUP)
         else:
             line, col = self.__getEndPos()
-            buf = unicode(self.text(line)).replace(sys.ps1, "").replace(sys.ps2, "")
+            buf = str(self.text(line)).replace(sys.ps1, "").replace(sys.ps2, "")
             if buf and self.incrementalSearchActive:
                 if self.incrementalSearchString:
                     idx = self.__rsearchHistory(self.incrementalSearchString, 
@@ -524,7 +523,7 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
             self.SendScintilla(QsciScintilla.SCI_LINEDOWN)
         else:
             line, col = self.__getEndPos()
-            buf = unicode(self.text(line)).replace(sys.ps1, "").replace(sys.ps2, "")
+            buf = str(self.text(line)).replace(sys.ps1, "").replace(sys.ps2, "")
             if buf and self.incrementalSearchActive:
                 if self.incrementalSearchString:
                     idx = self.__searchHistory(self.incrementalSearchString, self.histidx)
@@ -618,7 +617,7 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
 
         line, col = self.__getEndPos()
         self.setCursorPosition(line,col)
-        buf = unicode(self.text(line)).replace(sys.ps1, "").replace(sys.ps2, "")
+        buf = str(self.text(line)).replace(sys.ps1, "").replace(sys.ps2, "")
         text = buf.split()[-1][:-1]
         return text
 
@@ -680,11 +679,11 @@ class SciShell(QsciScintilla,GraphicalStreamRedirection):
          # Remove already written characters
         line, col = self.__getEndPos()
         self.setCursorPosition(line,col)
-        buf = unicode(self.text(line))
+        buf = str(self.text(line))
         ind = len(buf) - buf.rfind(".") - 1
 
         if id == 1:
-            txt = unicode(txt[ind:])
+            txt = str(txt[ind:])
             #if self.completionText != "":
              #   txt = txt.replace(self.completionText, "")
             self.__insertText(txt)

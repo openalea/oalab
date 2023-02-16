@@ -1,6 +1,6 @@
 
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from openalea.core.control.manager import ControlManager
 from openalea.oalab.control.manager import ControlManagerWidget
 from openalea.oalab.control.panel import ControlPanel
@@ -21,9 +21,9 @@ def test_all_lpy_controls():
 def test_all_interfaces():
     # Fill al
     for iname in interface_names():
-        print iname
+        print(iname)
         for i, editor in enumerate(qt_control.qt_widget_plugins(iname)):
-            print '  -', editor.name
+            print('  -', editor.name)
             name = editor.name.replace('Plugin', 'P.').replace('Widget', 'W.')
             name = '%s_%s' % (iname, name)
             c = new_control(name, iname)
@@ -50,17 +50,17 @@ def sample_controls():
 def disp_controls():
     cm = ControlManager()
     import sys
-    for k, v in cm.namespace().items():
-        print >> sys.__stdout__, k, v
+    for k, v in list(cm.namespace().items()):
+        print(k, v, file=sys.__stdout__)
 
 
 if __name__ == '__main__':
 
     from openalea.oalab.testing.applet import TestMainWin
-    instance = QtGui.QApplication.instance()
+    instance = QtWidgets.QApplication.instance()
 
     if instance is None:
-        app = QtGui.QApplication([])
+        app = QtWidgets.QApplication([])
     else:
         app = instance
 

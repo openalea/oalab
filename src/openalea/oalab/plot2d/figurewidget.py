@@ -20,7 +20,7 @@
 #
 ###############################################################################
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 import matplotlib
 from matplotlib import pyplot
@@ -82,7 +82,7 @@ class FigureManagerQT(FigureManagerBase):
         self.canvas.setFocusPolicy(QtCore.Qt.StrongFocus)
 
     def show(self):
-        print 'pylab.plot'
+        print('pylab.plot')
 
 
 class MplFigureWidget(QtGui.QFrame):
@@ -110,7 +110,7 @@ class MplFigureWidget(QtGui.QFrame):
         self.setFrameShadow(QtGui.QFrame.Plain)
         self.setContentsMargins(1, 1, 1, 1)
 
-        self._layout = QtGui.QVBoxLayout(self)
+        self._layout = QtWidgets.QVBoxLayout(self)
         self._layout.addWidget(self.canvas)
         self._layout.setContentsMargins(1, 1, 1, 1)
 

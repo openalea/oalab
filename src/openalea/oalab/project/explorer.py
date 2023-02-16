@@ -16,8 +16,8 @@
 #       OpenAlea WebSite : http://openalea.gforge.inria.fr
 #
 ###############################################################################
-from openalea.vpltk.qt import QtGui, QtCore
-from openalea.vpltk.qt.compat import getexistingdirectory
+from qtpy import QtGui, QtCore
+from openalea.oalab.qt.compat import getexistingdirectory
 
 
 from openalea.core.path import path as Path
@@ -82,7 +82,7 @@ class ProjectExplorer(ManagerExplorer):
 def main():
     import sys
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
     selector = ProjectExplorer()
     selector.show()
     app.exec_()

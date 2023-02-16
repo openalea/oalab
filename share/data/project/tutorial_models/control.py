@@ -4,6 +4,6 @@ controls = []
 from openalea.core.interface import IBool
 
 minterface = IBool()
-mcontrol = Control(u'FLAKE', minterface, True)
+mcontrol = Control('FLAKE', minterface, True)
 controls.append(mcontrol)
 

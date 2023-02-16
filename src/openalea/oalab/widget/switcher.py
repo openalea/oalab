@@ -1,19 +1,19 @@
 
 import weakref
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore, QtWidgets
 
 
-class WidgetSwitcher(QtGui.QWidget):
+class WidgetSwitcher(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self._previous = None
 
-        self._layout = QtGui.QHBoxLayout(self)
+        self._layout = QtWidgets.QHBoxLayout(self)
         self._layout.setContentsMargins(0, 0, 0, 0)
         self._layout.setSpacing(0)
 
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
 
     def set_widget(self, widget_class, *args, **kwargs):
         """
@@ -28,7 +28,7 @@ class WidgetSwitcher(QtGui.QWidget):
             del previous
 
         widget = widget_class(*args, **kwargs)
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
         widget.setSizePolicy(p(p.MinimumExpanding, p.MinimumExpanding))
         widget.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self._layout.addWidget(widget)

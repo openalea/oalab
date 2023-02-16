@@ -19,7 +19,7 @@
 ###############################################################################
 
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui, QtWidgets
 
 
 import openalea.oalab.service.qt_control as scontrol
@@ -29,16 +29,16 @@ from openalea.core.control.manager import ControlManager
 from openalea.oalab.gui.control.qcontainer import QControlContainer
 from openalea.oalab.gui.control.model_view import ControlView, ControlModel
 
-from openalea.vpltk.qt.designer import generate_pyfile_from_uifile
+from openalea.visualea.qt.designer import generate_pyfile_from_uifile
 
 generate_pyfile_from_uifile(__name__)
 from openalea.oalab.gui.control.designer._widget_tester import Ui_WidgetTester
 
 
-class ControlWidgetTester(Ui_WidgetTester, QtGui.QWidget):
+class ControlWidgetTester(Ui_WidgetTester, QtWidgets.QWidget):
 
     def __init__(self, control, edit_mode='edit'):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.setupUi(self)
 
         text = 'interface: %s, preferred widget: %s, edit mode: %s' % (control.interface, control.widget, edit_mode)
@@ -64,7 +64,7 @@ class ControlWidgetTester(Ui_WidgetTester, QtGui.QWidget):
                 valid_widget_shape = shape
                 self._qtcontrols.append(widget)
             else:
-                layout.addWidget(QtGui.QLabel("X"))
+                layout.addWidget(QtWidgets.QLabel("X"))
 
         if valid_widget_shape:
             self._test_widget = m(self._control, shape=valid_widget_shape)
@@ -79,7 +79,7 @@ class ControlWidgetTester(Ui_WidgetTester, QtGui.QWidget):
         self.l_large_box.addWidget(self._view, 1, 1, 2, 1)
 
     def contextMenuEvent(self, event):
-        menu = QtGui.QMenu(self)
+        menu = QtWidgets.QMenu(self)
         menu.addActions(self._qcontainer.actions())
         menu.exec_(event.pos())
 

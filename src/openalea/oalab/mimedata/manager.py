@@ -24,9 +24,7 @@ from openalea.core.service.plugin import plugins
 from openalea.core.singleton import Singleton
 
 
-class MimeCodecManager(object):
-    __metaclass__ = Singleton
-
+class MimeCodecManager(object, metaclass=Singleton):
     def __init__(self):
         self._registry_decode = set()
         self._registry_decode_plugin = {}
@@ -43,18 +41,18 @@ class MimeCodecManager(object):
 
         for plugin in plugins('oalab.plugin', criteria=dict(implement='IQMimeCodec')):
             for k, v in plugin.qtdecode:
-                codec = (unicode(k), unicode(v))
+                codec = (str(k), str(v))
                 self._registry_decode.add(codec)
                 self._registry_decode_plugin[codec] = plugin
             for k, v in plugin.qtencode:
-                codec = (unicode(k), unicode(v))
+                codec = (str(k), str(v))
                 self._registry_encode.add(codec)
                 self._registry_encode_plugin[codec] = plugin
 
     def _mimelist(self, mimetype_list, keyidx):
         if mimetype_list is None:
             mimetype_list = [k[keyidx] for k in self._registry_decode]
-        elif isinstance(mimetype_list, basestring):
+        elif isinstance(mimetype_list, str):
             mimetype_list = [mimetype_list]
         else:
             mimetype_list = [mime for mime in mimetype_list]

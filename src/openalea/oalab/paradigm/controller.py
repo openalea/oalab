@@ -38,13 +38,13 @@ def check_mutually_exclusive(kwds, name1, name2):
 
 
 class ParadigmController(object):
-    default_name = unicode
-    default_file_name = unicode
-    pattern = unicode
-    extension = unicode
-    icon = unicode
-    mimetype_model = unicode
-    mimetype_data = unicode
+    default_name = str
+    default_file_name = str
+    pattern = str
+    extension = str
+    icon = str
+    mimetype_model = str
+    mimetype_data = str
 
     def __init__(self, **kwds):
         self.parent = kwds.pop('parent', None)

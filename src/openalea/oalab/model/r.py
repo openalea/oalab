@@ -81,7 +81,7 @@ class RModel(PythonModel):
         if output_names:
             cmd += ' -o %s' % (','.join(output_names))
 
-        print cmd
+        print(cmd)
 
         return cmd
 

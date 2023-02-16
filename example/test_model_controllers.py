@@ -18,7 +18,7 @@ from openalea.core.world.world import World
 from openalea.oalab.service.paradigm import paradigm_controller
 
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui, QtWidgets
 
 from openalea.core.service.ipython import interpreter
 interp = interpreter()
@@ -61,7 +61,7 @@ def test_load_project():
 def test_create_controllers():
     project = interp.locals['project']
     controllers = []
-    for name, data in project.model.items():
+    for name, data in list(project.model.items()):
         if data.mimetype == 'text/vnd-lpy':
             continue
         controller = paradigm_controller(data)
@@ -74,7 +74,7 @@ def test_create_controllers():
 
 def test_instantiate_widgets(controllers):
     layout = interp.locals['layout']
-    tabwidget = interp.locals.get('tabwidget', QtGui.QTabWidget())
+    tabwidget = interp.locals.get('tabwidget', QtWidgets.QTabWidget())
     interp.user_ns['tabwidget'] = tabwidget
     layout.addWidget(tabwidget)
     for controller in controllers:
@@ -117,9 +117,9 @@ def test_all():
 
 
 if __name__ == '__main__':
-    instance = QtGui.QApplication.instance()
+    instance = QtWidgets.QApplication.instance()
     if instance is None:
-        app = QtGui.QApplication([])
+        app = QtWidgets.QApplication([])
     else:
         app = instance
 
@@ -129,8 +129,8 @@ if __name__ == '__main__':
     interp.locals.update(locals())
 
     # Set Shell Widget
-    widget = QtGui.QWidget()
-    layout = QtGui.QHBoxLayout(widget)
+    widget = QtWidgets.QWidget()
+    layout = QtWidgets.QHBoxLayout(widget)
 
     shellwdgt = get_shell_class()(interp)
     interp.locals['layout'] = layout

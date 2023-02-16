@@ -20,7 +20,7 @@ import openalea.image
 from openalea.oalab.colormap.colormap_utils import Colormap, colormap_from_file
 from openalea.oalab.control.widget import AbstractQtControlWidget
 from openalea.oalab.widget.basic import QFloatSlider, QSpanSlider, QColormapBar
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
 
 class ColormapRectangle(QtGui.QColormapBar, AbstractQtControlWidget):
@@ -47,11 +47,11 @@ class ColormapRectangle(QtGui.QColormapBar, AbstractQtControlWidget):
         AbstractQtControlWidget.apply(self, control)
 
 
-class ColormapSwitcher(QtGui.QWidget, AbstractQtControlWidget):
+class ColormapSwitcher(QtWidgets.QWidget, AbstractQtControlWidget):
     valueChanged = QtCore.Signal(dict)
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
         self.colormap_bar = QColormapBar()
         self.colormap_bar.setMinimumHeight(20)
@@ -62,7 +62,7 @@ class ColormapSwitcher(QtGui.QWidget, AbstractQtControlWidget):
         # self.label = QtGui.QLabel(self)
         # self.label.setText("Colormap")
 
-        self.combobox = QtGui.QComboBox(self)
+        self.combobox = QtWidgets.QComboBox(self)
 
         # self.setMinimumHeight(50)
 
@@ -89,7 +89,7 @@ class ColormapSwitcher(QtGui.QWidget, AbstractQtControlWidget):
         self.combobox.currentIndexChanged.connect(self.updateColormap)
         self.colormap_bar.valueChanged.connect(self.valueChanged)
 
-        layout = QtGui.QHBoxLayout(self)
+        layout = QtWidgets.QHBoxLayout(self)
         layout.setContentsMargins(0, 0, 0, 0)
 
         # line = QtGui.QHBoxLayout(self)

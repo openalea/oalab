@@ -1,6 +1,6 @@
 # -*- coding: utf8 -*-
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 from openalea.core.path import path as Path
 
 import sys
@@ -8,10 +8,10 @@ import sys
 try:
     workdir = sys.argv[1]
 except IndexError:
-    print 'usage: script outputdir'
+    print('usage: script outputdir')
     sys.exit(1)
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 
 from openalea.oalab.service.qt_control import qt_widget_plugins
 from openalea.core.service.interface import interface_names
@@ -20,8 +20,8 @@ from openalea.core.control import Control
 SAMPLE_VALUES = {
     'IIntRange': dict(value=(10, 150), constraints={'min': 0, 'max': 255}),
     'ISequence': dict(value=['Item %02d' % i for i in range(15)]),
-    'IStr': dict(value=u'Bonjour = Καλημέρα'),
-    'ITextStr': dict(value=u"""Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    'IStr': dict(value='Bonjour = Καλημέρα'),
+    'ITextStr': dict(value="""Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
 Nunc turpis orci, porta at facilisis sed, dignissim sed magna. 
 Aenean rutrum mi vitae nibh fermentum, ut tempus justo pulvinar. 
 Donec ac nunc molestie, interdum lectus vel, malesuada metus. 
@@ -55,15 +55,15 @@ for iname in interface_names():
                 kwargs = {}
             control = Control('c', iname, widget=plugin.name, **kwargs)
             w_editor_class = plugin.load()
-            if issubclass(w_editor_class, QtGui.QWidget):
+            if issubclass(w_editor_class, QtWidgets.QWidget):
                 w_editor = w_editor_class()
             else:
                 w_editor = w_editor_class.edit(control, shape=shape)
             if w_editor:
                 w_editor.set(control)
-                widget = QtGui.QWidget()
+                widget = QtWidgets.QWidget()
                 widget.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-                layout = QtGui.QVBoxLayout(widget)
+                layout = QtWidgets.QVBoxLayout(widget)
                 layout.setContentsMargins(1, 1, 1, 1)
                 if size:
                     widget.setMinimumSize(*size)
@@ -76,7 +76,7 @@ for iname in interface_names():
                 widget.show()
                 widget.raise_()
                 if kwargs.get('value', None):
-                    print 'use sample for %s' % iname
+                    print('use sample for %s' % iname)
 
                 x = widget.pos().x()
                 y = widget.pos().y()

@@ -21,7 +21,7 @@ import pkg_resources
 import openalea.core
 import openalea.oalab
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtWidgets
 
 from openalea.core.path import path as Path
 from openalea.core.path import tempdir
@@ -43,7 +43,7 @@ from openalea.oalab.utils import qicon_path
 QI = QtGui.QIcon
 
 
-class Preview(QtGui.QTextEdit):
+class Preview(QtWidgets.QTextEdit):
 
     """
     This widget displays meta-information about project.
@@ -117,7 +117,7 @@ class PluginExplorer(ManagerExplorer):
         self._explorer.set_default_item_icon(DEFAULT_ICON)
         self.set_criteria(self.criteria)
 
-        self._cb_group = QtGui.QComboBox()
+        self._cb_group = QtWidgets.QComboBox()
         prefixes = ['openalea', 'oalab', 'vpltk']
         for group in sorted(iter_groups()):
             match = False
@@ -167,7 +167,7 @@ class PluginExplorer(ManagerExplorer):
 def show_plugins(group="oalab.applet"):
     import sys
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     plugin_selector = PluginExplorer()
     plugin_selector.show()

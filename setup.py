@@ -5,34 +5,24 @@ import sys
 import os
 
 from setuptools import setup, find_packages
-from openalea.deploy.metainfo import read_metainfo
 
-# Reads the metainfo file
-metadata = read_metainfo('metainfo.ini', verbose=True)
-for key, value in metadata.iteritems():
-    exec("%s = '%s'" % (key, value))
+_version = {}
+with open("src/openalea/oalab/version.py") as fp:
+    exec(fp.read(), _version)
+    version = _version["__version__"]
 
-# The metainfo files must contains
-# version, release, project, name, namespace, pkg_name,
-# description, long_description,
-# authors, authors_email, url and license
-# * version is 1.0.0 and release 1.0
-# * project must be in [openalea, vplants, alinea]
-# * name is the full name (e.g., OpenAlea.OALab) whereas pkg_name is only 'oalab'
+packages=find_packages('src')
+package_dir={'': 'src'}
 
-# name will determine the name of the egg, as well as the name of
-# the pakage directory under Python/lib/site-packages). It is also
-# the one to use in setup script of other packages to declare a dependency to this package)
-# (The version number is used by deploy to detect UPDATES)
+# Define global variables
+name = 'openalea.oalab'
+description = "OALab package for OpenAlea.."
+long_description= "The OpenAlea.OALab package is a GUI for OpenAlea wich permit to use Visualea and LPy and others in the same application."
+authors= "OpenAlea consortium"
+authors_email = "christophe.pradal at cirad.fr"
+url = "https://github.com/openalea/oalab"
+license = "CeCILL"
 
-
-# Packages list, namespace and root directory of packages
-
-pkg_root_dir = 'src'
-pkgs = [pkg for pkg in find_packages(pkg_root_dir)]
-top_pkgs = [pkg for pkg in pkgs if len(pkg.split('.')) < 2]
-packages = pkgs
-package_dir = dict([('', pkg_root_dir)] + [(namespace + "." + pkg, pkg_root_dir + "/" + pkg) for pkg in top_pkgs])
 
 
 # List of top level wralea packages (directories with __wralea__.py)
@@ -45,8 +35,8 @@ setup_requires = ['openalea.deploy']
 install_requires = []
 
 # web sites where to find eggs
-dependency_links = ['http://openalea.gforge.inria.fr/pi']
-has_project = bool('openalea')
+dependency_links = []
+
 setup(
     name=name,
     version=version,
@@ -56,7 +46,7 @@ setup(
     author_email=authors_email,
     url=url,
     license=license,
-    keywords='',
+    keywords='openalea',
 
     # package installation
     packages=packages,
@@ -64,14 +54,14 @@ setup(
 
     # Namespace packages creation by deploy
     py_modules=['oalab_postinstall'],
-    namespace_packages=['openalea'],
+    #namespace_packages=['openalea'],
     # create_namespaces = False,
     zip_safe=False,
 
     # Dependencies
     setup_requires=setup_requires,
     install_requires=install_requires,
-    dependency_links=dependency_links,
+    #dependency_links=dependency_links,
 
 
     # Eventually include data in your package

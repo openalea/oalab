@@ -16,7 +16,7 @@
 #
 ###############################################################################
 
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 from openalea.core.control.manager import ControlContainer
 from openalea.core.control.pyserial import save_controls
@@ -28,11 +28,11 @@ from openalea.oalab.service.qt_control import qt_painter, qt_editor
 from openalea.oalab.utils import ModalDialog
 
 
-class ControlView(QtGui.QTreeView):
+class ControlView(QtWidgets.QTreeView):
     controlsSelected = QtCore.Signal(list)
 
     def __init__(self):
-        QtGui.QTreeView.__init__(self)
+        QtWidgets.QTreeView.__init__(self)
         self.setEditTriggers(self.DoubleClicked)
         self.setSelectionMode(self.SingleSelection)
         self.setSelectionBehavior(self.SelectRows)
@@ -48,29 +48,29 @@ class ControlView(QtGui.QTreeView):
         self._selected_indexes = None
 
     def contextMenuEvent(self, event):
-        menu = QtGui.QMenu(self)
-        action = QtGui.QAction("New control", menu)
+        menu = QtWidgets.QMenu(self)
+        action = QtWidgets.QAction("New control", menu)
         action.triggered.connect(self.new_control)
         menu.addAction(action)
 
         if self.selectedIndexes():
             self._selected_indexes = self.selectedIndexes()
-            action = QtGui.QAction("Delete control", menu)
+            action = QtWidgets.QAction("Delete control", menu)
             action.triggered.connect(self.delete_control)
             menu.addAction(action)
 
-        action = QtGui.QAction("Import L-Py controls", menu)
+        action = QtWidgets.QAction("Import L-Py controls", menu)
         action.triggered.connect(self.import_lpy)
         menu.addAction(action)
-        action = QtGui.QAction("Export L-Py controls", menu)
+        action = QtWidgets.QAction("Export L-Py controls", menu)
         action.triggered.connect(self.export_lpy)
         menu.addAction(action)
 
-        action = QtGui.QAction("Save controls", menu)
+        action = QtWidgets.QAction("Save controls", menu)
         action.triggered.connect(self.save_controls)
         menu.addAction(action)
 
-        action = QtGui.QAction("Load controls", menu)
+        action = QtWidgets.QAction("Load controls", menu)
         action.triggered.connect(self.load_controls)
         menu.addAction(action)
 
@@ -95,7 +95,7 @@ class ControlView(QtGui.QTreeView):
 
     def save_controls(self, filename=None):
         if not filename:
-            filename = QtGui.QFileDialog.getSaveFileName(self, 'Select python file')
+            filename, _ = QtGui.QFileDialog.getSaveFileName(self, 'Select python file')
         if filename:
             save_controls(self.model()._manager.controls(), filename)
 
@@ -116,7 +116,7 @@ class ControlView(QtGui.QTreeView):
 
     def export_lpy(self):
         from openalea.plantlab.lpycontrol import export_lpy_controls
-        filename = QtGui.QFileDialog.getSaveFileName(self, 'Select L-Py file')
+        filename, _ = QtGui.QFileDialog.getSaveFileName(self, 'Select L-Py file')
         if filename:
             mcontrols = [(c.name, c.interface, c.value) for c in self.model()._manager.controls()]
             export_lpy_controls(mcontrols, filename)
@@ -130,13 +130,13 @@ class ControlView(QtGui.QTreeView):
             index = self.model().createIndex(row, 1)
             controls.append(self.model().control(index))
         self.controlsSelected.emit(controls)
-        return QtGui.QTreeView.selectionChanged(self, selected, deselected)
+        return QtWidgets.QTreeView.selectionChanged(self, selected, deselected)
 
     def onRowsInserted(self, *args, **kwargs):
         self.resizeColumnToContents(0)
 
 
-class ValueControlDelegate(QtGui.QStyledItemDelegate):
+class ValueControlDelegate(QtWidgets.QStyledItemDelegate):
 
     external_edit_required = QtCore.Signal(QtCore.QModelIndex)
 
@@ -161,7 +161,7 @@ class ValueControlDelegate(QtGui.QStyledItemDelegate):
         if paint:
             paint(control, painter, option.rect, option)
         else:
-            QtGui.QStyledItemDelegate.paint(self, painter, option, index)
+            QtWidgets.QStyledItemDelegate.paint(self, painter, option, index)
 
     def setModelData(self, editor, model, index):
         model.setData(index, str(editor.value()), QtCore.Qt.DisplayRole)
@@ -176,7 +176,7 @@ class ValueControlDelegate(QtGui.QStyledItemDelegate):
         self.external_edit_required.emit(index)
 
 
-class NameControlDelegate(QtGui.QStyledItemDelegate):
+class NameControlDelegate(QtWidgets.QStyledItemDelegate):
 
     def setEditorData(self, editor, index):
         control = index.model().control(index)
@@ -185,7 +185,7 @@ class NameControlDelegate(QtGui.QStyledItemDelegate):
     def setModelData(self, editor, model, index):
         control = model.control(index)
         control.name = editor.text()
-        QtGui.QStyledItemDelegate.setModelData(self, editor, model, index)
+        QtWidgets.QStyledItemDelegate.setModelData(self, editor, model, index)
 
 
 class ControlModel(QtGui.QStandardItemModel, AbstractListener):
@@ -194,7 +194,7 @@ class ControlModel(QtGui.QStandardItemModel, AbstractListener):
         QtGui.QStandardItemModel.__init__(self)
         AbstractListener.__init__(self)
 
-        self._headers = [u'Name', u'Value']
+        self._headers = ['Name', 'Value']
         self.setHorizontalHeaderLabels(self._headers)
 
         self._control_index = {}
@@ -233,9 +233,9 @@ class ControlModel(QtGui.QStandardItemModel, AbstractListener):
 
     def data(self, index, role):
         if role == QtCore.Qt.DisplayRole and index.column() == 0:
-            return unicode(self.control(index).label)
+            return str(self.control(index).label)
         elif role == QtCore.Qt.DisplayRole and index.column() == 1:
-            return unicode(self.control(index).value)
+            return str(self.control(index).value)
         else:
             return QtGui.QStandardItemModel.data(self, index, role)
 

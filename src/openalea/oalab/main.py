@@ -22,6 +22,7 @@ import sys
 
 from openalea.core.service.plugin import debug_plugin, plugins
 from openalea.oalab.cli.parser import CommandLineParser
+from qtpy import QtWidgets
 
 
 def launch_lab(plugin_class):
@@ -72,11 +73,11 @@ def main():
     cli.parse()
 
     if session.gui:
-        from openalea.vpltk.qt import QtGui
+        from qtpy import QtGui
         from openalea.core.settings import get_openalea_home_dir
         from openalea.core.path import path as Path
 
-        app = QtGui.QApplication(sys.argv)
+        app = QtWidgets.QApplication(sys.argv)
 
         win = None
         # Run all extension matching session.extension
@@ -110,9 +111,9 @@ def main():
         if win:
             app.exec_()
         else:
-            print 'Extension %r not found' % session.extension
-            print 'Please choose a valid \033[94mextension\033[0m:'
-            print '\n'.join(available_extensions)
+            print('Extension %r not found' % session.extension)
+            print('Please choose a valid \033[94mextension\033[0m:')
+            print('\n'.join(available_extensions))
 
 if(__name__ == "__main__"):
     main()

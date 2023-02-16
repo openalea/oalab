@@ -20,15 +20,15 @@ import openalea.core
 import openalea.oalab
 import random
 
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui
 from openalea.oalab.pluginwidget.explorer import PluginExplorer
 
 from openalea.deploy.shared_data import shared_data
 from openalea.core.formatting.util import icon_path
 from openalea.core.formatting.html import html_section, html_list
 
-from openalea.vpltk.qt import QT_API
-from openalea.vpltk.qt import QtGui
+from qtpy import QT_API
+from qtpy import QtGui, QtWidgets
 
 from openalea.core.plugin.formatting.text import format_author
 from openalea.core import authors as auth
@@ -38,17 +38,17 @@ if QT_API == 'pyqt':
         from PyQt4.QtWebKit import QWebView
         VIEW = "webkit"
     except ImportError:
-        QWebView = QtGui.QTextEdit
+        QWebView = QtWidgets.QTextEdit
         VIEW = "basic"
 elif QT_API == 'pyside':
     try:
         from PySide.QtWebKit import QWebView
         VIEW = "webkit"
     except ImportError:
-        QWebView = QtGui.QTextEdit
+        QWebView = QtWidgets.QTextEdit
         VIEW = "basic"
 else:
-    QWebView = QtGui.QTextEdit
+    QWebView = QtWidgets.QTextEdit
     VIEW = "basic"
 
 stylesheet_path = shared_data(openalea.core, 'stylesheet.css')
@@ -59,42 +59,42 @@ if VIEW == "webkit":
 
 dependencies = dict(
     vtk=dict(
-        team=u'VTK',
-        icon=u'vtk.png',
-        website=u'http://vtk.org'
+        team='VTK',
+        icon='vtk.png',
+        website='http://vtk.org'
     ),
 
     pyqode=dict(
-        authors=[u'Colin Duquesnoy'],
-        team=u'PyQode',
-        icon=u'pyqode.png',
-        website=u'http://github.com/pyQode/pyQode',
-        license=u'MIT',
+        authors=['Colin Duquesnoy'],
+        team='PyQode',
+        icon='pyqode.png',
+        website='http://github.com/pyQode/pyQode',
+        license='MIT',
     ),
 
     qt=dict(
-        team=u'Qt',
-        icon=u'qt.png',
-        website=u'http://qt.io'
+        team='Qt',
+        icon='qt.png',
+        website='http://qt.io'
     ),
 
     pyqt=dict(
-        team=u'PyQt',
-        icon=u'pyqt.png',
-        website=u'http://www.riverbankcomputing.com'
+        team='PyQt',
+        icon='pyqt.png',
+        website='http://www.riverbankcomputing.com'
     ),
 
     git=dict(
-        team=u'Git',
-        icon=u'git.png',
-        website=u'https://git-scm.com'
+        team='Git',
+        icon='git.png',
+        website='https://git-scm.com'
     ),
 
 )
 
 scientific = ['ipython', 'matplotlib', 'numpy', 'pandas', 'scipy', 'python']
 for lib in scientific:
-    dependencies[lib] = dict(team=lib.capitalize(), icon=u'%s.png' % lib, website=u'http://%s.org' % lib)
+    dependencies[lib] = dict(team=lib.capitalize(), icon='%s.png' % lib, website='http://%s.org' % lib)
 
 
 dep_order = 'python qt pyqt ipython pyqode numpy matplotlib scipy pandas git vtk'.split()
@@ -229,19 +229,19 @@ CREDITS = """
 """ % args
 
 
-class AboutPage(QtGui.QWidget):
+class AboutPage(QtWidgets.QWidget):
 
     def __init__(self, banner_path=None, content=None):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
         if banner_path is None:
             banner_path = shared_data(openalea.oalab, 'icons/logo/banner.png')
 
-        self._lay = QtGui.QVBoxLayout(self)
+        self._lay = QtWidgets.QVBoxLayout(self)
 
-        p = QtGui.QSizePolicy
+        p = QtWidgets.QSizePolicy
 
-        self._banner = QtGui.QLabel()
+        self._banner = QtWidgets.QLabel()
         self._banner.setStyleSheet("QLabel { background-color : #ffffff;}")
         banner = QtGui.QPixmap(banner_path)
         size = banner.size()
@@ -252,7 +252,7 @@ class AboutPage(QtGui.QWidget):
             self._content.setReadOnly(True)
         self._content.setHtml(content)
 
-        self._footer = QtGui.QLabel()
+        self._footer = QtWidgets.QLabel()
         self._footer.setStyleSheet("QLabel { background-color : #459454;}")
 
         self._lay.addWidget(self._banner)
@@ -274,10 +274,10 @@ class OpenAleaLabCredits(AboutPage):
         AboutPage.__init__(self, content=CREDITS)
 
 
-class About(QtGui.QTabWidget):
+class About(QtWidgets.QTabWidget):
 
     def __init__(self):
-        QtGui.QTabWidget.__init__(self)
+        QtWidgets.QTabWidget.__init__(self)
 
         self._welcome = OpenAleaLabSummary()
         self._plugin = PluginExplorer()
@@ -297,10 +297,10 @@ class About(QtGui.QTabWidget):
 
 if __name__ == '__main__':
 
-    instance = QtGui.QApplication.instance()
+    instance = QtWidgets.QApplication.instance()
 
     if instance is None:
-        app = QtGui.QApplication([])
+        app = QtWidgets.QApplication([])
     else:
         app = instance
 

@@ -1,6 +1,6 @@
 from qtconsole.rich_jupyter_widget import RichJupyterWidget
 from qtconsole.inprocess import QtInProcessKernelManager
-from streamredirection import GraphicalStreamRedirection
+from .streamredirection import GraphicalStreamRedirection
 
 
 class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):
@@ -120,10 +120,10 @@ class ShellWidget(RichJupyterWidget, GraphicalStreamRedirection):
 
 
 def main():
-    from openalea.vpltk.qt import QtGui
+    from qtpy import QtGui
     import sys
 
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     from openalea.core.service.ipython import interpreter
     interpreter = interpreter()
@@ -133,7 +133,7 @@ def main():
     shellwdgt = ShellWidget(interpreter=interpreter)
     interpreter.user_ns['shell'] = shellwdgt
 
-    mainWindow = QtGui.QMainWindow()
+    mainWindow = QtWidgets.QMainWindow()
     mainWindow.setCentralWidget(shellwdgt)
     mainWindow.show()
 

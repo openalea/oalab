@@ -22,7 +22,7 @@ TODO:
     - use project known categories instead of hard coded 'model', 'src', ...
 
 """
-from openalea.vpltk.qt import QtGui
+from qtpy import QtGui, QtWidgets
 
 from openalea.core.service.data import DataClass, MimeType
 from openalea.core.service.plugin import plugin_instance_exists, plugin_instance
@@ -36,9 +36,9 @@ from openalea.oalab.widget import resources_rc
 class ProjectEditorWidget(ProjectBrowserWidget):
 
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
-        layout = QtGui.QVBoxLayout(self)
+        layout = QtWidgets.QVBoxLayout(self)
         self.view = ProjectEditorView()
         self._transfer_view_signals()
 
@@ -61,7 +61,7 @@ class ProjectEditorWidget(ProjectBrowserWidget):
 
     def toolbars(self):
         toolbars = ProjectBrowserWidget.toolbars(self)
-        toolbar_paradigm = QtGui.QToolBar("Paradigms")
+        toolbar_paradigm = QtWidgets.QToolBar("Paradigms")
         toolbar_paradigm.addActions(self.view.paradigm.actions())
         return toolbars + [toolbar_paradigm]
 
@@ -107,7 +107,7 @@ class ProjectEditorView(ProjectBrowserView):
 
     def create_menu(self):
 
-        menu = QtGui.QMenu(self)
+        menu = QtWidgets.QMenu(self)
         actions = ProjectBrowserView.create_menu(self).actions()
         if actions:
             menu.addActions(actions)
@@ -148,7 +148,7 @@ class ProjectEditorView(ProjectBrowserView):
         if category:
             categories = [category]
         else:
-            categories = project.categories.keys()
+            categories = list(project.categories.keys())
 
         # Show dialog
         w = ParadigmInfoSelector(default_name, categories, [dtype],

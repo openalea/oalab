@@ -14,21 +14,21 @@
 #
 #       OpenAlea WebSite : http://openalea.gforge.inria.fr
 #
-from openalea.vpltk.qt import QtGui, QtCore
+from qtpy import QtGui, QtWidgets
 import sys
 
 
-class InputsModel(QtGui.QWidget):
+class InputsModel(QtWidgets.QWidget):
     def __init__(self, world={}, parent=None):
         super(InputsModel, self).__init__(parent=parent)
         self.world = world
 
         layout = QtGui.QGridLayout(self)
 
-        self.label = QtGui.QLabel("Inputs: ")
+        self.label = QtWidgets.QLabel("Inputs: ")
 
-        self.combo_input = QtGui.QComboBox(self)
-        self.combo_input.addItems(world.keys())
+        self.combo_input = QtWidgets.QComboBox(self)
+        self.combo_input.addItems(list(world.keys()))
 
         self.add_button = QtGui.QPushButton("Add Input")
         self.add_button.clicked.connect(self.add_input)
@@ -47,28 +47,28 @@ class InputsModel(QtGui.QWidget):
         self.setLayout(layout)
 
     def add_input(self):
-        print "add"
+        print("add")
 
     def rm_input(self):
-        print "rm"
+        print("rm")
 
     def get_current(self):
         text = self.combo_input.currentText()
         return text, self.world[text]
 
     def print_current(self):
-        print self.get_current()
+        print(self.get_current())
 
 
-class OutputsModel(QtGui.QWidget):
+class OutputsModel(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super(OutputsModel, self).__init__(parent=parent)
 
         layout = QtGui.QGridLayout(self)
 
-        self.label = QtGui.QLabel("Outputs: ")
+        self.label = QtWidgets.QLabel("Outputs: ")
 
-        self.line_output = QtGui.QLineEdit(self)
+        self.line_output = QtWidgets.QLineEdit(self)
 
         self.add_button = QtGui.QPushButton("Add Output")
         self.add_button.clicked.connect(self.add_input)
@@ -87,20 +87,20 @@ class OutputsModel(QtGui.QWidget):
         self.setLayout(layout)
 
     def add_input(self):
-        print "add"
+        print("add")
 
     def rm_input(self):
-        print "rm"
+        print("rm")
 
     def get_current(self):
         text = self.line_output.text()
         return text
 
     def print_current(self):
-        print self.get_current()
+        print(self.get_current())
 
 
-class InAndOutModel(QtGui.QWidget):
+class InAndOutModel(QtWidgets.QWidget):
     def __init__(self, world={}, parent=None):
         super(InAndOutModel, self).__init__(parent=parent)
         self.world = world
@@ -124,12 +124,12 @@ class InAndOutModel(QtGui.QWidget):
 
     def print_current(self):
         inp, outp = self.get_current()
-        print "inputs: ", inp
-        print "outputs: ", outp
+        print("inputs: ", inp)
+        print("outputs: ", outp)
 
 
 def main():
-    app = QtGui.QApplication(sys.argv)
+    app = QtWidgets.QApplication(sys.argv)
 
     a = dict()
     a[""] = None

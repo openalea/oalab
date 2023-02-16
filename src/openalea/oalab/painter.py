@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from openalea.vpltk.qt import QtCore, QtGui
+from qtpy import QtCore, QtGui
 
 from openalea.core.service.interface import interface_label
 from openalea.core.control import Control
@@ -30,7 +30,7 @@ class PainterInterfaceObject(AbstractPainter):
         painter.save()
 
         pen = QtGui.QPen()
-        if option and option.state & QtGui.QStyle.State_Selected:
+        if option and option.state & QtWidgets.QStyle.State_Selected:
             painter.fillRect(option.rect, option.palette.highlight())
             pen.setColor(option.palette.highlightedText().color())
         else:
@@ -55,7 +55,7 @@ class PainterColormap(AbstractPainter):
         lx = r.width() / 101.
         ly = r.height() / 101.
 
-        points = data['color_points'].keys()
+        points = list(data['color_points'].keys())
 
         orientation = kwargs.get('orientation',QtCore.Qt.Horizontal)
 

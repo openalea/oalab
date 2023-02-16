@@ -23,12 +23,12 @@ def test_detect_step_and_others():
 This is the doc of my model
 """
 
-print "result = 0"
+print ("result = 0")
 result = 0
 
 def step():
     result += 1
-    print result
+    print (result)
 
 def animate():
     for i in range(10):
@@ -37,7 +37,7 @@ def animate():
 
 def init():
     result = 0
-    print "ini"
+    print ("ini")
 '''
 
     model_src2 = '''"""
@@ -46,13 +46,13 @@ This is the doc of my model
 :use: run()
 """
 
-print "result = 0"
+print ("result = 0")
 result = 0
 
 def run():
     for i in range(10):
         result += 1
-        print result
+        print (result)
 
 '''
     has_init, has_step, has_animate, has_run = parse_functions(model_src)
@@ -79,7 +79,7 @@ def run():
 '''
     _, _, _, run = parse_functions(code)
     d = {}
-    exec run in d
+    exec(run, d)
     assert d['a'] == 10
 
 
