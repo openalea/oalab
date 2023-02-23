@@ -1,6 +1,6 @@
 
 
-from qtpy import QtGui
+from qtpy import QtWidgets
 from openalea.core.control.manager import ControlManager
 from openalea.oalab.control.manager import ControlManagerWidget
 from openalea.oalab.control.panel import ControlPanel
