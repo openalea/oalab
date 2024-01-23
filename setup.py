@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
-__revision__ = "$Id$"
 
 import sys
 import os
 
-from setuptools import setup, find_packages
+from setuptools import setup, find_namespace_packages
 
 _version = {}
 with open("src/openalea/oalab/version.py") as fp:
     exec(fp.read(), _version)
     version = _version["__version__"]
 
-packages=find_packages('src')
+packages = find_namespace_packages(where='src', include=['openalea.*'])
 package_dir={'': 'src'}
 
 # Define global variables
