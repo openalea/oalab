@@ -10,7 +10,7 @@ with open("src/openalea/oalab/version.py") as fp:
     exec(fp.read(), _version)
     version = _version["__version__"]
 
-packages = find_namespace_packages(where='src', include=['openalea', 'openalea.*'])
+packages = find_namespace_packages(where='src', include=['openalea.*'])
 package_dir={'': 'src'}
 
 # Define global variables
