@@ -17,13 +17,14 @@
 ###############################################################################
 
 from openalea.core.path import path as Path
-from openalea.deploy.shared_data import shared_data
-import openalea.oalab
-
+from openalea.oalab.resources import resources_dir
+import os
 
 def list_colormaps():
     colormap_names = []
-    colormaps_path = Path(shared_data(openalea.oalab, 'colormaps/grey.lut')).parent
+    f = resources_dir/'colormaps'/'grey.lut'
+    f = os.path.expandvars(f)
+    colormaps_path = Path(f).parent
 
     for colormap_file in colormaps_path.walkfiles('*.lut'):
         colormap_name = str(colormap_file.name[:-4])
@@ -35,7 +36,9 @@ def list_colormaps():
 def load_colormaps():
     from openalea.oalab.colormap.colormap_utils import Colormap, colormap_from_file
     colormaps = {}
-    colormaps_path = Path(shared_data(openalea.oalab, 'colormaps/grey.lut')).parent
+    f = resources_dir/'colormaps'/'grey.lut'
+    f = os.path.expandvars(f)
+    colormaps_path = Path(f).parent
 
     for colormap_file in colormaps_path.walkfiles('*.lut'):
         colormap_name = str(colormap_file.name[:-4])

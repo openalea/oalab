@@ -5,7 +5,8 @@ from qtpy import QtGui, QtCore, QtWidgets
 from openalea.core.service.interface import interface_label
 from openalea.oalab.service.qt_control import qt_widget_plugins
 from openalea.core.control import Control
-from openalea.deploy.shared_data import shared_data
+from openalea.oalab.resources import resources_dir
+import os
 import openalea.oalab
 
 
@@ -103,7 +104,9 @@ class ControlEditor(QtWidgets.QWidget, Ui_ControlEditor):
                 else:
                     icon_path = None
                 if icon_path is None:
-                    icon_path = shared_data(openalea.oalab, 'icons/preview_%s.png' % iname)
+                    f = resources_dir
+                    f = os.path.expandvars(f)
+                    icon_path = f + 'icons/preview_%s.png' % iname
                     if icon_path and not icon_path.exists():
                         icon_path = None
                 break

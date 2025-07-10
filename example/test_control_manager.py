@@ -9,13 +9,14 @@ from openalea.core.service.interface import interface_names, get_interface
 from openalea.oalab.service import qt_control
 
 
-def test_all_lpy_controls():
-    from openalea.plantlab.lpycontrol import import_lpy_controls
-    from openalea.deploy.shared_data import shared_data
-    import openalea.lpy
-    lpydir = shared_data(openalea.lpy.__path__, share_path='share/tutorial')
-    for lpypath in lpydir.walkfiles('*.lpy'):
-        import_lpy_controls(lpypath)
+# def todo_test_all_lpy_controls():
+#     # 2025-07-10: baugetfa at this stage lpy won't have .data
+#     from openalea.plantlab.lpycontrol import import_lpy_controls
+#     from openalea.deploy.shared_data import shared_data
+#     import openalea.lpy
+#     lpydir = shared_data(openalea.lpy.__path__, share_path='share/tutorial')
+#     for lpypath in lpydir.walkfiles('*.lpy'):
+#         import_lpy_controls(lpypath)
 
 
 def test_all_interfaces():

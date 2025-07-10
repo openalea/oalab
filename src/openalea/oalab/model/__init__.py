@@ -6,11 +6,10 @@ Here we suppose that we have a model named *sum_int* that do the sum between two
 
   - Get the project **(not necessary if you are working inside OpenAleaLab)**:
       >>> from openalea.core.project import ProjectManager
-      >>> from openalea.deploy.shared_data import shared_data
+      >>> from openalea.oalab.data import data_dir as oalab_dir
       >>> from openalea import oalab
       >>> pm = ProjectManager()
       >>> pm.discover()
-      >>> oalab_dir = shared_data(oalab)
       >>> proj = pm.load("sum", oalab_dir)
 
 """

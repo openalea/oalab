@@ -4,13 +4,13 @@ This module define Qt controls, ie QWidget able to edit control's values.
 
 For documentation, see :class:`~openalea.oalab.plugins.control`
 """
-
-from openalea.deploy.shared_data import shared_data
+from openalea.core.path import path as Path
+from openalea.oalab.resources import resources_dir
 import openalea.oalab
 from openalea.oalab.control.widget import AbstractQtControlWidget
 from openalea.oalab.widget.basic import QFloatSlider, QSpanSlider, QColormapBar
 from qtpy import QtCore, QtGui, QtWidgets
-
+import os
 
 class BoolCheckBox(QtWidgets.QCheckBox, AbstractQtControlWidget):
 
@@ -539,7 +539,9 @@ class ColormapSwitcher(QtWidgets.QWidget, AbstractQtControlWidget):
 
         colormap_names = []
         # colormaps_path = Path(shared_data(tissuelab, 'colormaps/grey.lut')).parent
-        colormaps_path = shared_data(openalea.oalab) / 'colormaps'
+        f = resources_dir / 'colormaps'
+        f = os.path.expandvars(f)
+        colormaps_path = Path(f) # otherwise colormaps_path won't have walkfiles
         for colormap_file in colormaps_path.walkfiles('*.lut'):
             colormap_name = str(colormap_file.name[:-4])
             colormap_names.append(colormap_name)
@@ -596,7 +598,8 @@ class ColormapSwitcher(QtWidgets.QWidget, AbstractQtControlWidget):
         self.colormap_name = self.combobox.itemText(colormap_index)
 
         from openalea.oalab.colormap.colormap_utils import colormap_from_file
-        colormap_path = shared_data(openalea.oalab, 'colormaps/' + self.colormap_name + '.lut')
+        fname = self.colormap_name + '.lut'
+        colormap_path = resources_dir / 'colormaps' / fname
 
         colormap = colormap_from_file(colormap_path, name=self.colormap_name)
         self.setValue(dict(name=self.colormap_name, color_points=colormap._color_points))

@@ -16,9 +16,9 @@ include-package-data = false # force explicit declaration of data (disable autom
 [tool.setuptools_scm]
 
 [project]
-name = "openalea.scipack"
+name = "openalea.oalab"
 authors = [
-  { name = "scipack" },
+  { name = "oalab" },
 ]
 description = "Sientific Python wrappers for OpenAlea Visual Programming environment."
 readme = "README.md"
@@ -81,11 +81,11 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/openalea/scipack"
+Repository = "https://github.com/openalea/oalab"
 Homepage = "https://openalea.rtfd.io"
-"Bug Tracker" = "https://github.com/openalea/scipack/issues"
-Discussions = "https://github.com/openalea/scipack/discussions"
-Changelog = "https://github.com/openalea/scipack/releases"
+"Bug Tracker" = "https://github.com/openalea/oalab/issues"
+Discussions = "https://github.com/openalea/oalab/discussions"
+Changelog = "https://github.com/openalea/oalab/releases"
 
 [tool.setuptools.package-data]
 "*" = ['*']

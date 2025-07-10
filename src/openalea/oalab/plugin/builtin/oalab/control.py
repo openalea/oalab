@@ -22,7 +22,8 @@
 ################################################################################
 
 from openalea.oalab.plugin.oalab.control import ControlWidgetSelectorPlugin
-from openalea.deploy.shared_data import shared_data
+from openalea.oalab.resources import resources_dir
+import os
 import openalea.oalab
 
 from openalea.core.plugin import PluginDef
@@ -59,7 +60,9 @@ class PluginIntWidgetSelector(ControlWidgetSelectorPlugin):
     label = 'Integer editor'
     required = ['IInt.min', 'IInt.max']
     edit_shape = ['responsive']
-    icon_path = shared_data(openalea.oalab, 'icons/IntWidgetSelector_hline.png')
+    f = resources_dir
+    f = os.path.expandvars(f)
+    icon_path = f + 'icons/IntWidgetSelector_hline.png'
 
     def __call__(self):
         from openalea.oalab.control.selector import IntWidgetSelector
@@ -73,7 +76,9 @@ class PluginFloatWidgetSelector(ControlWidgetSelectorPlugin):
     label = 'Float editor'
     required = ['IFloat.min', 'IFloat.max', 'IFloat.step']
     edit_shape = ['responsive']
-    icon_path = shared_data(openalea.oalab, 'icons/IntWidgetSelector_hline.png')
+    f = resources_dir
+    f = os.path.expandvars(f)
+    icon_path = f + 'icons/IntWidgetSelector_hline.png'
 
     def __call__(self):
         from openalea.oalab.control.selector import FloatWidgetSelector

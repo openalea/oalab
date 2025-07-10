@@ -1,3 +1,3 @@
 import importlib.resources as resources
 
-resources_dir = resources.files(__name__)
+data_dir = resources.files(__name__)

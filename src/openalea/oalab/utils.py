@@ -24,7 +24,7 @@ import openalea.oalab
 from qtpy import QtGui, QtCore, QtWidgets
 from openalea.oalab.qt.compat import orientation_qt, orientation_int
 from openalea.core.customexception import CustomException, cast_error
-from openalea.deploy.shared_data import shared_data
+from openalea.oalab.resources import resources_dir
 from openalea.core.path import path as Path
 from openalea.core.formatting.util import icon_path
 from openalea.oalab.widget import resources_rc
@@ -33,7 +33,7 @@ DEFAULT_SCALE = (256, 256)
 
 
 def get_shared_data(filename):
-    return shared_data(openalea.oalab, filename)
+    return resources_dir / filename
 
 
 def qicon(filename, default=None, paths=None, save_filepath=None, packages=None):
