@@ -77,7 +77,6 @@ channels = [
 ]
 dependencies = [
     "openalea.core",
-    "openalea.mtg",
 ]
 
 [project.urls]

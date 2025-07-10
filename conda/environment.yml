@@ -5,7 +5,6 @@ channels:
 dependencies:
   - python
   - openalea.core
-  - openalea.mtg
   - ipython
   - qtconsole
   - configobj

@@ -1,6 +1,6 @@
 
 from openalea.core.plugin import PluginDef
-
+import os
 
 @PluginDef
 class Tutorial(object):
@@ -15,4 +15,5 @@ class Tutorial(object):
         except ImportError:
             return []
         else:
-            return [path(data_dir)]
+            f = os.path.expandvars(data_dir)
+            return [path(f)]

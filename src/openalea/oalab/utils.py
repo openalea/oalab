@@ -28,6 +28,7 @@ from openalea.oalab.resources import resources_dir
 from openalea.core.path import path as Path
 from openalea.core.formatting.util import icon_path
 from openalea.oalab.widget import resources_rc
+import os
 
 DEFAULT_SCALE = (256, 256)
 
@@ -53,9 +54,11 @@ def qicon(filename, default=None, paths=None, save_filepath=None, packages=None)
         return icon
     else:
         if packages is None:
-            packages = [openalea.core, openalea.oalab]
+            # in icon_path packages must be a list of string because it use 'importlib.import_module(package + '.resources')'
+            packages = [openalea.core.__name__, openalea.oalab.__name__]
         found = icon_path(filename, default=default, paths=paths, packages=packages)
         if found:
+            found = os.path.expandvars(found) # in QPixmap we need a string it seems not a posix
             pixmap = QtGui.QPixmap(found).scaled(*DEFAULT_SCALE, aspectRatioMode=QtCore.Qt.KeepAspectRatio)
             icon = QtGui.QIcon(pixmap)
             if save_filepath:

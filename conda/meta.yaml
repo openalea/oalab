@@ -45,9 +45,12 @@ test:
     - {{ name }}
   requires:
     - pytest
+    - openalea.core
+    - importlib_resources
   source_files:
-    - test/
-    - test/*.py
+    - test/**
+  commands:
+    - pytest -v
 
 about:
   home: {{ home }}
