@@ -1,8 +1,7 @@
-from openalea.deploy.shared_data import shared_data
+from openalea.mtg.data import data_dir as data
 import openalea.mtg
 from openalea.mtg import *
 
-data = shared_data(openalea.mtg)
 
 g = MTG(data/'noylum2.mtg')
 

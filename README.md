@@ -39,8 +39,8 @@ conda install -c openalea3 -c conda-forge openalea.oalab
 ```
 
 ### Requirements
-* openalea.deploy
 * openalea.core
-* qtpy
+* ipython
 * qtconsole
+* configobj
 

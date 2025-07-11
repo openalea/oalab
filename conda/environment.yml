@@ -1,0 +1,13 @@
+name: oalab_dev
+channels:
+  - conda-forge
+  - openalea3
+dependencies:
+  - python
+  - openalea.core
+  - ipython
+  - qtconsole
+  - configobj
+  - pip
+  - pip:
+      - -e '..[test,dev,doc]'

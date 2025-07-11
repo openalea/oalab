@@ -1,0 +1,115 @@
+[build-system]
+requires = [
+    "setuptools",
+    "setuptools_scm",
+    "six",
+]
+build-backend = "setuptools.build_meta"
+
+# where your source lies if you followed src layout
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools]
+include-package-data = false # force explicit declaration of data (disable automatic inclusion)
+
+# enable dynamic version based on git tags
+[tool.setuptools_scm]
+
+[project]
+name = "openalea.oalab"
+authors = [
+  { name = "Christophe Pradal" },
+]
+description = "The OpenAlea.OALab package is a GUI for OpenAlea wich permit to use Visualea and LPy and others in the same application."
+readme = "README.md"
+license = "CECILL-C"
+license-files = ["LICEN[CS]E*"]
+requires-python = ">=3.10"
+dynamic = ["version"]
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering",
+]
+
+# you can list here all dependencies that are pip-instalable, and that have a name identical to the one used by conda (to allow reuse of this list in meta.yaml)
+# If conda name is different, please do not declare the pip name, and declare conda name in the next section
+dependencies = [
+    "ipython",
+    "qtconsole",
+    "configobj",
+]
+
+[project.optional-dependencies]
+test = [
+  "pytest",
+  "nbmake",
+]
+dev = [
+  "pytest >=6",
+  "pytest-cov >=3",
+]
+doc = [
+  "sphinx-autobuild",
+  "pydata-sphinx-theme",
+  "myst-parser",
+  "sphinx-favicon",
+  "ipykernel",
+  "sphinx-copybutton",
+  "ipython_genutils",
+  "nbsphinx",
+]
+
+# section specific to conda-only distributed package (not used by pip yet)
+[tool.conda.environment]
+channels = [
+  "openalea3",
+  "conda-forge"
+]
+dependencies = [
+    "openalea.core",
+]
+
+[project.urls]
+Repository = "https://github.com/openalea/oalab"
+Homepage = "https://openalea.rtfd.io"
+"Bug Tracker" = "https://github.com/openalea/oalab/issues"
+Discussions = "https://github.com/openalea/oalab/discussions"
+Changelog = "https://github.com/openalea/oalab/releases"
+
+[tool.setuptools.package-data]
+"openalea.oalab" = ['*.ui']
+
+[project.entry-points."gui_scripts"]
+"oalab" = "openalea.oalab.main:main"
+
+[project.entry-points."oalab.applet"]
+"oalab.applet/oalab" = "openalea.oalab.plugin.builtin.applet"
+
+[project.entry-points."oalab.plugin"]
+"oalab/oalab.core" = "openalea.oalab.plugin.builtin.oalab"
+"oalab/oalab.core.visualea" = "openalea.oalab.plugin.builtin.oalab.visualea_control:PluginVisualeaWidgetSelectors"
+
+[project.entry-points."oalab.lab"]
+"oalab.lab/oalab" = "openalea.oalab.plugin.builtin.lab"
+
+[project.entry-points."openalea.core"]
+"openalea.core/oalab" = "openalea.oalab.plugin.builtin.core"
+
+[project.entry-points."openalea.interface"]
+"openalea.interface/oalab" = "openalea.oalab.plugin.builtin.interface"
+
+[project.entry-points."wralea"]
+"oalab" = "openalea.oalab_wralea"
+
+[project.entry-points."plugin"]
+"oalab" = "openalea.oalab_wralea"

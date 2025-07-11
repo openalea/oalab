@@ -10,11 +10,11 @@ QI = QtGui.QIcon
 DEFAULT_PROJECT_ICON = ":/images/resources/axiom2.png"
 
 import openalea.core
-from openalea.deploy.shared_data import shared_data
+from openalea.core.resources import resources_dir
 
 from openalea.oalab.utils import qicon_path
 
-stylesheet_path = shared_data(openalea.core, 'stylesheet.css')
+stylesheet_path = resources_dir/'stylesheet.css'
 
 html_header = '<html>\n  <head>\n    <link rel="stylesheet" type="text/css" href="%s">\n  </head>' % stylesheet_path
 html_footer = '</html>'

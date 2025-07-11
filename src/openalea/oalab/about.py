@@ -23,9 +23,11 @@ import random
 from qtpy import QtGui
 from openalea.oalab.pluginwidget.explorer import PluginExplorer
 
-from openalea.deploy.shared_data import shared_data
+from openalea.core.resources import resources_dir
 from openalea.core.formatting.util import icon_path
 from openalea.core.formatting.html import html_section, html_list
+from openalea.oalab.resources import resources_dir as resources_oalab
+import os
 
 from qtpy import QT_API
 from qtpy import QtGui, QtWidgets
@@ -51,7 +53,7 @@ else:
     QWebView = QtWidgets.QTextEdit
     VIEW = "basic"
 
-stylesheet_path = shared_data(openalea.core, 'stylesheet.css')
+stylesheet_path = resources_dir/'stylesheet.css'
 
 if VIEW == "webkit":
     stylesheet_path = 'file://' + stylesheet_path
@@ -114,7 +116,9 @@ if VIEW == "webkit":
         dep = dependencies[dep_name]
         args = {}
         args.update(dep)
-        icon_path = 'file://' + shared_data(openalea.oalab, 'icons/logo/%s' % dep["icon"])
+        f = resources_oalab
+        f = os.path.expandvars(f)
+        icon_path = 'file://' + f + 'icons/logo/%s' % dep["icon"]
         args.update(dict(x=i * width, icon=icon_path, width=width))
         html_dep += '<div style="width:%(width)dpx; float:left; text-align:center; padding-bottom:10px;">\n' % args
         html_dep += '  <img height="32px" src="%(icon)s" alt="%(team)s">\n' % args
@@ -129,7 +133,9 @@ else:
         dep = dependencies[dep_name]
         args = {}
         args.update(dep)
-        icon_path = shared_data(openalea.oalab, 'icons/logo/%s' % dep["icon"])
+        f = resources_oalab
+        f = os.path.expandvars(f)
+        icon_path = 'file://' + f + 'icons/logo/%s' % dep["icon"]
         args.update(dict(x=i * width, icon=icon_path, width=width))
         deps.append('<span class="logo-label"><a href="%(website)s">%(team)s</a></span>\n' % args)
     html_dep += html_list('dependencies', deps)
@@ -235,7 +241,9 @@ class AboutPage(QtWidgets.QWidget):
         QtWidgets.QWidget.__init__(self)
 
         if banner_path is None:
-            banner_path = shared_data(openalea.oalab, 'icons/logo/banner.png')
+            f = resources_oalab
+            f = os.path.expandvars(f)
+            banner_path = f + 'icons/logo/banner.png'
 
         self._lay = QtWidgets.QVBoxLayout(self)
 

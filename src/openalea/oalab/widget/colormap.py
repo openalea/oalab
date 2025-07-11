@@ -15,7 +15,9 @@
 #
 ###############################################################################
 
-from openalea.deploy.shared_data import shared_data
+from openalea.core.path import path as Path
+from openalea.oalab.resources import resources_dir
+import os
 import openalea.image
 from openalea.oalab.colormap.colormap_utils import Colormap, colormap_from_file
 from openalea.oalab.control.widget import AbstractQtControlWidget
@@ -67,8 +69,9 @@ class ColormapSwitcher(QtWidgets.QWidget, AbstractQtControlWidget):
         # self.setMinimumHeight(50)
 
         colormap_names = []
-        # colormaps_path = Path(shared_data(tissuelab, 'colormaps/grey.lut')).parent
-        colormaps_path = shared_data(openalea.image) / 'colormaps'
+        f = resources_dir / 'colormaps'
+        f = os.path.expandvars(f)
+        colormaps_path = Path(f)
         for colormap_file in colormaps_path.walkfiles('*.lut'):
             colormap_name = str(colormap_file.name[:-4])
             colormap_names.append(colormap_name)
@@ -123,8 +126,10 @@ class ColormapSwitcher(QtWidgets.QWidget, AbstractQtControlWidget):
 
     def updateColormap(self, colormap_index):
         self.colormap_name = self.combobox.itemText(colormap_index)
-
-        colormap_path = shared_data(openalea.oalab, 'colormaps/' + self.colormap_name + '.lut')
+        filename = self.colormap_name + '.lut'
+        f = resources_dir / 'colormaps' / filename
+        f = os.path.expandvars(f)
+        colormap_path = Path(f)
 
         colormap = colormap_from_file(colormap_path, name=self.colormap_name)
         self.setValue(dict(name=self.colormap_name, color_points=colormap._color_points))
