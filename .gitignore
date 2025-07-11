@@ -85,3 +85,4 @@ doc/_dvlpt/
 
 # user custom filters
 .DS_Store
+doc/_build/

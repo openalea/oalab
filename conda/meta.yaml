@@ -50,7 +50,10 @@ test:
   source_files:
     - test/**
   commands:
-    - pytest -v
+    - cd test
+    # at this date 2025-07-11 added ignore because when building
+    # it uses core from openalea that needs openalea.deploy
+    - pytest -v --ignore=qt
 
 about:
   home: {{ home }}
