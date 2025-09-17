@@ -62,28 +62,28 @@ class NotebookControlWidget(AbstractControlWidget):
     def _ipython_display_(self):
         return self._w._ipython_display_()
 
-from IPython.html import widgets
+from ipywidgets import widgets
 available_widgets = {
-    'IInt': [widgets.IntSliderWidget],
-    'IStr': [widgets.HTMLWidget],
-    'IBool': [widgets.CheckboxWidget],
+    'IInt': [widgets.IntSlider],
+    'IStr': [widgets.HTML],
+    'IBool': [widgets.Checkbox],
 }
 
 preferred_widgets = {
     'IInt': {
-        'slider': widgets.IntSliderWidget,
-        'progress': widgets.IntProgressWidget
+        'slider': widgets.IntSlider,
+        'progress': widgets.IntProgress
     },
 
     'IStr': {
-        'html': widgets.HTMLWidget,
-        'latex': widgets.LatexWidget,
-        'text': widgets.TextWidget,
-        'text area': widgets.TextareaWidget
+        'html': widgets.HTML,
+        'latex': widgets.Label, #render latex equation
+        'text': widgets.Text,
+        'text area': widgets.Textarea
     },
 
     'IBool': {
-        'checkbox': widgets.CheckboxWidget
+        'checkbox': widgets.Checkbox
     },
 
 }
@@ -107,17 +107,18 @@ def notebook_editor(control, shape=None, preferred=None, preferences=None):
 
 def select_default_widgets():
     from IPython.display import display
-    box = widgets.ContainerWidget(description="Select default widgets")
+    box = widgets.Box(description="Select default widgets")
     dic = {}
     children = []
     for iname, widget_dict in preferred_widgets.items():
         iclass = interface_class(iname)
 #         for name, notebookclass in widgets.iteritems():
         values = widget_dict
-        widget = widgets.SelectWidget(description=interface_label(iclass), values=values)
+        widget = widgets.Select(description=interface_label(iclass), values=values)
         children.append(widget)
         dic[iname] = widget
     box.children = children
-    box.set_css('border', "1px solid")
+    # box.set_css('border', "1px solid")
+    box.layout.border = "1px solid #dddddd"
     display(box)
     return dic
