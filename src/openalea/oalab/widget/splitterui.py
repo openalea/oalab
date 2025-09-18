@@ -925,17 +925,17 @@ class SplittableUI(QtWidgets.QWidget):
 
             if direction == QtCore.Qt.Horizontal:
                 firstHeight = secondHeight = containerHeight
-                firstWidth = (containerWidth * amount) if sticky != -1 else 0
+                firstWidth = int(containerWidth * amount) if sticky != -1 else 0
                 secondWidth = (containerWidth - firstWidth) if sticky != 1 else 0
                 firstX, firstY = containerGeom.x(), containerGeom.y()
                 secondX, secondY = firstX + firstWidth + sp, firstY
-                hgeom.moveLeft(firstX + +firstWidth)
+                hgeom.moveLeft(firstX + firstWidth)
                 hgeom.moveTop(firstY)
                 hgeom.setHeight(containerHeight)
                 hgeom.setWidth(sp)
             else:
                 firstWidth = secondWidth = containerWidth
-                firstHeight = (containerHeight * amount) if sticky != -1 else 0
+                firstHeight = int(containerHeight * amount) if sticky != -1 else 0
                 secondHeight = (containerHeight - firstHeight) if sticky != 1 else 0
                 firstX, firstY = containerGeom.x(), containerGeom.y()
                 secondX, secondY = firstX, firstY + firstHeight + sp

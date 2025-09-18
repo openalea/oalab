@@ -1,7 +1,8 @@
 name: oalab_dev
 channels:
+  - openalea3/label/dev
+  - openalea3/label/rc
   - conda-forge
-  - openalea3
 dependencies:
   - python
   - openalea.core
