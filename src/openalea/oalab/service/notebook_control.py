@@ -61,7 +61,8 @@ class NotebookControlWidget(AbstractControlWidget):
         return self._w.value
 
     def _ipython_display_(self):
-        return self._w._ipython_display_()
+        from IPython.display import display
+        return display(self._w)
 
 available_widgets = {
     'IInt': [widgets.IntSlider],
