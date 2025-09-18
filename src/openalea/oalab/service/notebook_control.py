@@ -1,3 +1,4 @@
+from ipywidgets import widgets
 
 from openalea.core.service.interface import interface_class, interface_name, interface_label
 from openalea.core.plugin import iter_plugins
@@ -62,7 +63,6 @@ class NotebookControlWidget(AbstractControlWidget):
     def _ipython_display_(self):
         return self._w._ipython_display_()
 
-from ipywidgets import widgets
 available_widgets = {
     'IInt': [widgets.IntSlider],
     'IStr': [widgets.HTML],
