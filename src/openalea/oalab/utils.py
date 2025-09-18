@@ -45,7 +45,7 @@ def qicon(filename, default=None, paths=None, save_filepath=None, packages=None)
         if default is None:
             default = get_shared_data('icons/oxygen_application-x-desktop.png')
         return qicon(default, default, save_filepath=save_filepath)
-    elif filename.startswith(':/'):
+    elif str(filename).startswith(':/'):
         pixmap = QtGui.QPixmap(filename).scaled(*DEFAULT_SCALE, aspectRatioMode=QtCore.Qt.KeepAspectRatio)
         icon = QtGui.QIcon(pixmap)
         if save_filepath:
