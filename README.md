@@ -6,13 +6,9 @@
 - License : Cecill-C
 - URL : http://openalea.rtfd.io
 
-## About
-
 ### Description 
 
 OpenAleaLab is a multi-paradigm modeling environment for plants. It will permit to divide the modeller’s work into multiple tasks. Each task can be viewed as a virtual experiment. OpenAleaLab is based on OpenAlea platform and components.
-
-
 
 ### Content 
 
@@ -26,11 +22,7 @@ The OpenAlea.oalab package contains a large set of concepts and sub-packages:
 
 and of course 
 * the ipython shell.
-The last component is integrated into **VisuAlea**
-
-The complete description (and old one) is described here:  http://virtualplants.github.io/latest/dev/archi/index.html
-
-
+The last component is integrated into [VisuAlea](https://visualea.readthedocs.io/en/latest/index.html)
 
 ### Installation 
 
