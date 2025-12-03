@@ -40,6 +40,12 @@ conda install -c openalea3 -c conda-forge openalea.oalab
 ### Requirements
 * openalea.core
 * ipython
+
+# Contributors
+
+<a href="https://github.com/openalea/core/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=openalea/oalab" />
+</a>
 * qtconsole
 * configobj
 
