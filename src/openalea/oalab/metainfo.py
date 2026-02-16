@@ -6,12 +6,14 @@ __revision__ = " $Id: $"
 
 def get_version():
 
-    import pkg_resources
-    dists = pkg_resources.require("openalea.oalab")
-    return dists[0].version
+    from importlib.metadata import metadata
+    meta = metadata("openalea.oalab")
+    release = meta.get("version")
+    
+    return release
 
-url = "http://openalea.gforge.inria.fr"
+url = "http://openalea.rtfd.io"
 
 def get_copyright():
 
-    return "Copyright \xa9 2014 Inria/CIRAD/INRA\n"
+    return "Copyright \xa9 2014-2026 inria/CIRAD/INRAE\n"

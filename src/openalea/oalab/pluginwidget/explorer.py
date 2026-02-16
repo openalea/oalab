@@ -17,7 +17,6 @@
 #
 ###############################################################################
 
-import pkg_resources
 import openalea.core
 import openalea.oalab
 
